@@ -1,12 +1,12 @@
 <!DOCTYPE html><html lang="ja"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>5分診断 Diagnosis｜MONEA GLOW</title>
-<meta name="description" content="5分でわかる肌診断。5つの質問に答えると、あなたに最適なケアとおすすめ商品をご提案します。">
-<link rel="canonical" href="https://moneaglow.com/diagnosis.html">
+<title>商品一覧 Collection｜MONEA GLOW</title>
+<meta name="description" content="MONEA GLOWの商品一覧。クレンジング・化粧水・美容液・クリーム・マスク・日焼け止め・美容雑貨。">
+<link rel="canonical" href="https://moneaglow.com/collection.html">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website"><meta property="og:site_name" content="MONEA GLOW"><meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="5分診断 Diagnosis｜MONEA GLOW"><meta property="og:description" content="5分でわかる肌診断。5つの質問に答えると、あなたに最適なケアとおすすめ商品をご提案します。"><meta property="og:url" content="https://moneaglow.com/diagnosis.html"><meta property="og:image" content="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&h=630&fit=crop&crop=faces&q=82&auto=format">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="5分診断 Diagnosis｜MONEA GLOW"><meta name="twitter:description" content="5分でわかる肌診断。5つの質問に答えると、あなたに最適なケアとおすすめ商品をご提案します。"><meta name="twitter:image" content="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&h=630&fit=crop&crop=faces&q=82&auto=format">
+<meta property="og:title" content="商品一覧 Collection｜MONEA GLOW"><meta property="og:description" content="MONEA GLOWの商品一覧。クレンジング・化粧水・美容液・クリーム・マスク・日焼け止め・美容雑貨。"><meta property="og:url" content="https://moneaglow.com/collection.html"><meta property="og:image" content="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&h=630&fit=crop&crop=faces&q=82&auto=format">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="商品一覧 Collection｜MONEA GLOW"><meta name="twitter:description" content="MONEA GLOWの商品一覧。クレンジング・化粧水・美容液・クリーム・マスク・日焼け止め・美容雑貨。"><meta name="twitter:image" content="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&h=630&fit=crop&crop=faces&q=82&auto=format">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Zen+Old+Mincho:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <style>:root{--ink:#1A1A1A;--bg:#fff;--soft:#faf6f3;--soft2:#f4efec;--sub:#7a6a64;--line:rgba(60,30,20,.12);--accent:#B43A32;--d1:#1b1110;--d2:#3a211c;--d3:#6f352d;--d4:#9b5648;--disp:'Marcellus',serif;--serif:'Zen Old Mincho',serif;--sans:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif}
@@ -107,21 +107,9 @@ footer{background:var(--d1);color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-
     <a href="collection.html">Collection</a><a href="index.html#trending">Trending</a><a href="diagnosis.html">Diagnosis</a><a href="journal.html">Journal</a><a href="index.html#concept">Concept</a><a href="index.html#member">Membership</a>
   </nav>
 </div>
-<section class="sub"><div class="in"><div class="eb">Diagnosis</div><h1>5分でわかる肌診断</h1><p>5つの質問で、いまのあなたに合うケアを。</p></div></section>
-<section class="dx">
-  <div class="bar"><i id="bar"></i></div>
-  <div id="quiz">
-    <div class="q" id="q"></div>
-    <div class="opts" id="opts"></div>
-  </div>
-  <div class="res" id="res">
-    <div class="rc" id="rc"></div>
-    <h2 id="rt"></h2>
-    <p id="rp" style="color:#555;line-height:2;margin-bottom:30px"></p>
-    <a href="collection.html" class="btn" id="rb">おすすめを見る</a>
-    <p style="margin-top:30px;font-size:.84rem;color:var(--sub)">会員登録で、いつでも10%OFF。</p>
-  </div>
-</section>
+<section class="sub"><div class="in"><div class="eb">Collection</div><h1>商品一覧</h1><p>あなたの「好き」と「なりたい」に出会う。</p></div></section>
+<div class="filter" id="filter"></div>
+<section class="wrap"><div class="grid" id="grid"></div></section>
 <footer>
   <div class="ft-top">
     <div><div class="ft-logo">MONEA GLOW</div></div>
@@ -135,26 +123,12 @@ footer{background:var(--d1);color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-
 burger.addEventListener("click",function(){menu.classList.add("active");});
 menuClose.addEventListener("click",function(){menu.classList.remove("active");});
 menu.addEventListener("click",function(e){if(e.target===menu)menu.classList.remove("active");});
-var Q=[
- {q:"いまの肌で、いちばん気になるのは？",a:[["乾燥・かさつき","クリーム"],["毛穴・ベタつき","クレンジング"],["くすみ・透明感","美容液"],["ゆらぎ・敏感","化粧水"]]},
- {q:"スキンケアにかけられる時間は？",a:[["しっかりめ","美容液"],["ふつう","化粧水"],["最短で","日焼け止め"],["気分による","マスク"]]},
- {q:"仕上がりの好みは？",a:[["しっとり","クリーム"],["さっぱり","化粧水"],["ツヤ","美容液"],["守る","日焼け止め"]]},
- {q:"日中、外にいる時間は？",a:[["長い","日焼け止め"],["半々","美容液"],["短い","化粧水"],["在宅中心","マスク"]]},
- {q:"ごほうびケアをするなら？",a:[["濃密マスク","マスク"],["美容液重ね","美容液"],["マッサージ","美容雑貨"],["とにかく保湿","クリーム"]]}
-];
-var RES={"クリーム":["うるおい重視タイプ","乾燥に負けない、うるおいを抱え込むケアが合います。"],"クレンジング":["クリアケアタイプ","毛穴と肌の巡りを整える、土台づくりから。"],"美容液":["透明感タイプ","ツヤと透明感を底上げする美容液を主役に。"],"化粧水":["ゆらぎケアタイプ","やさしく水分を届ける、シンプルなケアを。"],"日焼け止め":["UVプロテクトタイプ","守るケアを軸に、未来の素肌を育てて。"],"マスク":["スペシャルケアタイプ","週末のごほうびケアで差をつけて。"],"美容雑貨":["セルフケアタイプ","道具を味方に、毎日のケアを心地よく。"]};
-var i=0,score={};
-function show(){document.getElementById("bar").style.width=((i)/Q.length*100)+"%";
- document.getElementById("q").textContent=(i+1)+". "+Q[i].q;
- document.getElementById("opts").innerHTML=Q[i].a.map(function(o,k){return '<button onclick="pick(\''+o[1]+'\')">'+o[0]+'</button>';}).join("");}
-function pick(cat){score[cat]=(score[cat]||0)+1;i++;if(i<Q.length){show();}else{result();}}
-function result(){document.getElementById("bar").style.width="100%";document.getElementById("quiz").style.display="none";
- var best="",mx=-1;for(var k in score){if(score[k]>mx){mx=score[k];best=k;}}
- var r=RES[best]||RES["化粧水"];
- document.getElementById("rc").textContent="Result";
- document.getElementById("rt").textContent=r[0];
- document.getElementById("rp").textContent=r[1];
- document.getElementById("rb").href="collection.html?cat="+encodeURIComponent(best);
- document.getElementById("res").classList.add("on");}
-show();
+var P=[{"c": "クレンジング", "n": "Pure Balm", "p": "¥2,640", "img": "photo-1599022484220-967921f2217c", "lead": "国内発送 2〜4日"}, {"c": "クレンジング", "n": "Silk Oil", "p": "¥2,640", "img": "photo-1680537260333-20fd95432044", "lead": "国内発送 2〜4日"}, {"c": "クレンジング", "n": "Mild Milk", "p": "¥2,640", "img": "photo-1605204359736-9a08b7175fc7", "lead": "国内発送 2〜4日"}, {"c": "クレンジング", "n": "Clay Wash", "p": "¥2,640", "img": "photo-1619166855062-f63c187def3d", "lead": "国内発送 2〜4日"}, {"c": "化粧水", "n": "Dew Lotion", "p": "¥2,860", "img": "photo-1643747394944-89b11e7fb616", "lead": "国内発送 2〜4日"}, {"c": "化粧水", "n": "Rose Water", "p": "¥2,860", "img": "photo-1665763630810-e6251bdd392d", "lead": "国内発送 2〜4日"}, {"c": "化粧水", "n": "Calm Toner", "p": "¥2,860", "img": "photo-1620916566398-39f1143ab7be", "lead": "国内発送 2〜4日"}, {"c": "化粧水", "n": "Hydra Mist", "p": "¥2,860", "img": "photo-1612817288484-6f916006741a", "lead": "国内発送 2〜4日"}, {"c": "美容液", "n": "Glow Serum", "p": "¥3,480", "img": "photo-1599022484220-967921f2217c", "lead": "国内発送 2〜4日"}, {"c": "美容液", "n": "C Drop", "p": "¥3,480", "img": "photo-1680537260333-20fd95432044", "lead": "国内発送 2〜4日"}, {"c": "美容液", "n": "Retinol PM", "p": "¥3,480", "img": "photo-1605204359736-9a08b7175fc7", "lead": "国内発送 2〜4日"}, {"c": "美容液", "n": "Barrier Ampoule", "p": "¥3,480", "img": "photo-1619166855062-f63c187def3d", "lead": "国内発送 2〜4日"}, {"c": "クリーム", "n": "Velvet Cream", "p": "¥4,200", "img": "photo-1643747394944-89b11e7fb616", "lead": "国内発送 2〜4日"}, {"c": "クリーム", "n": "Night Repair", "p": "¥4,200", "img": "photo-1665763630810-e6251bdd392d", "lead": "国内発送 2〜4日"}, {"c": "クリーム", "n": "Aqua Gel", "p": "¥4,200", "img": "photo-1620916566398-39f1143ab7be", "lead": "国内発送 2〜4日"}, {"c": "クリーム", "n": "Rich Balm", "p": "¥4,200", "img": "photo-1612817288484-6f916006741a", "lead": "国内発送 2〜4日"}, {"c": "マスク", "n": "Rose Mask", "p": "¥1,980", "img": "photo-1599022484220-967921f2217c", "lead": "国内発送 2〜4日"}, {"c": "マスク", "n": "Glow Pack", "p": "¥1,980", "img": "photo-1680537260333-20fd95432044", "lead": "国内発送 2〜4日"}, {"c": "マスク", "n": "Clay Mask", "p": "¥1,980", "img": "photo-1605204359736-9a08b7175fc7", "lead": "国内発送 2〜4日"}, {"c": "マスク", "n": "Sheet x5", "p": "¥1,980", "img": "photo-1619166855062-f63c187def3d", "lead": "国内発送 2〜4日"}, {"c": "日焼け止め", "n": "Veil UV", "p": "¥2,420", "img": "photo-1643747394944-89b11e7fb616", "lead": "国内発送 2〜4日"}, {"c": "日焼け止め", "n": "Tone Up UV", "p": "¥2,420", "img": "photo-1665763630810-e6251bdd392d", "lead": "国内発送 2〜4日"}, {"c": "日焼け止め", "n": "Mineral UV", "p": "¥2,420", "img": "photo-1620916566398-39f1143ab7be", "lead": "国内発送 2〜4日"}, {"c": "日焼け止め", "n": "Stick UV", "p": "¥2,420", "img": "photo-1612817288484-6f916006741a", "lead": "国内発送 2〜4日"}, {"c": "美容雑貨", "n": "Jade Roller", "p": "¥1,680", "img": "photo-1599022484220-967921f2217c", "lead": "海外直送 5〜9日"}, {"c": "美容雑貨", "n": "Gua Sha", "p": "¥1,680", "img": "photo-1680537260333-20fd95432044", "lead": "海外直送 5〜9日"}, {"c": "美容雑貨", "n": "Beauty Mirror", "p": "¥1,680", "img": "photo-1605204359736-9a08b7175fc7", "lead": "海外直送 5〜9日"}, {"c": "美容雑貨", "n": "Spa Towel", "p": "¥1,680", "img": "photo-1619166855062-f63c187def3d", "lead": "海外直送 5〜9日"}],CATS=["クレンジング", "化粧水", "美容液", "クリーム", "マスク", "日焼け止め", "美容雑貨"],cur="";
+function render(){var f=document.getElementById("filter");
+ f.innerHTML='<button class="'+(cur===""?"on":"")+'" onclick="setC(\'\')">すべて</button>'+CATS.map(function(c){return '<button class="'+(cur===c?"on":"")+'" onclick="setC(\''+c+'\')">'+c+'</button>';}).join("");
+ var list=cur?P.filter(function(p){return p.c===cur;}):P;
+ document.getElementById("grid").innerHTML=list.map(function(p){return '<div class="card"><div class="card-fig"><img src="https://images.unsplash.com/'+p.img+'?w=520&h=700&fit=crop&q=80&auto=format" alt=""></div><div class="cat">'+p.c+'</div><div class="nm">'+p.n+'</div><div class="pr">'+p.p+'</div><div class="ld">'+p.lead+'</div></div>';}).join("");}
+function setC(c){cur=c;render();}
+var q=location.search.match(/cat=([^&]+)/);if(q)cur=decodeURIComponent(q[1]);
+render();
 </script></body></html>

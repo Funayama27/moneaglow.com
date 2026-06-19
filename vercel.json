@@ -1,6 +1,6 @@
 {
   "crons": [
-    { "path": "/api/generate-article", "schedule": "0 23 * * *" }
+    { "path": "/api/generate-article", "schedule": "0 0 * * *" }
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" }

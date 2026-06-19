@@ -1,25 +1,24 @@
-// api/sitemap.js — sitemap.xml を動的生成（SEO）。vercel.json で /sitemap.xml にrewrite。
-// 環境変数 SITE_URL（例: https://moneaglow.com）。未設定時はリクエストホストから推定。
-import { kv } from "@vercel/kv";
+// /api/sitemap  → /sitemap.xml （vercel.json の rewrites で公開）
+let kv = null;
+try { ({ kv } = await import("@vercel/kv")); } catch(e){ kv = null; }
 
-const STATIC = ["", "category.html", "diagnosis.html", "media.html", "design-reference.html"];
+const BASE = process.env.SITE_URL || "https://moneaglow.com";
+const STATIC = ["", "collection.html", "diagnosis.html", "journal.html"];
+const ARTICLE_SLUGS = ["winter-dry-skincare","vitamin-c-serum-guide","sunscreen-reapply"];
 
-export default async function handler(req, res) {
-  const base = (process.env.SITE_URL || ("https://" + (req.headers.host || "moneaglow.com"))).replace(/\/$/, "");
-  let slugs = [];
-  try { slugs = (await kv.lrange("articles:index", 0, 1000)) || []; } catch (e) {}
-
-  const urls = [];
-  for (const p of STATIC) urls.push(`${base}/${p}`);
-  for (const s of slugs) urls.push(`${base}/article.html?slug=${encodeURIComponent(s)}`);
-
-  const xml =
-    `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-    urls.map((u) => `  <url><loc>${u}</loc></url>`).join("\n") +
-    `\n</urlset>`;
-
-  res.setHeader("Content-Type", "application/xml");
-  res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate=86400");
+export default async function handler(req, res){
+  let slugs = [...ARTICLE_SLUGS];
+  try{ if(kv){ const k = await kv.lrange("articles:index",0,199); if(k && k.length) slugs = [...new Set([...slugs, ...k])]; } }catch(e){}
+  const today = new Date().toISOString().slice(0,10);
+  const urls = [
+    ...STATIC.map(p=>`${BASE}/${p}`),
+    ...slugs.map(s=>`${BASE}/article.html?slug=${s}`)
+  ];
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map(u=>`  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join("\n")}
+</urlset>`;
+  res.setHeader("Content-Type","application/xml");
+  res.setHeader("Cache-Control","s-maxage=3600, stale-while-revalidate=86400");
   res.status(200).send(xml);
 }
