@@ -1,15 +1,44 @@
-# v0-monea — MONEA GLOW
+# monea-glow
 
-このフォルダを ~/github/v0-monea に置き、VS Code で開いて Claude Code に下記の .md を順番に貼る。
+美容・コスメオンラインサイト「monea」のNext.jsプロジェクトです。
 
-## Claude Code に貼る順番
-1. MONEA_GLOW_FULL_PROMPT.md … サイト構築 → GitHub/Vercel 公開 → moneaglow.com 接続 → ドロップシッピング自動化
-2. MONEA_GLOW_MONO_PROMPT.md … 配色を白背景モノトーンに統一＋ヒーローをそのまま組み込む
+## 起動方法
 
-## 見本・参考（Claude Code が基準にする／参照する）
-- monea-glow-mono.html      … 完成版トップデザイン（白背景モノトーン＋ヒーロー演出）。これが基準
-- monea-glow-trending.html  … 人気アイテム自動入れ替えの参考実装
+```bash
+npm install
+npm run dev
+```
 
-## ブランド
-- MONEA GLOW / 自分らしい輝きを、毎日に。
-- ドメイン: moneaglow.com（Cloudflare 取得済み）
+ブラウザで以下を開きます。
+
+```txt
+http://localhost:3000
+```
+
+## レスポンシブ対応
+
+対応済みです。
+
+- PC：大きなヒーロービジュアル、4カラムカテゴリ、4カラム商品表示
+- タブレット：カテゴリと商品を2カラムへ変更
+- スマホ：カテゴリ、商品、診断、フォームを1カラムへ変更
+- スマホ：ヘッダーナビを横スクロール化
+- スマホ：CTA、入力欄、診断ボタンをタップしやすいサイズに調整
+- スマホ：メインビジュアルと下層ページの高さを調整
+
+## 商品API接続
+
+`.env.local.example` を `.env.local` にコピーして、利用するAPIに合わせて設定します。
+
+```bash
+cp .env.local.example .env.local
+```
+
+初期状態は `DROPSHIP_PROVIDER=mock` なので、API未設定でもモック商品で動きます。
+
+対応アダプター：
+
+- mock
+- shopify
+- cj
+- generic
