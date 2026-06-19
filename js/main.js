@@ -156,6 +156,14 @@ function subscribe(e){e.preventDefault();e.target.reset();showToast("ご登録�
 let toastT;
 function showToast(m){const t=document.getElementById("toast");if(!t)return;const tm=document.getElementById("toastMsg");if(tm)tm.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2600);}
 
+/* transparent hero header -> solid on scroll (homepage) */
+const hOver = document.querySelector("header.hero-over");
+if(hOver){
+  const onHScroll = ()=>hOver.classList.toggle("scrolled", window.scrollY > window.innerHeight*0.8);
+  onHScroll();
+  window.addEventListener("scroll", onHScroll, {passive:true});
+}
+
 /* hero cinematic slideshow */
 const heroScenes = document.querySelectorAll(".hero-scene");
 if(heroScenes.length > 1){

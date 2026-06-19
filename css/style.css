@@ -79,6 +79,14 @@ header{position:sticky;top:0;z-index:60;background:rgba(250,246,241,.86);backdro
 @media (prefers-reduced-motion:reduce){
   .hero-photo,.hero-rays,.hero-glow{animation:none}
 }
+/* transparent header over hero (homepage), solid on scroll */
+header.hero-over{background:transparent;backdrop-filter:none;border-bottom-color:transparent;transition:background .4s ease,border-color .4s ease}
+header.hero-over .logo,header.hero-over .nav,header.hero-over .icon-btn{color:#fff}
+header.hero-over .logo small{color:rgba(255,255,255,.72)}
+header.hero-over .submenu a{color:var(--ink)}
+header.hero-over.scrolled{background:rgba(250,247,242,.92);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+header.hero-over.scrolled .logo,header.hero-over.scrolled .nav,header.hero-over.scrolled .icon-btn{color:var(--ink)}
+header.hero-over.scrolled .logo small{color:var(--ink-soft)}
 .btn{display:inline-flex;align-items:center;gap:12px;font-size:.76rem;letter-spacing:.22em;padding:17px 38px;background:var(--ink);color:var(--ivory);margin-top:34px;transition:.4s;position:relative;overflow:hidden}
 .btn::after{content:"→";transition:.4s}
 .btn:hover{background:var(--gold)}
