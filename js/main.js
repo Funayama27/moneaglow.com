@@ -156,6 +156,25 @@ function subscribe(e){e.preventDefault();e.target.reset();showToast("ご登録�
 let toastT;
 function showToast(m){const t=document.getElementById("toast");if(!t)return;const tm=document.getElementById("toastMsg");if(tm)tm.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2600);}
 
+/* hero cinematic slideshow */
+const heroScenes = document.querySelectorAll(".hero-scene");
+if(heroScenes.length > 1){
+  const heroDots = document.querySelectorAll(".hero-dot");
+  const HERO_INTERVAL = 6000;
+  let hsIdx = 0, hsTimer;
+  function setScene(n){
+    hsIdx = (n + heroScenes.length) % heroScenes.length;
+    heroScenes.forEach((s,i)=>s.classList.toggle("active", i===hsIdx));
+    heroDots.forEach((d,i)=>{
+      d.classList.remove("active");
+      if(i===hsIdx){ void d.offsetWidth; d.classList.add("active"); } // restart fill animation
+    });
+  }
+  function heroRestart(){ clearInterval(hsTimer); hsTimer = setInterval(()=>setScene(hsIdx+1), HERO_INTERVAL); }
+  window.goScene = function(n){ setScene(n); heroRestart(); };
+  heroRestart();
+}
+
 /* announce rotation */
 const aSpans = document.querySelectorAll("#announce span");
 if(aSpans.length){let ai=0;setInterval(()=>{aSpans[ai].classList.remove("on");ai=(ai+1)%aSpans.length;aSpans[ai].classList.add("on");},4000);}

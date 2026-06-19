@@ -61,64 +61,91 @@
   </div>
 </header>
 
-<!-- hero -->
+<!-- hero (cinematic crossfade slideshow) -->
 <section class="hero">
-  <div class="hero-rays"></div>
-  <div class="hero-halo"></div>
-  <div class="hero-particles">
-    <i style="left:58%;top:70%;animation-delay:0s"></i>
-    <i style="left:66%;top:80%;width:5px;height:5px;animation-delay:1.4s"></i>
-    <i style="left:72%;top:60%;width:9px;height:9px;animation-delay:.6s"></i>
-    <i style="left:78%;top:75%;animation-delay:2.2s"></i>
-    <i style="left:62%;top:55%;width:5px;height:5px;animation-delay:3s"></i>
-    <i style="left:84%;top:66%;width:8px;height:8px;animation-delay:1.8s"></i>
-    <i style="left:54%;top:64%;animation-delay:4.1s"></i>
-    <i style="left:88%;top:78%;width:5px;height:5px;animation-delay:2.7s"></i>
-    <i style="left:70%;top:88%;width:9px;height:9px;animation-delay:3.6s"></i>
-    <i style="left:80%;top:52%;animation-delay:5s"></i>
+  <!-- shared bottle artwork -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="hcap" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#EFDFBE"/><stop offset=".5" stop-color="#C0A063"/><stop offset="1" stop-color="#8E703B"/>
+      </linearGradient>
+      <linearGradient id="hglass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#FFFFFF" stop-opacity=".96"/><stop offset=".45" stop-color="#F3E9D6" stop-opacity=".9"/><stop offset="1" stop-color="#E2D0AE" stop-opacity=".96"/>
+      </linearGradient>
+      <linearGradient id="hliquid" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#F1DEB7"/><stop offset="1" stop-color="#D6B981"/>
+      </linearGradient>
+      <g id="mgBottle">
+        <rect x="78" y="8" width="44" height="72" rx="11" fill="url(#hcap)"/>
+        <rect x="84" y="15" width="9" height="58" rx="4.5" fill="#fff" opacity=".28"/>
+        <rect x="70" y="76" width="60" height="20" rx="5" fill="url(#hcap)"/>
+        <path d="M62 98 q0 -6 8 -6 h60 q8 0 8 6 v198 q0 26 -26 26 h-24 q-26 0 -26 -26 z" fill="url(#hglass)" stroke="#CDB488" stroke-width="1.3"/>
+        <path d="M70 184 h60 v108 q0 18 -18 18 h-24 q-18 0 -18 -18 z" fill="url(#hliquid)" opacity=".88"/>
+        <rect x="76" y="200" width="48" height="74" rx="4" fill="#fff" opacity=".6"/>
+        <text x="100" y="232" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="18" letter-spacing="2" fill="#8E703B">MONEA</text>
+        <text x="100" y="248" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="6" letter-spacing="4" fill="#A98E5A">GLOW</text>
+        <line x1="84" y1="258" x2="116" y2="258" stroke="#CDB488" stroke-width=".8"/>
+        <rect x="74" y="112" width="12" height="150" rx="6" fill="#fff" opacity=".5"/>
+        <rect x="92" y="124" width="5" height="112" rx="2.5" fill="#fff" opacity=".32"/>
+      </g>
+    </defs>
+  </svg>
+
+  <div class="hero-scenes">
+    <!-- scene 1 -->
+    <div class="hero-scene active">
+      <div class="scene-bg s1"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">MONEA GLOW</span>
+          <h1>自分らしい輝きを、<br><em>毎日に</em>。</h1>
+          <p class="sub">誰かになるためではなく、あなたのために。<br>素肌そのものの美しさへ。</p>
+          <div class="hero-cta">
+            <a href="#shop" class="btn">コレクションを見る</a>
+            <a href="pages/about.html" class="btn ghost">ブランドについて</a>
+          </div>
+        </div>
+        <div class="hero-visual"><div class="hero-pedestal"></div><div class="hero-bottle"><svg viewBox="0 0 200 340"><use href="#mgBottle"/></svg></div></div>
+      </div>
+    </div>
+    <!-- scene 2 -->
+    <div class="hero-scene">
+      <div class="scene-bg s2"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">Moisture</span>
+          <h1>うるおいで満たす、<br><em>素肌</em>へ。</h1>
+          <p class="sub">厳選した成分が、肌のすみずみまでめぐる。<br>乾きを忘れる、心地よさ。</p>
+          <div class="hero-cta">
+            <a href="pages/products.html" class="btn">アイテムを見る</a>
+            <a href="pages/about.html" class="btn ghost">ブランドについて</a>
+          </div>
+        </div>
+        <div class="hero-visual"><div class="hero-pedestal"></div><div class="hero-bottle"><svg viewBox="0 0 200 340"><use href="#mgBottle"/></svg></div></div>
+      </div>
+    </div>
+    <!-- scene 3 (dark) -->
+    <div class="hero-scene dark">
+      <div class="scene-bg s3"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">Radiance</span>
+          <h1>内側から、<br><em>澄んだ明るさ</em>を。</h1>
+          <p class="sub">ツヤと透明感が、毎日の表情を変えていく。<br>あなたらしい輝きへ。</p>
+          <div class="hero-cta">
+            <a href="pages/products.html" class="btn">ベストセラーを見る</a>
+            <a href="pages/contact.html" class="btn ghost">カウンセリング予約</a>
+          </div>
+        </div>
+        <div class="hero-visual"><div class="hero-pedestal"></div><div class="hero-bottle"><svg viewBox="0 0 200 340"><use href="#mgBottle"/></svg></div></div>
+      </div>
+    </div>
   </div>
-  <div class="hero-inner">
-    <div class="hero-copy">
-      <span class="eyebrow">Find your own glow</span>
-      <h1>自分らしい輝きを、<br><em>毎日に</em>。</h1>
-      <p class="lead">自分らしく美しくなりたい、すべての人へ。</p>
-      <p class="sub">誰かになるためではなく、自分自身の魅力を見つけ、花開かせるために。MONEA GLOW は、あなた本来のツヤと輝きに、そっと寄り添います。</p>
-      <div class="hero-cta">
-        <a href="#shop" class="btn">コレクションを見る</a>
-        <a href="pages/about.html" class="btn ghost">ブランドストーリー</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-pedestal"></div>
-      <div class="hero-bottle">
-        <svg viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs>
-            <linearGradient id="hcap" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#EFDFBE"/><stop offset=".5" stop-color="#C0A063"/><stop offset="1" stop-color="#8E703B"/>
-            </linearGradient>
-            <linearGradient id="hglass" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#FFFFFF" stop-opacity=".96"/>
-              <stop offset=".45" stop-color="#F3E9D6" stop-opacity=".9"/>
-              <stop offset="1" stop-color="#E2D0AE" stop-opacity=".96"/>
-            </linearGradient>
-            <linearGradient id="hliquid" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F1DEB7"/><stop offset="1" stop-color="#D6B981"/>
-            </linearGradient>
-          </defs>
-          <rect x="78" y="8" width="44" height="72" rx="11" fill="url(#hcap)"/>
-          <rect x="84" y="15" width="9" height="58" rx="4.5" fill="#fff" opacity=".28"/>
-          <rect x="70" y="76" width="60" height="20" rx="5" fill="url(#hcap)"/>
-          <path d="M62 98 q0 -6 8 -6 h60 q8 0 8 6 v198 q0 26 -26 26 h-24 q-26 0 -26 -26 z" fill="url(#hglass)" stroke="#CDB488" stroke-width="1.3"/>
-          <path d="M70 184 h60 v108 q0 18 -18 18 h-24 q-18 0 -18 -18 z" fill="url(#hliquid)" opacity=".88"/>
-          <rect x="76" y="200" width="48" height="74" rx="4" fill="#fff" opacity=".6"/>
-          <text x="100" y="232" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="18" letter-spacing="2" fill="#8E703B">MONEA</text>
-          <text x="100" y="248" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="6" letter-spacing="4" fill="#A98E5A">GLOW</text>
-          <line x1="84" y1="258" x2="116" y2="258" stroke="#CDB488" stroke-width=".8"/>
-          <rect x="74" y="112" width="12" height="150" rx="6" fill="#fff" opacity=".5"/>
-          <rect x="92" y="124" width="5" height="112" rx="2.5" fill="#fff" opacity=".32"/>
-        </svg>
-      </div>
-    </div>
+
+  <div class="hero-dots">
+    <button class="hero-dot active" onclick="goScene(0)" aria-label="シーン1"></button>
+    <button class="hero-dot" onclick="goScene(1)" aria-label="シーン2"></button>
+    <button class="hero-dot" onclick="goScene(2)" aria-label="シーン3"></button>
   </div>
 </section>
 
@@ -168,7 +195,7 @@
     <div class="reveal">
       <span class="eyebrow">Our Philosophy</span>
       <h2>花開くのは、<br>あなた自身。</h2>
-      <p>MONEA GLOW は、誰かになるためのスキンケアではありません。あなた自身の魅力を見つけ、花開かせるために。<br><br>厳選した成分と、ていねいなケアで、あなたが本来もっている美しさを、しずかに引き出していきます。</p>
+      <p>輝きは、足すものではなく、引き出すもの。MONEA GLOW は、あなたがもともと持っているツヤと透明感に目を向けました。<br><br>厳選した成分と、毎日続けられる心地よさで、素肌そのものの美しさを育てていきます。</p>
       <a href="pages/about.html" class="btn">ブランドストーリー</a>
     </div>
     <div class="vis reveal"><svg viewBox="0 0 60 90">__BOTTLE_GOLD__</svg></div>
