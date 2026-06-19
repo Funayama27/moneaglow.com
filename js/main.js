@@ -5,15 +5,15 @@
    ============================================================ */
 
 /* ---------- SVG パーツ（化粧品容器：本物画像の代わり） ---------- */
-const SVG = {
-  bottle:`<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#E3CBBC"/></linearGradient></defs><rect x="22" y="4" width="16" height="9" rx="2" fill="#B08D57"/><rect x="25" y="11" width="10" height="6" fill="#C9AE86"/><rect x="16" y="17" width="28" height="62" rx="9" fill="url(#g1)" stroke="#B08D57" stroke-width="1"/><rect x="21" y="40" width="18" height="22" rx="3" fill="#fff" opacity=".55"/><line x1="24" y1="46" x2="36" y2="46" stroke="#B08D57" stroke-width="1"/><line x1="24" y1="52" x2="33" y2="52" stroke="#C9AE86" stroke-width="1"/>`,
-  bottleGold:`<defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4D2B4"/><stop offset="1" stop-color="#B08D57"/></linearGradient></defs><rect x="22" y="4" width="16" height="9" rx="2" fill="#EFE7DC"/><rect x="25" y="11" width="10" height="6" fill="#D9C9B0"/><rect x="16" y="17" width="28" height="62" rx="9" fill="url(#gg)" stroke="#EFE7DC" stroke-width="1"/><rect x="21" y="40" width="18" height="22" rx="3" fill="#fff" opacity=".25"/>`,
-  jar:`<defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#DCC9B6"/></linearGradient></defs><ellipse cx="30" cy="34" rx="22" ry="6" fill="#B08D57"/><rect x="8" y="34" width="44" height="14" fill="#C9AE86"/><ellipse cx="30" cy="48" rx="22" ry="6" fill="#B08D57"/><rect x="11" y="48" width="38" height="30" rx="4" fill="url(#g2)" stroke="#B08D57" stroke-width="1"/><ellipse cx="30" cy="78" rx="19" ry="5" fill="#E3CBBC"/><ellipse cx="30" cy="34" rx="22" ry="6" fill="#C9AE86" opacity=".5"/>`,
-  drop:`<defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#D9C2CE"/></linearGradient></defs><rect x="24" y="2" width="12" height="20" rx="3" fill="#B08D57"/><rect x="26" y="22" width="8" height="6" fill="#C9AE86"/><rect x="19" y="28" width="22" height="52" rx="8" fill="url(#g3)" stroke="#B08D57" stroke-width="1"/><rect x="27" y="6" width="6" height="40" rx="3" fill="#fff" opacity=".5"/><rect x="23" y="44" width="14" height="30" rx="3" fill="#fff" opacity=".4"/>`,
-  tube:`<defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#E4D2B4"/></linearGradient></defs><rect x="25" y="3" width="10" height="12" rx="2" fill="#B08D57"/><path d="M19 15 h22 v55 a4 4 0 0 1 -4 4 h-14 a4 4 0 0 1 -4 -4 z" fill="url(#g4)" stroke="#B08D57" stroke-width="1"/><line x1="24" y1="36" x2="36" y2="36" stroke="#B08D57" stroke-width="1"/><line x1="24" y1="42" x2="33" y2="42" stroke="#C9AE86" stroke-width="1"/>`
+const SVG={
+  bottle:`<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#D9D9D7"/></linearGradient></defs><rect x="22" y="4" width="16" height="9" rx="2" fill="#1A1A1A"/><rect x="25" y="11" width="10" height="6" fill="#A4A4A2"/><rect x="16" y="17" width="28" height="62" rx="9" fill="url(#g1)" stroke="#1A1A1A" stroke-width="1"/><rect x="21" y="40" width="18" height="22" rx="3" fill="#fff" opacity=".55"/><line x1="24" y1="46" x2="36" y2="46" stroke="#1A1A1A" stroke-width="1"/><line x1="24" y1="52" x2="33" y2="52" stroke="#A4A4A2" stroke-width="1"/>`,
+  bottleGold:`<defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#DADAD8"/><stop offset="1" stop-color="#1A1A1A"/></linearGradient></defs><rect x="22" y="4" width="16" height="9" rx="2" fill="#EEEEEC"/><rect x="25" y="11" width="10" height="6" fill="#CECECC"/><rect x="16" y="17" width="28" height="62" rx="9" fill="url(#gg)" stroke="#EEEEEC" stroke-width="1"/><rect x="21" y="40" width="18" height="22" rx="3" fill="#fff" opacity=".25"/>`,
+  jar:`<defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#D8D8D6"/></linearGradient></defs><ellipse cx="30" cy="34" rx="22" ry="6" fill="#1A1A1A"/><rect x="8" y="34" width="44" height="14" fill="#A4A4A2"/><ellipse cx="30" cy="48" rx="22" ry="6" fill="#1A1A1A"/><rect x="11" y="48" width="38" height="30" rx="4" fill="url(#g2)" stroke="#1A1A1A" stroke-width="1"/><ellipse cx="30" cy="78" rx="19" ry="5" fill="#D9D9D7"/><ellipse cx="30" cy="34" rx="22" ry="6" fill="#A4A4A2" opacity=".5"/>`,
+  drop:`<defs><linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#D4D4D2"/></linearGradient></defs><rect x="24" y="2" width="12" height="20" rx="3" fill="#1A1A1A"/><rect x="26" y="22" width="8" height="6" fill="#A4A4A2"/><rect x="19" y="28" width="22" height="52" rx="8" fill="url(#g3)" stroke="#1A1A1A" stroke-width="1"/><rect x="27" y="6" width="6" height="40" rx="3" fill="#fff" opacity=".5"/><rect x="23" y="44" width="14" height="30" rx="3" fill="#fff" opacity=".4"/>`,
+  tube:`<defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#DADAD8"/></linearGradient></defs><rect x="25" y="3" width="10" height="12" rx="2" fill="#1A1A1A"/><path d="M19 15 h22 v55 a4 4 0 0 1 -4 4 h-14 a4 4 0 0 1 -4 -4 z" fill="url(#g4)" stroke="#1A1A1A" stroke-width="1"/><line x1="24" y1="36" x2="36" y2="36" stroke="#1A1A1A" stroke-width="1"/><line x1="24" y1="42" x2="33" y2="42" stroke="#A4A4A2" stroke-width="1"/>`
 };
 function paint(svg){return svg.replace(/__BOTTLE_GOLD__/g,SVG.bottleGold).replace(/__BOTTLE__/g,SVG.bottle).replace(/__JAR__/g,SVG.jar).replace(/__DROP__/g,SVG.drop).replace(/__TUBE__/g,SVG.tube);}
-document.body.innerHTML = paint(document.body.innerHTML);
+if(/__(BOTTLE|BOTTLE_GOLD|JAR|DROP|TUBE)__/.test(document.body.innerHTML)) document.body.innerHTML = paint(document.body.innerHTML);
 
 /* ---------- 商品データ（仮置き：TODO Shopify Storefront 連携） ---------- */
 const products = [
@@ -187,6 +187,13 @@ if(heroScenes.length > 1){
   heroRestart();
 }
 
+/* hero light particles (mono main visual) */
+(function(){var c=document.getElementById('heroP');if(!c)return;var x=c.getContext('2d'),W,H,ps=[];
+function sz(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}sz();addEventListener('resize',sz);
+function mk(){return{x:Math.random()*W,y:H+Math.random()*H,r:Math.random()*1.8+.4,s:Math.random()*.4+.12,d:Math.random()*6.28,o:Math.random()*.5+.2};}
+for(var i=0;i<46;i++){var p=mk();p.y=Math.random()*H;ps.push(p);}
+function tk(t){x.clearRect(0,0,W,H);for(var i=0;i<ps.length;i++){var p=ps[i];p.y-=p.s;p.d+=.01;p.x+=Math.sin(p.d)*.25;var tw=p.o*(.55+.45*Math.sin(t/600+p.d));x.beginPath();x.arc(p.x,p.y,p.r,0,7);var g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);g.addColorStop(0,'rgba(255,255,255,'+tw+')');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fill();if(p.y<-10)Object.assign(p,mk());}requestAnimationFrame(tk);}requestAnimationFrame(tk);})();
+
 /* announce rotation */
 const aSpans = document.querySelectorAll("#announce span");
 if(aSpans.length){let ai=0;setInterval(()=>{aSpans[ai].classList.remove("on");ai=(ai+1)%aSpans.length;aSpans[ai].classList.add("on");},4000);}
@@ -202,3 +209,10 @@ initReveal();
 /* esc閉じる */
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeAll();closeSearch();closePopup();}});
 renderCart();
+
+/* 法務ページ（特定商取引法・利用規約・プライバシー）は準備中：リンクは残すが遷移は無効化 */
+document.querySelectorAll('a[href*="law.html"],a[href*="privacy.html"]').forEach(a=>{
+  a.setAttribute("aria-disabled","true");
+  a.style.cursor="default";
+  a.addEventListener("click",e=>e.preventDefault());
+});

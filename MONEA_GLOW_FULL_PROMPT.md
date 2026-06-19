@@ -21,10 +21,11 @@
 - ホスティング: Vercel / リポジトリ: GitHub。
 
 ## 3. デザインシステム
-- 配色: --ivory #FAF6F1 / --white #FFFFFF / --ink #2A2622 / --ink-soft #7C7166 / --gold #B08D57 / --gold-light #E4D2B4（輝き）/ --rose #E7D3C6 / --dark #211E1A
-- GLOW表現はゴールドのハイライトと余白・タイポの抑制で。派手にしない。
+- 配色・トーンは `monea-glow-mono.html` と `MONEA_GLOW_MONO_PROMPT.md` に従う（白背景モノトーン：白／黒／グレーの無彩色のみ。金・暖色は使わない）。
+- 写真・商品画像はすべてグレースケール。
 - タイポ: 英字 Cormorant Garamond / 和文見出し Noto Serif JP / 本文 Noto Sans JP
-- ロゴ: MONEA を大きく、下に小さく GLOW。既製テーマ感を避けオリジナルに。
+- ロゴ: MONEA を大きく、下に小さく GLOW。
+- ヒーローは `monea-glow-mono.html` のヒーロー（白黒ポートレート＋白銀の光）をそのまま使う。
 
 ## 4. ページ・セクション（トップを最優先で完成）
 トップ: アナウンスバー → ヘッダー → ヒーロー → 信頼バー → カテゴリ → 新着 → コンセプト → いま人気の美容アイテム（自動入れ替え）→ お客様の声 → メルマガ → フッター。

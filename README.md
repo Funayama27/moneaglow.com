@@ -1,41 +1,15 @@
-# v0-monea — MONEA GLOW storefront
+# v0-monea — MONEA GLOW
 
-MONEA GLOW のECサイト（静的サイト：HTML / CSS / JavaScript）。
+このフォルダを ~/github/v0-monea に置き、VS Code で開いて Claude Code に下記の .md を順番に貼る。
 
-- タグライン: 自分らしい輝きを、毎日に。
-- コンセプト: 誰かになるためではなく、自分自身の魅力を見つけ、花開かせるために。
+## Claude Code に貼る順番
+1. MONEA_GLOW_FULL_PROMPT.md … サイト構築 → GitHub/Vercel 公開 → moneaglow.com 接続 → ドロップシッピング自動化
+2. MONEA_GLOW_MONO_PROMPT.md … 配色を白背景モノトーンに統一＋ヒーローをそのまま組み込む
+
+## 見本・参考（Claude Code が基準にする／参照する）
+- monea-glow-mono.html      … 完成版トップデザイン（白背景モノトーン＋ヒーロー演出）。これが基準
+- monea-glow-trending.html  … 人気アイテム自動入れ替えの参考実装
+
+## ブランド
+- MONEA GLOW / 自分らしい輝きを、毎日に。
 - ドメイン: moneaglow.com（Cloudflare 取得済み）
-
-## 構成
-
-```
-v0-monea/
-├ index.html          … トップページ
-├ css/style.css       … 全体スタイル
-├ js/main.js          … 商品データ（仮）・カート・UI
-├ assets/             … 画像・SVG（プレースホルダー）
-└ pages/
-   ├ about.html       … コンセプト / ブランドについて
-   ├ products.html    … 商品一覧（カテゴリ絞り込み）
-   ├ product.html     … 商品詳細（?i=インデックス）
-   ├ contact.html     … お問い合わせ
-   ├ law.html         … 特定商取引法に基づく表記
-   └ privacy.html     … プライバシーポリシー
-```
-
-## ローカル表示
-
-VS Code の Live Server などで `index.html` を開く。
-ビルド・npm install 不要。
-
-## EC / 決済
-
-- 購入導線は Shopify 接続前提（Buy Button / Checkout）。
-- カート／レジボタン付近に `<!-- TODO: Shopify Buy Button embed here -->` を設置済み。
-- 商品データは `js/main.js` の配列で仮置き。Shopify Storefront 連携時に差し替え。
-
-## ホスティング
-
-- GitHub リポジトリ: `v0-monea`
-- Vercel（Framework: Other / 静的）でデプロイ。
-- カスタムドメイン: moneaglow.com（Cloudflare DNS → Vercel）。

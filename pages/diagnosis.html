@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>無料肌診断｜MONEA GLOW</title>
+<meta name="description" content="約5分でわかる MONEA GLOW の無料肌診断。5つの質問に答えるだけで、あなたのタイプと最適なスキンケアをご提案します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+JP:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://moneaglow.com/pages/diagnosis.html">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#1A1613">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/og.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MONEA GLOW">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:url" content="https://moneaglow.com/pages/diagnosis.html">
+<meta property="og:title" content="無料肌診断｜MONEA GLOW">
+<meta property="og:description" content="約5分で、あなたに最適なスキンケアをご提案。MONEA GLOW の無料肌診断。">
+<meta property="og:image" content="https://moneaglow.com/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../css/style.css?v=6">
+</head>
+<body>
+
+<div class="announce" id="announce">
+  <span class="on">メンバーはいつでも全品10%OFF</span>
+  <span>5分でわかる無料肌診断｜あなたに最適なケアをご提案</span>
+  <span>新規メンバー登録受付中</span>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="bar">
+      <button class="burger icon-btn" onclick="toggleMenu(true)" aria-label="メニュー"><svg viewBox="0 0 24 24"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg></button>
+      <nav class="nav left">
+        <div class="nav-item has-sub"><a href="products.html">SKINCARE</a><div class="submenu"><a href="products.html">クレンジング</a><a href="products.html">化粧水・トナー</a><a href="products.html">美容液</a><a href="products.html">クリーム・乳液</a><a href="products.html">マスク・スペシャル</a><a href="products.html">UVケア</a></div></div>
+        <div class="nav-item has-sub"><a href="products.html">お悩み別</a><div class="submenu"><a href="products.html">乾燥・保湿</a><a href="products.html">毛穴・ハリ</a><a href="products.html">くすみ・透明感</a><a href="products.html">ゆらぎ・敏感肌</a><a href="products.html">エイジングケア</a></div></div>
+        <div class="nav-item"><a href="about.html">CONCEPT</a></div>
+        <div class="nav-item"><a href="journal.html">JOURNAL</a></div>
+      </nav>
+      <a href="../index.html" class="logo">MONEA<small>GLOW</small></a>
+      <div class="nav tools">
+        <button class="icon-btn" onclick="openSearch()" aria-label="検索"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></button>
+        <button class="icon-btn fav-h" aria-label="お気に入り"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.7 5 5.2 5c2 0 3.3 1.1 4 2.2C9.9 6.1 11.2 5 13.2 5c3.5 0 4.9 3.6 3.2 6.8C20 16.4 12 21 12 21z" transform="translate(0.8 0)"/></svg></button>
+        <button class="icon-btn" onclick="openCart()" aria-label="カート"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5.5a3 3 0 0 1 6 0V7"/></svg><span class="cart-count" id="cartCount">0</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- diagnosis split experience -->
+<section class="dx" id="dxSplit">
+  <div class="dx-media">
+    <img src="/assets/hero/hero3.jpg" alt="MONEA GLOW Skin Diagnosis" loading="eager">
+    <div class="dx-media-cap">
+      <span class="eyebrow">Skin Diagnosis</span>
+      <h1>肌診断</h1>
+    </div>
+  </div>
+  <div class="dx-panel">
+    <div class="dx-stage" id="dxStage"></div>
+  </div>
+</section>
+
+<!-- result (full width, revealed after the quiz) -->
+<section class="section dx-result" id="dxResult" hidden></section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-col foot-brand">
+        <div class="foot-logo">MONEA GLOW</div>
+        <p>「毎日のスキンケアを特別な時間へ」</p>
+        <div class="foot-sns">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="LINE"><svg viewBox="0 0 24 24"><path d="M21 11c0-4-4-7-9-7s-9 3-9 7c0 3.6 3.2 6.6 7.5 7v3l3.5-3.2C18.2 17 21 14.3 21 11z"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col"><h4>Shop</h4><a href="products.html">新着商品</a><a href="products.html">ランキング</a><a href="products.html">スキンケア</a><a href="products.html">お悩み別</a><a href="diagnosis.html">肌診断</a></div>
+      <div class="foot-col"><h4>About</h4><a href="about.html">ブランドについて</a><a href="member.html">メンバー登録</a><a href="journal.html">JOURNAL</a><a href="contact.html">よくあるご質問</a></div>
+      <div class="foot-col"><h4>Support</h4><a href="contact.html">お問い合わせ</a><a href="law.html">配送・送料について</a><a href="law.html">返品・交換</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© MONEA GLOW All Rights Reserved.</span>
+      <div class="links"><a href="privacy.html">プライバシーポリシー</a><a href="law.html">特定商取引法に基づく表記</a><a href="privacy.html">利用規約</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head"><h3>Shopping Bag</h3><button class="close-x" onclick="closeAll()">×</button></div>
+  <div class="drawer-body" id="cartBody"></div>
+  <div class="drawer-foot">
+    <div class="subtotal"><span>小計</span><span class="amt" id="subtotal">¥0</span></div>
+    <p class="ship-note">メンバー登録で、いつでも全品10%OFF</p>
+    <button class="checkout" onclick="fakeCheckout()">レジに進む</button>
+    <!-- TODO: Shopify Buy Button embed here -->
+    <p class="buybtn-note">※ 本番では、このボタンに Shopify のチェックアウト（Buy Button）が接続されます</p>
+  </div>
+</aside>
+<div class="search-modal" id="searchModal">
+  <button class="search-close" onclick="closeSearch()">×</button>
+  <div class="search-box"><span class="eyebrow">Search</span><input type="text" class="search-input" placeholder="探す…" id="searchInput">
+    <div class="search-sug"><span>人気のキーワード：</span><a href="products.html">美容液</a><a href="products.html">クレンジング</a><a href="products.html">毛穴</a><a href="products.html">エイジングケア</a><a href="products.html">UV</a></div>
+  </div>
+</div>
+<div class="toast" id="toast"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg><span id="toastMsg">カートに追加しました</span></div>
+<div class="mmenu" id="mmenu">
+  <div class="mmenu-head"><span class="logo">MONEA GLOW</span><button class="close-x" onclick="toggleMenu(false)">×</button></div>
+  <div class="macc"><button onclick="acc(this)">SKINCARE <span class="pm">＋</span></button><div class="macc-sub"><a href="products.html">クレンジング</a><a href="products.html">化粧水・トナー</a><a href="products.html">美容液</a><a href="products.html">クリーム・乳液</a><a href="products.html">マスク</a><a href="products.html">UVケア</a></div></div>
+  <div class="macc"><button onclick="acc(this)">お悩み別 <span class="pm">＋</span></button><div class="macc-sub"><a href="products.html">乾燥・保湿</a><a href="products.html">毛穴・ハリ</a><a href="products.html">くすみ・透明感</a><a href="products.html">敏感肌</a><a href="products.html">エイジングケア</a></div></div>
+  <div class="macc"><button onclick="location.href='member.html'">メンバー登録 <span class="pm" style="opacity:0">＋</span></button></div>
+  <div class="macc"><button onclick="location.href='about.html'">CONCEPT <span class="pm" style="opacity:0">＋</span></button></div>
+  <div class="macc"><button onclick="location.href='journal.html'">JOURNAL <span class="pm" style="opacity:0">＋</span></button></div>
+</div>
+
+<script src="../js/main.js?v=6"></script>
+<script>
+/* ===== 無料肌診断 — Chanel風スプリット。入力ごとにスクロールせず、その場でフェード遷移 ===== */
+(function(){
+  const stage = document.getElementById("dxStage");
+  const split = document.getElementById("dxSplit");
+  const resultSec = document.getElementById("dxResult");
+  if(!stage || !split || !resultSec) return;
+
+  const QUESTIONS = [
+    { q:"いま、いちばん気になる肌悩みは？", a:[
+      {t:"乾燥・かさつき", s:{dry:2}},
+      {t:"毛穴・テカり", s:{pore:2}},
+      {t:"くすみ・トーンの暗さ", s:{bright:2}},
+      {t:"赤み・ゆらぎ", s:{sensitive:2}},
+      {t:"ハリ不足・年齢サイン", s:{aging:2}},
+    ]},
+    { q:"お肌のタイプに近いのは？", a:[
+      {t:"乾燥肌", s:{dry:2}},
+      {t:"脂性肌", s:{pore:2}},
+      {t:"混合肌", s:{pore:1, bright:1}},
+      {t:"敏感肌", s:{sensitive:2}},
+      {t:"普通肌", s:{}},
+    ]},
+    { q:"朝起きたときのお肌は？", a:[
+      {t:"つっぱる・粉をふく", s:{dry:2}},
+      {t:"Tゾーンがテカる", s:{pore:2}},
+      {t:"なんとなくくすんで見える", s:{bright:2}},
+      {t:"不安定・ピリつくことがある", s:{sensitive:2}},
+      {t:"ハリ・弾力のなさが気になる", s:{aging:2}},
+    ]},
+    { q:"スキンケアで、いちばん叶えたいことは？", a:[
+      {t:"うるおいをキープしたい", s:{dry:2}},
+      {t:"毛穴レス・引き締め", s:{pore:2}},
+      {t:"透明感・明るさ", s:{bright:2}},
+      {t:"やさしさ・低刺激", s:{sensitive:2}},
+      {t:"引き上げ・弾力", s:{aging:2}},
+    ]},
+    { q:"とくに底上げしたいケアは？", a:[
+      {t:"保湿・バリア機能", s:{dry:1, sensitive:1}},
+      {t:"毛穴・キメ", s:{pore:2}},
+      {t:"明るさ・紫外線対策", s:{bright:2}},
+      {t:"ハリ・目もと", s:{aging:2}},
+      {t:"揺らがない肌", s:{sensitive:2}},
+    ]},
+  ];
+
+  const TYPES = {
+    dry:{ name:"うるおい充電タイプ", en:"Moisture Charge", desc:"水分も油分も不足しがち。うるおいを抱え込むケアで、ふっくらしたツヤ肌へ導きます。", rec:[3,0,1] },
+    pore:{ name:"毛穴すっきりタイプ", en:"Clear Pore", desc:"皮脂や毛穴の目立ちが気になりやすいタイプ。やさしいオフと引き締めで、なめらかな肌印象へ。", rec:[0,4,1] },
+    bright:{ name:"透明感みがきタイプ", en:"Luminous", desc:"くすみが気になりやすいタイプ。明るさを引き出すケアと紫外線対策で、澄んだ印象へ。", rec:[2,4,5] },
+    sensitive:{ name:"ゆらぎケアタイプ", en:"Gentle Care", desc:"刺激や乾燥で揺らぎやすいタイプ。低刺激でうるおいを守り、安定した肌コンディションへ。", rec:[1,3] },
+    aging:{ name:"ハリ・弾力タイプ", en:"Firm & Lift", desc:"年齢サインが気になり始めたタイプ。夜の集中ケアと目もとケアで、引き上がった印象へ。", rec:[6,7,4] },
+  };
+  const PRIORITY = ["dry","pore","bright","sensitive","aging"];
+
+  let step = -1;
+  const scores = { dry:0, pore:0, bright:0, sensitive:0, aging:0 };
+  const answers = [];
+
+  function fadeTo(html, after){
+    stage.classList.add("is-fade");
+    setTimeout(()=>{
+      stage.innerHTML = html;
+      if(after) after();
+      requestAnimationFrame(()=>stage.classList.remove("is-fade"));
+    }, 200);
+  }
+
+  function intro(){
+    fadeTo(`
+      <div class="dx-intro">
+        <span class="eyebrow">Skin Diagnosis</span>
+        <h2>5つの質問で、<br>あなたのためのケアを。</h2>
+        <p>所要時間は約5分。直感でお選びください。<br>結果に合わせて、最適なアイテムをご提案します。</p>
+        <button class="btn" id="dxStart" style="justify-content:center">診断をはじめる</button>
+      </div>`,
+      ()=>{ const s=document.getElementById("dxStart"); if(s) s.onclick=()=>{ step=0; question(); }; }
+    );
+  }
+
+  function question(){
+    const Q = QUESTIONS[step];
+    const pct = Math.round(step / QUESTIONS.length * 100);
+    const n = String(step+1).padStart(2,"0"), tot = String(QUESTIONS.length).padStart(2,"0");
+    fadeTo(`
+      <div class="dx-meta">
+        <span class="num">${n} <i>/</i> ${tot}</span>
+        <span class="dx-line"><span style="width:${pct}%"></span></span>
+      </div>
+      <h2 class="dx-q">${Q.q}</h2>
+      <div class="dx-opts">
+        ${Q.a.map((o,i)=>`<button class="dx-opt" data-i="${i}"><span>${o.t}</span><span class="ar">→</span></button>`).join("")}
+      </div>
+      ${step>0 ? `<button class="dx-back">← 戻る</button>` : ""}
+    `, ()=>{
+      stage.querySelectorAll(".dx-opt").forEach(b=>{
+        b.onclick = ()=>{
+          const sc = Q.a[+b.dataset.i].s;
+          answers[step] = sc;
+          for(const k in sc){ scores[k] += sc[k]; }
+          step++;
+          if(step >= QUESTIONS.length) result();
+          else question();
+        };
+      });
+      const back = stage.querySelector(".dx-back");
+      if(back) back.onclick = ()=>{
+        step--;
+        const prev = answers[step];
+        if(prev){ for(const k in prev){ scores[k] -= prev[k]; } }
+        question();
+      };
+    });
+  }
+
+  function topType(){
+    let best = PRIORITY[0];
+    for(const k of PRIORITY){ if(scores[k] > scores[best]) best = k; }
+    return best;
+  }
+
+  function result(){
+    const T = TYPES[topType()];
+    const cards = (typeof cardHTML === "function" && typeof products !== "undefined")
+      ? T.rec.map(i => cardHTML(products[i], i)).join("") : "";
+    split.setAttribute("hidden","");
+    resultSec.innerHTML = `
+      <div class="wrap">
+        <div class="dx-res reveal">
+          <span class="eyebrow">Your Type</span>
+          <div class="en">${T.en}</div>
+          <h2 class="name">${T.name}</h2>
+          <p class="desc">${T.desc}</p>
+        </div>
+        <div class="dx-rec-head reveal"><span class="eyebrow">Recommended for you</span></div>
+        <div class="grid dx-grid">${cards}</div>
+        <div class="dx-cta reveal">
+          <a href="member.html" class="btn" style="justify-content:center">メンバー登録で10%OFF</a>
+          <button class="btn ghost" id="dxRestart" style="margin-top:0">もう一度診断する</button>
+        </div>
+      </div>`;
+    resultSec.removeAttribute("hidden");
+    if(typeof initReveal === "function") initReveal();
+    window.scrollTo({ top: Math.max(0, resultSec.offsetTop - 80), behavior:"smooth" });
+    const rs = document.getElementById("dxRestart");
+    if(rs) rs.onclick = ()=>{
+      for(const k in scores){ scores[k] = 0; }
+      answers.length = 0; step = -1;
+      resultSec.setAttribute("hidden","");
+      split.removeAttribute("hidden");
+      window.scrollTo({ top: Math.max(0, split.offsetTop - 80), behavior:"smooth" });
+      intro();
+    };
+  }
+
+  intro();
+})();
+</script>
+</body>
+</html>
