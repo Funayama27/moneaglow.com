@@ -6,8 +6,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
    画像 URL（Unsplash — カテゴリ合致）
 ────────────────────────────────────────────── */
 const IMAGES = {
-  // 高級コスメ広告風の外国人女性ポートレート（正面・クローズアップ）
-  hero:        "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=2800&q=95",
+  // 高級コスメ広告風の外国人女性ポートレート
+  hero:        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=2800&q=95",
   // フェイスマスク・スパ・集中ケア
   specialCare: "https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?auto=format&fit=crop&w=2800&q=95",
   // 洗顔泡・クレンジング・清潔感
@@ -321,7 +321,7 @@ export default function Home() {
             </div>
             <div className="service-card">
               <h3>MONEA MEMBER</h3>
-              <p>メンバー登録で、すべてのアイテムがいつでも10%OFF。特別なケア体験をあなたに。</p>
+              <p>メンバー登録で、すべてのアイテムがい��でも10%OFF。特別なケア体験をあなたに。</p>
               <a href="#member">登録はこちら</a>
             </div>
             <div className="service-card">
