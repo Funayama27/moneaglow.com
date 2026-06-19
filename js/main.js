@@ -17,24 +17,24 @@ document.body.innerHTML = paint(document.body.innerHTML);
 
 /* ---------- 商品データ（仮置き：TODO Shopify Storefront 連携） ---------- */
 const products = [
-  {n:"オーロラ クレンジングバーム",en:"Aurora Cleansing Balm",c:"CLEANSE",p:6600,img:"jar",tag:"NEW"},
-  {n:"ネロリ ブラン トナー",en:"Néroli Blanc Toner",c:"TONE",p:5500,img:"bottle",tag:"NEW"},
-  {n:"ローズ ド ニュイ セラム",en:"Rose de Nuit Serum",c:"SERUM",p:12100,img:"drop",tag:""},
-  {n:"シルク モイスチャークリーム",en:"Silk Moisture Cream",c:"CREAM",p:9900,img:"jar",tag:""},
-  {n:"ゴールド リフティングマスク",en:"Gold Lifting Mask",c:"MASK",p:7700,img:"jar",tag:"NEW"},
-  {n:"ルミエール UVプロテクター",en:"Lumière UV Protector",c:"UV",p:4950,img:"tube",tag:""},
-  {n:"ナイトリペア オイルセラム",en:"Night Repair Oil",c:"SERUM",p:11000,img:"drop",tag:""},
-  {n:"アイ ブライトニングクリーム",en:"Eye Brightening Cream",c:"EYE",p:8800,img:"tube",tag:""}
+  {n:"オーロラ クレンジングバーム",en:"Aurora Cleansing Balm",c:"CLEANSE",p:6600,img:"/assets/products/7815016.jpg",tag:"NEW"},
+  {n:"ネロリ ブラン トナー",en:"Néroli Blanc Toner",c:"TONE",p:5500,img:"/assets/products/7814991.jpg",tag:"NEW"},
+  {n:"ローズ ド ニュイ セラム",en:"Rose de Nuit Serum",c:"SERUM",p:12100,img:"/assets/products/7796975.jpg",tag:""},
+  {n:"シルク モイスチャークリーム",en:"Silk Moisture Cream",c:"CREAM",p:9900,img:"/assets/products/8049849.jpg",tag:""},
+  {n:"ゴールド リフティングマスク",en:"Gold Lifting Mask",c:"MASK",p:7700,img:"/assets/products/7691166.jpg",tag:"NEW"},
+  {n:"ルミエール UVプロテクター",en:"Lumière UV Protector",c:"UV",p:4950,img:"/assets/products/8049841.jpg",tag:""},
+  {n:"ナイトリペア オイルセラム",en:"Night Repair Oil",c:"SERUM",p:11000,img:"/assets/products/8101147.jpg",tag:""},
+  {n:"アイ ブライトニングクリーム",en:"Eye Brightening Cream",c:"EYE",p:8800,img:"/assets/products/7005933.jpg",tag:""}
 ];
 const yen = v => "¥" + v.toLocaleString("ja-JP");
 
 function cardHTML(pr,i){
   return `<article class="card reveal">
-    <div class="card-media" style="background:linear-gradient(155deg,#F4ECE2,#E7D6C7)">
+    <div class="card-media">
       ${pr.tag?`<span class="tag">${pr.tag}</span>`:""}
       <button class="fav" onclick="togFav(this)" aria-label="お気に入り"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.2C.3 8.6 1.7 5 5.2 5c2 0 3.3 1.1 4 2.2C9.9 6.1 11.2 5 13.2 5c3.5 0 4.9 3.6 3.2 6.8C20 16.4 12 21 12 21z" transform="translate(.8 0)"/></svg></button>
-      <a href="product.html?i=${i}" class="card-media-link" style="position:absolute;inset:0;z-index:1"></a>
-      <svg viewBox="0 0 60 90">${SVG[pr.img]}</svg>
+      <a href="/pages/product.html?i=${i}" class="card-media-link" style="position:absolute;inset:0;z-index:1"></a>
+      <img class="card-img" src="${pr.img}" alt="${pr.n}" loading="lazy">
     </div>
     <div class="card-body">
       <div class="card-cat">${pr.c}</div>
@@ -81,7 +81,7 @@ if(pdRoot){
   document.title = `${pr.n}｜MONEA GLOW`;
   pdRoot.innerHTML = `
     <div class="pd">
-      <div class="pd-media">${pr.tag?`<span class="tag">${pr.tag}</span>`:""}<svg viewBox="0 0 60 90">${SVG[pr.img]}</svg></div>
+      <div class="pd-media">${pr.tag?`<span class="tag">${pr.tag}</span>`:""}<img src="${pr.img}" alt="${pr.n}"></div>
       <div class="pd-info">
         <div class="pd-cat">${pr.c}</div>
         <h1>${pr.n}</h1>
@@ -119,7 +119,7 @@ function renderCart(){
   if(sub) sub.textContent = yen(total);
   if(!cart.length){body.innerHTML=`<div class="empty-cart"><svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5.5a3 3 0 0 1 6 0V7"/></svg><p>バッグは空です</p></div>`;return;}
   body.innerHTML = cart.map((c,ci)=>{const pr=products[c.i];return `<div class="cart-item">
-    <div class="thumb" style="background:linear-gradient(155deg,#F4ECE2,#E7D6C7)"><svg viewBox="0 0 60 90">${SVG[pr.img]}</svg></div>
+    <div class="thumb"><img src="${pr.img}" alt="${pr.n}" loading="lazy"></div>
     <div class="ci-info"><div class="ci-name">${pr.n}</div><div class="ci-price">${yen(pr.p)}</div>
       <div class="ci-qty"><button onclick="qty(${ci},-1)">−</button><span>${c.q}</span><button onclick="qty(${ci},1)">＋</button></div>
       <a class="ci-remove" onclick="rm(${ci})">削除</a>

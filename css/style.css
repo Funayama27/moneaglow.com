@@ -155,6 +155,16 @@ header{position:sticky;top:0;z-index:60;background:rgba(250,246,241,.86);backdro
 .add:hover{background:var(--ink);color:var(--ivory)}
 .more-row{text-align:center;margin-top:56px}
 
+/* real-photo media (cards / categories / cart / detail) */
+.card-media{background:#F4ECE2}
+.card-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:.7s cubic-bezier(.2,.7,.2,1)}
+.card:hover .card-img{transform:scale(1.05)}
+.cat-img img{width:100%;height:100%;object-fit:cover}
+.cat-img{background:#F4ECE2}
+.cart-item .thumb{overflow:hidden;background:#F4ECE2}
+.cart-item .thumb img{width:100%;height:100%;object-fit:cover}
+.pd-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
 /* concept band */
 .concept{background:var(--dark);color:#EFE7DC;position:relative;overflow:hidden}
 .concept::before{content:"";position:absolute;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(176,141,87,.22),transparent 70%);top:-160px;right:-120px}
