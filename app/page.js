@@ -1,483 +1,469 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-const heroImage =
-  "https://images.unsplash.com/photo-1457972729786-0411a3b2b626?auto=format&fit=crop&w=2000&q=90";
-
-const categories = [
-  {
-    slug: "skincare",
-    label: "SKINCARE",
-    jp: "スキンケア",
-    title: "肌本来の透明感を育てるケア",
-    text: "乾燥、ゆらぎ、くすみ感に寄り添い、毎日の肌を静かに整えるライン。",
-    match: "SKINCARE",
-    image:
-      "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1600&q=90",
-  },
-  {
-    slug: "makeup",
-    label: "MAKEUP",
-    jp: "メイクアップ",
-    title: "自分らしさを引き出す色と質感",
-    text: "誰かに近づくためではなく、あなたの表情を咲かせるカラーコスメ。",
-    match: "MAKEUP",
-    image:
-      "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1600&q=90",
-  },
-  {
-    slug: "fragrance",
-    label: "FRAGRANCE",
-    jp: "フレグランス",
-    title: "記憶に残る印象をまとう香り",
-    text: "近づいた瞬間に残る、静かで美しい余韻をまとう香りのコレクション。",
-    match: "FRAGRANCE",
-    image:
-      "https://images.unsplash.com/photo-1619994403073-2cec844b8e63?auto=format&fit=crop&w=1600&q=90",
-  },
-  {
-    slug: "inner-glow",
-    label: "INNER GLOW",
-    jp: "インナーグロウ",
-    title: "内側から整える美容習慣",
-    text: "外側の美しさだけでなく、毎日のリズムから自分らしい輝きを整える。",
-    match: "INNER GLOW",
-    image:
-      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1600&q=90",
-  },
-];
-
-const diagnosisQuestions = [
-  {
-    question: "朝、鏡を見たときに一番気になることは？",
-    options: [
-      { label: "乾燥やつっぱり", type: "skincare" },
-      { label: "血色感のなさ", type: "makeup" },
-      { label: "印象が薄いこと", type: "fragrance" },
-      { label: "疲れが残る感じ", type: "inner-glow" },
-    ],
-  },
-  {
-    question: "理想の雰囲気に近いものは？",
-    options: [
-      { label: "透明感がある", type: "skincare" },
-      { label: "華やかで印象的", type: "makeup" },
-      { label: "静かに惹きつける", type: "fragrance" },
-      { label: "自然体で健やか", type: "inner-glow" },
-    ],
-  },
-  {
-    question: "美容で一番続けたいものは？",
-    options: [
-      { label: "毎日の肌ケア", type: "skincare" },
-      { label: "似合う色探し", type: "makeup" },
-      { label: "香りの使い分け", type: "fragrance" },
-      { label: "生活リズム改善", type: "inner-glow" },
-    ],
-  },
-  {
-    question: "今の自分に足したいものは？",
-    options: [
-      { label: "うるおい", type: "skincare" },
-      { label: "彩り", type: "makeup" },
-      { label: "余韻", type: "fragrance" },
-      { label: "軽やかさ", type: "inner-glow" },
-    ],
-  },
-  {
-    question: "買い物で重視することは？",
-    options: [
-      { label: "肌への心地よさ", type: "skincare" },
-      { label: "仕上がりの美しさ", type: "makeup" },
-      { label: "印象に残る体験", type: "fragrance" },
-      { label: "続けやすさ", type: "inner-glow" },
-    ],
-  },
-  {
-    question: "moneaに期待することは？",
-    options: [
-      { label: "肌を整えたい", type: "skincare" },
-      { label: "似合う色を知りたい", type: "makeup" },
-      { label: "自分の香りを見つけたい", type: "fragrance" },
-      { label: "内側から変わりたい", type: "inner-glow" },
-    ],
-  },
-];
-
-const resultCopy = {
-  skincare: {
-    title: "Glow Skin Type",
-    text: "あなたには、肌本来の透明感を育てるスキンケア中心の提案が合います。",
-  },
-  makeup: {
-    title: "Bloom Color Type",
-    text: "あなたには、自分らしさを引き出す色と質感のメイク提案が合います。",
-  },
-  fragrance: {
-    title: "Memory Scent Type",
-    text: "あなたには、印象を静かに残すフレグランス提案が合います。",
-  },
-  "inner-glow": {
-    title: "Inner Glow Type",
-    text: "あなたには、内側から整える美容習慣の提案が合います。",
-  },
+/* ──────────────────────────────────────────────
+   画像 URL（Unsplash — カテゴリ合致）
+────────────────────────────────────────────── */
+const IMAGES = {
+  // 高級コスメ広告風の外国人女性ポートレート（正面・クローズアップ）
+  hero:        "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=2800&q=95",
+  // フェイスマスク・スパ・集中ケア
+  specialCare: "https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?auto=format&fit=crop&w=2800&q=95",
+  // 洗顔泡・クレンジング・清潔感
+  cleanser:    "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=2800&q=95",
+  // 化粧水ボトル・水しずく・うるおい
+  toner:       "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=2800&q=95",
+  // スポイト付きガラスボトル美容液・光沢
+  serum:       "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=1800&q=95",
+  // 白いクリームジャー・保湿クリーム
+  cream:       "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=1800&q=95",
+  // 目元・まつ毛・繊細なクローズアップ
+  eyecream:    "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=2800&q=95",
+  // 肌・ボディオイル・なめらか
+  body:        "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=2800&q=95",
+  // スキンケア商品・肌診断イメージ
+  diagnosis:   "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=2800&q=95",
+  // 複数の外国人女性が笑っている
+  member:      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2800&q=95",
 };
 
-function filterByCategory(products, category) {
-  if (!products.length) return [];
-  const key = category.match.toLowerCase();
-  const matched = products.filter((product) =>
-    (product.category || "").toLowerCase().includes(key.split(" ")[0])
-  );
-  return matched.concat(products).slice(0, 4);
-}
-
-export default function Home() {
-  const [products, setProducts] = useState([]);
-  const [featureIndex, setFeatureIndex] = useState(0);
-  const [activeCategory, setActiveCategory] = useState(null);
-  const [hoverSlug, setHoverSlug] = useState("");
-  const [touchSlug, setTouchSlug] = useState("");
-  const [popupOpen, setPopupOpen] = useState(false);
-  const [answers, setAnswers] = useState([]);
-
-  useEffect(() => {
-    fetch("/api/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data.products || []))
-      .catch(() => setProducts([]));
-  }, []);
-
-  useEffect(() => {
-    if (!products.length) return;
-    const timer = setInterval(() => {
-      setFeatureIndex((current) => (current + 1) % products.length);
-    }, 4600);
-    return () => clearInterval(timer);
-  }, [products]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setPopupOpen(true), 3200);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (activeCategory) {
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }
-  }, [activeCategory]);
-
-  const featuredProduct = products[featureIndex];
-
-  const diagnosisResult = useMemo(() => {
-    if (answers.length < diagnosisQuestions.length) return null;
-    const score = answers.reduce((acc, type) => {
-      acc[type] = (acc[type] || 0) + 1;
-      return acc;
-    }, {});
-    return Object.entries(score).sort((a, b) => b[1] - a[1])[0][0];
-  }, [answers]);
-
-  const currentCategory = categories.find((item) => item.slug === activeCategory);
-
-  function answerQuestion(type) {
-    if (answers.length >= diagnosisQuestions.length) return;
-    setAnswers((current) => [...current, type]);
-  }
-
-  function resetDiagnosis() {
-    setAnswers([]);
-  }
-
-  function handleMemberSubmit(event) {
-    event.preventDefault();
-  }
-
-  if (currentCategory) {
-    const categoryProducts = filterByCategory(products, currentCategory);
-
-    return (
-      <main>
-        <Header onCategorySelect={setActiveCategory} />
-
-        <section className="subpageHero">
-          <div className="subpageImage radialReveal imageZoom" style={imageVar(currentCategory.image)} />
-          <div className="subpageCopy luxuryFade">
-            <p className="eyebrow">{currentCategory.jp}</p>
-            <h1>{currentCategory.label}</h1>
-            <h2>{currentCategory.title}</h2>
-            <p>{currentCategory.text}</p>
-            <button className="ghostButton" onClick={() => setActiveCategory(null)}>
-              ← TOPへ戻る
-            </button>
-          </div>
-        </section>
-
-        <section className="editorialSection productSection">
-          <div className="sectionHead">
-            <p className="eyebrow">SELECTED FOR {currentCategory.label}</p>
-            <h2>{currentCategory.jp}のおすすめ</h2>
-          </div>
-          <div className="productGrid">
-            {categoryProducts.map((product) => (
-              <ProductCard key={`${currentCategory.slug}-${product.id}`} product={product} />
-            ))}
-          </div>
-        </section>
-      </main>
-    );
-  }
-
+/* ──────────────────────────────────────────────
+   Topbar
+────────────────────────────────────────────── */
+function Topbar() {
   return (
-    <main>
-      <Header onCategorySelect={setActiveCategory} />
+    <header className="topbar" role="banner">
+      <div className="topbar-left">
+        <button className="hamburger-icon" aria-label="メニューを開く" />
+        <span>メニュー</span>
+      </div>
 
-      <section className="hero">
-        <div className="radialReveal imageZoom" style={imageVar(heroImage)} />
-        <div className="heroOverlay" />
-        <div className="heroCopy luxuryFade">
-          <p className="brandMark">monea</p>
-          <h1>
-            <span>自分らしく美しくなりたい</span>
-            <span>すべての人へ</span>
-          </h1>
-          <p className="heroSub">
-            誰かになるためではなく、自分自身の魅力を見つけ、
-            <br />
-            花開かせるために。
-          </p>
-          <div className="heroActions">
-            <a href="#diagnosis" className="solidButton">
-              診断をはじめる
-            </a>
-            <a href="#member" className="outlineButton">
-              メンバー登録
-            </a>
-          </div>
-        </div>
-        <div className="scrollHint">SCROLL</div>
-      </section>
+      <a className="topbar-brand" href="#" aria-label="monea トップへ">
+        MONEA
+      </a>
 
-      <section id="member" className="memberBand editorialSection">
-        <p className="eyebrow">MONEA MEMBER</p>
-        <h2>メンバーはいつでも10%OFF</h2>
-        <p className="memberLead">
-          あなたらしい美しさのために。moneaのアイテムを特別な価格で。
-        </p>
-        <a href="#member-form" className="solidButton invert">
-          メンバー登録
-        </a>
-      </section>
-
-      <section className="editorialSection categorySection">
-        <div className="sectionHead">
-          <p className="eyebrow">DISCOVER MONEA</p>
-          <h2>白黒の世界に、触れた瞬間だけ色が宿る。</h2>
-        </div>
-
-        <div className="categoryPanels">
-          {categories.map((category) => {
-            const active = hoverSlug === category.slug || touchSlug === category.slug;
-            return (
-              <article
-                key={category.slug}
-                className={`categoryPanel ${active ? "active" : ""}`}
-                onMouseEnter={() => setHoverSlug(category.slug)}
-                onMouseLeave={() => setHoverSlug("")}
-                onClick={() =>
-                  setTouchSlug((current) =>
-                    current === category.slug ? "" : category.slug
-                  )
-                }
-              >
-                <div
-                  className="panelImage hoverColor"
-                  style={{ backgroundImage: `url(${category.image})` }}
-                />
-                <div className="panelShade" />
-                <p className="panelIndex">0{categories.indexOf(category) + 1}</p>
-                <div className="panelCopy">
-                  <p className="panelJp">{category.jp}</p>
-                  <h3>{category.label}</h3>
-                  <p className="panelText">{category.title}</p>
-                  <button
-                    className="enterButton"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      setActiveCategory(category.slug);
-                    }}
-                  >
-                    ENTER →
-                  </button>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section id="products" className="editorialSection productFeature">
-        <div className="sectionHead">
-          <p className="eyebrow">AUTO CURATED</p>
-          <h2>今のmoneaが選ぶアイテム</h2>
-        </div>
-
-        {featuredProduct && (
-          <div className="featureProduct" key={featuredProduct.id}>
-            <div className="featureImage radialReveal" style={imageVar(featuredProduct.image)} />
-            <div className="featureCopy luxuryFade">
-              <p className="eyebrow">{featuredProduct.category}</p>
-              <h3>{featuredProduct.title}</h3>
-              <p className="featureText">{featuredProduct.description}</p>
-              <strong>{featuredProduct.price}</strong>
-              <a href={featuredProduct.url} className="ghostButton dark">
-                詳細を見る →
-              </a>
-            </div>
-          </div>
-        )}
-
-        <div className="productGrid compact">
-          {products.slice(0, 4).map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
-
-      <section id="diagnosis" className="diagnosis editorialSection">
-        <div className="diagnosisImage hoverColor active" />
-        <div className="diagnosisInner">
-          <div className="sectionHead light">
-            <p className="eyebrow">5 MINUTES DIAGNOSIS</p>
-            <h2>あなたに似合うmoneaを見つける</h2>
-          </div>
-
-          {!diagnosisResult && (
-            <div className="questionBox luxuryFade" key={answers.length}>
-              <p className="questionCount">
-                <span>{String(answers.length + 1).padStart(2, "0")}</span> / 0
-                {diagnosisQuestions.length}
-              </p>
-              <h3>{diagnosisQuestions[answers.length].question}</h3>
-              <div className="answerGrid">
-                {diagnosisQuestions[answers.length].options.map((option) => (
-                  <button key={option.label} onClick={() => answerQuestion(option.type)}>
-                    {option.label}
-                  </button>
-                ))}
-              </div>
-              {answers.length > 0 && (
-                <button className="textButton" onClick={resetDiagnosis}>
-                  はじめからやり直す
-                </button>
-              )}
-            </div>
-          )}
-
-          {diagnosisResult && (
-            <div className="resultBox luxuryFade">
-              <p className="eyebrow">YOUR RESULT</p>
-              <h3>{resultCopy[diagnosisResult].title}</h3>
-              <p className="resultText">{resultCopy[diagnosisResult].text}</p>
-              <p className="resultRecommend">
-                おすすめカテゴリ：
-                {categories.find((c) => c.slug === diagnosisResult)?.label}
-              </p>
-
-              <div className="resultProducts">
-                {filterByCategory(
-                  products,
-                  categories.find((c) => c.slug === diagnosisResult)
-                ).map((product) => (
-                  <ProductCard key={`result-${product.id}`} product={product} />
-                ))}
-              </div>
-
-              <div className="resultActions">
-                <button
-                  className="solidButton invert"
-                  onClick={() => setActiveCategory(diagnosisResult)}
-                >
-                  おすすめを見る →
-                </button>
-                <button className="textButton" onClick={resetDiagnosis}>
-                  もう一度診断する
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      <section id="member-form" className="memberForm editorialSection">
-        <p className="eyebrow">JOIN MONEA</p>
-        <h2>メンバー登録</h2>
-        <p className="memberLead">
-          登録すると、moneaのアイテムをいつでも10%OFFでご利用いただけます。
-        </p>
-        <form onSubmit={handleMemberSubmit}>
-          <input type="text" placeholder="お名前" />
-          <input type="email" placeholder="メールアドレス" />
-          <button type="submit" className="solidButton">
-            登録する
-          </button>
-        </form>
-      </section>
-
-      <footer className="footer">
-        <p className="footerMark">monea</p>
-        <span>自分自身の魅力を見つけ、花開かせるために。</span>
-      </footer>
-
-      {popupOpen && (
-        <div className="memberPopup luxuryFade">
-          <button className="popupClose" onClick={() => setPopupOpen(false)} aria-label="閉じる">
-            ×
-          </button>
-          <p className="eyebrow">MEMBER ONLY</p>
-          <h3>メンバーはいつでも10%OFF</h3>
-          <a href="#member-form" className="solidButton" onClick={() => setPopupOpen(false)}>
-            メンバー登録
-          </a>
-        </div>
-      )}
-    </main>
-  );
-}
-
-function imageVar(url) {
-  return { "--image": `url(${url})` };
-}
-
-function Header({ onCategorySelect }) {
-  return (
-    <header className="header">
-      <button className="logo" onClick={() => onCategorySelect(null)}>
-        monea
-      </button>
-      <nav aria-label="Main navigation">
-        {categories.map((category) => (
-          <button key={category.slug} onClick={() => onCategorySelect(category.slug)}>
-            {category.label}
-          </button>
-        ))}
-        <a href="#diagnosis">DIAGNOSIS</a>
-        <a href="#member">MEMBER</a>
-      </nav>
+      <div className="topbar-right">
+        {/* 検索 */}
+        <button className="topbar-icon-btn" aria-label="検索">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <line x1="16.5" y1="16.5" x2="22" y2="22" />
+          </svg>
+        </button>
+        {/* アカウント */}
+        <button className="topbar-icon-btn" aria-label="アカウント">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+        </button>
+        {/* お気に入り */}
+        <button className="topbar-icon-btn" aria-label="お気に入り">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" />
+          </svg>
+        </button>
+        {/* カート */}
+        <button className="topbar-icon-btn" aria-label="カート">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+        </button>
+      </div>
     </header>
   );
 }
 
-function ProductCard({ product }) {
+/* ──────────────────────────────────────────────
+   BloomSection — ホバー/タッチで色づくセクション
+────────────────────────────────────────────── */
+function BloomSection({ className = "", style = {}, children, ...rest }) {
+  const ref = useRef(null);
+  const [cssVars, setCssVars] = useState({ "--x": "50%", "--y": "50%", "--r": "0px" });
+  const waves = useRef([]);
+  const [waveList, setWaveList] = useState([]);
+  const nextId = useRef(0);
+
+  const setPos = useCallback((x, y) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    const px = ((x - rect.left) / rect.width)  * 100;
+    const py = ((y - rect.top)  / rect.height) * 100;
+    setCssVars({ "--x": `${px}%`, "--y": `${py}%`, "--r": "0px" });
+  }, []);
+
+  const spawnWave = useCallback((x, y) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    const id = nextId.current++;
+    const wx = x - rect.left;
+    const wy = y - rect.top;
+    const newWave = { id, wx, wy };
+    waves.current = [...waves.current, newWave];
+    setWaveList([...waves.current]);
+    setTimeout(() => {
+      waves.current = waves.current.filter((w) => w.id !== id);
+      setWaveList([...waves.current]);
+    }, 1400);
+  }, []);
+
+  const handleMouseMove = (e) => setPos(e.clientX, e.clientY);
+  const handleClick     = (e) => spawnWave(e.clientX, e.clientY);
+  const handleTouch     = (e) => {
+    const t = e.touches[0];
+    if (t) { setPos(t.clientX, t.clientY); spawnWave(t.clientX, t.clientY); }
+  };
+
   return (
-    <a className="productCard" href={product.url}>
-      <div className="productImage hoverColor" style={{ backgroundImage: `url(${product.image})` }} />
-      <div className="productMeta">
-        <p>{product.category}</p>
-        <h3>{product.title}</h3>
-        <span>{product.price}</span>
+    <section
+      ref={ref}
+      className={`campaign bloom ${className}`}
+      style={{ ...style, ...cssVars }}
+      onMouseMove={handleMouseMove}
+      onClick={handleClick}
+      onTouchStart={handleTouch}
+      {...rest}
+    >
+      {children}
+      {waveList.map((w) => (
+        <div
+          key={w.id}
+          className="bloom-wave"
+          style={{ "--wave-x": `${w.wx}px`, "--wave-y": `${w.wy}px` }}
+          aria-hidden="true"
+        />
+      ))}
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   Popup
+────────────────────────────────────────────── */
+function MemberPopup() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setOpen(true), 2000);
+    return () => clearTimeout(t);
+  }, []);
+
+  if (!open) return null;
+
+  return (
+    <aside className="site-popup" role="dialog" aria-modal="true" aria-label="メンバー登録">
+      <button className="popup-close" onClick={() => setOpen(false)} aria-label="閉じる">
+        ×
+      </button>
+      <p className="popup-eyebrow">MEMBER ONLY</p>
+      <h3>メンバーは<br />いつでも10%OFF</h3>
+      <a href="#member" className="popup-btn" onClick={() => setOpen(false)}>
+        登録する
+      </a>
+    </aside>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   Page
+────────────────────────────────────────────── */
+export default function Home() {
+  return (
+    <>
+      <Topbar />
+
+      <main>
+        {/* ① メインビジュアル — 外側から色が流れ込む */}
+        <section
+          className="campaign tall hero-main"
+          style={{
+            "--img": `url('${IMAGES.hero}')`,
+            "--pos": "center 30%",
+          }}
+          aria-label="メインビジュアル"
+        >
+          <div className="campaign-gray" aria-hidden="true" />
+          <div className="hero-color-left"  aria-hidden="true" />
+          <div className="hero-color-right" aria-hidden="true" />
+          <div className="hero-flash"  aria-hidden="true" />
+          <div className="hero-sweep"  aria-hidden="true" />
+          <div className="campaign-copy">
+            <h1 className="campaign-title jp">
+              自分らしく美しくなりたい<br />すべての人へ
+            </h1>
+            <p className="campaign-sub">
+              誰かになるためではなく、自分自身の魅力を見つけ、花開かせるために
+            </p>
+            <a className="campaign-button" href="#diagnosis">診断をはじめる</a>
+          </div>
+        </section>
+
+        {/* ② SPECIAL CARE */}
+        <BloomSection
+          className="clean"
+          style={{ "--img": `url('${IMAGES.specialCare}')`, "--pos": "center 48%" }}
+          aria-label="Special Care"
+        >
+          <div className="campaign-gray"  aria-hidden="true" />
+          <div className="campaign-color" aria-hidden="true" />
+          <div className="campaign-copy">
+            <h2 className="campaign-title">SPECIAL CARE</h2>
+            <p className="campaign-sub">いつものケアに、特別な一滴と余白を</p>
+            <a className="campaign-button" href="#">スペシャルケアを見る</a>
+          </div>
+        </BloomSection>
+
+        {/* ③ CLEANSER */}
+        <BloomSection
+          className="clean"
+          style={{ "--img": `url('${IMAGES.cleanser}')`, "--pos": "center 52%" }}
+          aria-label="Cleanser"
+        >
+          <div className="campaign-gray"  aria-hidden="true" />
+          <div className="campaign-color" aria-hidden="true" />
+          <div className="campaign-copy">
+            <h2 className="campaign-title">CLEANSER</h2>
+            <p className="campaign-sub">一日の始まりと終わりに、肌を静かにリセットする</p>
+            <a className="campaign-button" href="#">クレンザーを見る</a>
+          </div>
+        </BloomSection>
+
+        {/* ④ TONER */}
+        <BloomSection
+          style={{ "--img": `url('${IMAGES.toner}')`, "--pos": "center 50%" }}
+          aria-label="Toner"
+        >
+          <div className="campaign-gray"  aria-hidden="true" />
+          <div className="campaign-color" aria-hidden="true" />
+          <div className="campaign-copy">
+            <h2 className="campaign-title">TONER</h2>
+            <p className="campaign-sub">うるおいの通り道を整え、肌の印象をなめらかに</p>
+            <a className="campaign-button" href="#">トナーを見る</a>
+          </div>
+        </BloomSection>
+
+        {/* ⑤⑥ SERUM + CREAM (split) */}
+        <div className="split-promo" role="group" aria-label="Serum と Cream">
+          <SplitItem
+            img={IMAGES.serum}
+            pos="center"
+            title="SERUM"
+            sub="透明感を集中して育てる"
+            btnLabel="美容液を見る"
+          />
+          <SplitItem
+            img={IMAGES.cream}
+            pos="center"
+            title="CREAM"
+            sub="肌を包み、うるおいを閉じ込める"
+            btnLabel="クリームを見る"
+          />
+        </div>
+
+        {/* ⑦ EYECREAM */}
+        <BloomSection
+          className="clean"
+          style={{ "--img": `url('${IMAGES.eyecream}')`, "--pos": "center 46%" }}
+          aria-label="Eye Cream"
+        >
+          <div className="campaign-gray"  aria-hidden="true" />
+          <div className="campaign-color" aria-hidden="true" />
+          <div className="campaign-copy">
+            <h2 className="campaign-title">EYECREAM</h2>
+            <p className="campaign-sub">目もとの印象に、繊細な明るさとハリを</p>
+            <a className="campaign-button" href="#">アイクリームを見る</a>
+          </div>
+        </BloomSection>
+
+        {/* ⑧ BODY */}
+        <BloomSection
+          style={{ "--img": `url('${IMAGES.body}')`, "--pos": "center 48%" }}
+          aria-label="Body"
+        >
+          <div className="campaign-gray"  aria-hidden="true" />
+          <div className="campaign-color" aria-hidden="true" />
+          <div className="campaign-copy">
+            <h2 className="campaign-title">BODY</h2>
+            <p className="campaign-sub">肌に触れるたび、自分を大切にしている実感を</p>
+            <a className="campaign-button" href="#">ボディケアを見る</a>
+          </div>
+        </BloomSection>
+
+        {/* ⑨ DIAGNOSIS */}
+        <BloomSection
+          id="diagnosis"
+          className="short"
+          style={{ "--img": `url('${IMAGES.diagnosis}')`, "--pos": "center 44%" }}
+          aria-label="肌診断"
+        >
+          <div className="campaign-gray"  aria-hidden="true" />
+          <div className="campaign-color" aria-hidden="true" />
+          <div className="campaign-copy">
+            <h2 className="campaign-title jp">5分で見つける<br />あなたのケア</h2>
+            <p className="campaign-sub">簡単な診断で、今のあなたに合う商品カテゴリを提案します</p>
+            <a className="campaign-button" href="#">診断する</a>
+          </div>
+        </BloomSection>
+
+        {/* ⑩ MEMBER */}
+        <MemberSection />
+
+        {/* サービスエリア */}
+        <div className="service-bar">
+          <div className="service-grid">
+            <div className="service-card">
+              <h3>SKIN DIAGNOSIS</h3>
+              <p>5つの質問に答えるだけで、今のあなたに最適なスキンケアカテゴリをご提案します。</p>
+              <a href="#">詳しく見る</a>
+            </div>
+            <div className="service-card">
+              <h3>MONEA MEMBER</h3>
+              <p>メンバー登録で、すべてのアイテムがいつでも10%OFF。特別なケア体験をあなたに。</p>
+              <a href="#member">登録はこちら</a>
+            </div>
+            <div className="service-card">
+              <h3>BEAUTY JOURNAL</h3>
+              <p>肌の悩みに寄り添うビューティーコンテンツを随時更新。あなたの日常ケアをより豊かに。</p>
+              <a href="#">ジャーナルを読む</a>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* フッター */}
+      <footer className="site-footer">
+        <div className="footer-grid">
+          <div className="footer-col">
+            <h3>MONEA</h3>
+            <p>自分らしく美しくなりたい<br />すべての人へ</p>
+          </div>
+          <div className="footer-col">
+            <h3>CATEGORY</h3>
+            <a href="#">Special Care</a>
+            <a href="#">Cleanser</a>
+            <a href="#">Toner</a>
+            <a href="#">Serum</a>
+            <a href="#">Cream</a>
+            <a href="#">Eye Cream</a>
+            <a href="#">Body</a>
+          </div>
+          <div className="footer-col">
+            <h3>SERVICES</h3>
+            <a href="#">肌診断</a>
+            <a href="#">メンバー登録</a>
+            <a href="#">ビューティージャーナル</a>
+          </div>
+          <div className="footer-col">
+            <h3>SUPPORT</h3>
+            <a href="#">お問い合わせ</a>
+            <a href="#">特定商取引法に基づく表記</a>
+            <a href="#">プライバシーポリシー</a>
+            <a href="#">利用規約</a>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>© 2025 monea. All rights reserved.</span>
+          <span>自分自身の魅力を見つけ、花開かせるために。</span>
+        </div>
+      </footer>
+
+      <MemberPopup />
+    </>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   SplitItem — split-promo 内の左右セクション
+────────────────────────────────────────────── */
+function SplitItem({ img, pos, title, sub, btnLabel }) {
+  const ref  = useRef(null);
+  const [cssVars, setCssVars] = useState({ "--x": "50%", "--y": "50%", "--r": "0px" });
+  const waves = useRef([]);
+  const [waveList, setWaveList] = useState([]);
+  const nextId = useRef(0);
+
+  const spawnWave = (clientX, clientY) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    const id = nextId.current++;
+    const newWave = { id, wx: clientX - rect.left, wy: clientY - rect.top };
+    waves.current = [...waves.current, newWave];
+    setWaveList([...waves.current]);
+    setTimeout(() => {
+      waves.current = waves.current.filter((w) => w.id !== id);
+      setWaveList([...waves.current]);
+    }, 1400);
+  };
+
+  const handleMouseMove = (e) => {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    const px = ((e.clientX - rect.left) / rect.width)  * 100;
+    const py = ((e.clientY - rect.top)  / rect.height) * 100;
+    setCssVars({ "--x": `${px}%`, "--y": `${py}%`, "--r": "0px" });
+  };
+
+  return (
+    <div
+      ref={ref}
+      className="split-item bloom"
+      style={{ "--img": `url('${img}')`, "--pos": pos, ...cssVars }}
+      onMouseMove={handleMouseMove}
+      onClick={(e) => spawnWave(e.clientX, e.clientY)}
+      onTouchStart={(e) => {
+        const t = e.touches[0];
+        if (t) spawnWave(t.clientX, t.clientY);
+      }}
+    >
+      <div className="campaign-gray"  aria-hidden="true" />
+      <div className="campaign-color" aria-hidden="true" />
+      <div className="campaign-copy">
+        <h2 className="campaign-title">{title}</h2>
+        <p className="campaign-sub">{sub}</p>
+        <a className="campaign-button" href="#">{btnLabel}</a>
       </div>
-    </a>
+      {waveList.map((w) => (
+        <div
+          key={w.id}
+          className="bloom-wave"
+          style={{ "--wave-x": `${w.wx}px`, "--wave-y": `${w.wy}px` }}
+          aria-hidden="true"
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   MemberSection — member-smooth 演出
+────────────────────────────────────────────── */
+function MemberSection() {
+  const ref    = useRef(null);
+  const [active, setActive] = useState(false);
+
+  return (
+    <section
+      id="member"
+      ref={ref}
+      className={`campaign member-smooth ${active ? "active" : ""}`}
+      style={{ "--img": `url('${IMAGES.member}')`, "--pos": "center 45%" }}
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onTouchStart={() => setActive(true)}
+      aria-label="メンバー登録"
+    >
+      <div className="campaign-gray"  aria-hidden="true" />
+      <div className="campaign-color" aria-hidden="true" />
+      <div className="campaign-copy">
+        <h2 className="campaign-title jp">
+          メンバーは<br />いつでも10%OFF
+        </h2>
+        <p className="campaign-sub">monea member</p>
+        <a className="campaign-button" href="#">メンバー登録</a>
+      </div>
+    </section>
   );
 }
