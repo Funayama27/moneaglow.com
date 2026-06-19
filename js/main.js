@@ -160,14 +160,18 @@ function showToast(m){const t=document.getElementById("toast");if(!t)return;cons
 const heroScenes = document.querySelectorAll(".hero-scene");
 if(heroScenes.length > 1){
   const heroDots = document.querySelectorAll(".hero-dot");
-  const HERO_INTERVAL = 6000;
+  const heroFlash = document.getElementById("heroFlash");
+  const heroSweep = document.getElementById("heroSweep");
+  const HERO_INTERVAL = 5600;
   let hsIdx = 0, hsTimer;
+  function fire(el, cls){ if(!el) return; el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
   function setScene(n){
     hsIdx = (n + heroScenes.length) % heroScenes.length;
+    fire(heroFlash, "fire"); fire(heroSweep, "go"); // flash + light sweep on change
     heroScenes.forEach((s,i)=>s.classList.toggle("active", i===hsIdx));
     heroDots.forEach((d,i)=>{
       d.classList.remove("active");
-      if(i===hsIdx){ void d.offsetWidth; d.classList.add("active"); } // restart fill animation
+      if(i===hsIdx){ void d.offsetWidth; d.classList.add("active"); }
     });
   }
   function heroRestart(){ clearInterval(hsTimer); hsTimer = setInterval(()=>setScene(hsIdx+1), HERO_INTERVAL); }
