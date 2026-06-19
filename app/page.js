@@ -3,29 +3,29 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 /* ──────────────────────────────────────────────
-   画像 URL（Unsplash — カテゴリ合致）
+   画像 URL
 ────────────────────────────────────────────── */
 const IMAGES = {
-  // 高級コスメ広告風の外国人女性ポートレート
+  // 高級コスメ広告風・外国人女性ポートレート
   hero:        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=2800&q=95",
   // フェイスマスク・スパ・集中ケア
-  specialCare: "https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?auto=format&fit=crop&w=2800&q=95",
-  // 洗顔泡・クレンジング・清潔感
+  specialCare: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=2800&q=95",
+  // 洗顔・クレンジング泡・清潔感
   cleanser:    "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=2800&q=95",
   // 化粧水ボトル・水しずく・うるおい
   toner:       "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=2800&q=95",
-  // スポイト付きガラスボトル美容液・光沢
+  // スポイト付きガラスボトル・美容液
   serum:       "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=1800&q=95",
   // 白いクリームジャー・保湿クリーム
   cream:       "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=1800&q=95",
-  // 目元・まつ毛・繊細なクローズアップ
+  // 目元クローズアップ・繊細なアイケア
   eyecream:    "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=2800&q=95",
-  // 肌・ボディオイル・なめらか
+  // ボディオイル・なめらかな肌
   body:        "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=2800&q=95",
-  // スキンケア商品・肌診断イメージ
+  // スキンケア商品フラットレイ・肌診断
   diagnosis:   "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=2800&q=95",
-  // 複数の外国人女性が笑っている
-  member:      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2800&q=95",
+  // 3人の外国人女性が正面で笑っている
+  member:      "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=2800&q=95",
 };
 
 /* ──────────────────────────────────────────────
@@ -44,27 +44,23 @@ function Topbar() {
       </a>
 
       <div className="topbar-right">
-        {/* 検索 */}
         <button className="topbar-icon-btn" aria-label="検索">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="11" cy="11" r="7" />
             <line x1="16.5" y1="16.5" x2="22" y2="22" />
           </svg>
         </button>
-        {/* アカウント */}
         <button className="topbar-icon-btn" aria-label="アカウント">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="8" r="4" />
             <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
           </svg>
         </button>
-        {/* お気に入り */}
         <button className="topbar-icon-btn" aria-label="お気に入り">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z" />
           </svg>
         </button>
-        {/* カート */}
         <button className="topbar-icon-btn" aria-label="カート">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
@@ -78,14 +74,102 @@ function Topbar() {
 }
 
 /* ──────────────────────────────────────────────
-   BloomSection — ホバー/タッチで色づくセクション
+   HeroMultiBloom
+   最初モノトーン → 12箇所から同時多発的に色づく演出
+────────────────────────────────────────────── */
+function HeroMultiBloom() {
+  const [blobs, setBlobs]         = useState([]);
+  const [fullColor, setFullColor] = useState(false);
+  const [swept, setSwept]         = useState(false);
+
+  useEffect(() => {
+    // 顔中心から外側へ向かって配置した12点
+    const positions = [
+      { x: 50, y: 30 },  // 顔の中心
+      { x: 41, y: 36 },  // 左頬
+      { x: 59, y: 36 },  // 右頬
+      { x: 50, y: 16 },  // 額・髪
+      { x: 22, y: 28 },  // 左背景
+      { x: 78, y: 30 },  // 右背景
+      { x: 34, y: 58 },  // 首もと左
+      { x: 65, y: 58 },  // 首もと右
+      { x: 10, y: 65 },  // 左下
+      { x: 88, y: 60 },  // 右下
+      { x: 50, y: 82 },  // 下部中央
+      { x:  5, y: 12 },  // 左上隅
+    ];
+
+    positions.forEach((pos, i) => {
+      setTimeout(() => {
+        setBlobs((prev) => [...prev, { id: i, x: pos.x, y: pos.y }]);
+      }, 500 + i * 280);
+    });
+
+    // ブロブが十分重なったらフルカラーへクロスフェード
+    const crossFadeAt = 500 + (positions.length - 3) * 280 + 1400;
+    setTimeout(() => setFullColor(true), crossFadeAt);
+
+    // 最後の光スウィープ
+    setTimeout(() => setSwept(true), crossFadeAt + 1100);
+  }, []);
+
+  return (
+    <section
+      className="campaign tall hero-main"
+      style={{
+        "--img": `url('${IMAGES.hero}')`,
+        "--pos": "center 30%",
+      }}
+      aria-label="メインビジュアル"
+    >
+      {/* グレースケールベース */}
+      <div className="hero-gray" aria-hidden="true" />
+
+      {/* 各色づきブロブ */}
+      {blobs.map((blob) => (
+        <div
+          key={blob.id}
+          className="hero-blob"
+          style={{ "--bx": `${blob.x}%`, "--by": `${blob.y}%` }}
+          aria-hidden="true"
+        />
+      ))}
+
+      {/* 全面カラーオーバーレイ（最終仕上げ） */}
+      <div
+        className={`hero-full-color${fullColor ? " visible" : ""}`}
+        aria-hidden="true"
+      />
+
+      {/* 光スウィープ */}
+      <div
+        className={`hero-sweep${swept ? " play" : ""}`}
+        aria-hidden="true"
+      />
+
+      <div className="campaign-copy">
+        <h1 className="campaign-title jp">
+          自分らしく美しくなりたい<br />すべての人へ
+        </h1>
+        <p className="campaign-sub">
+          誰かになるためではなく、自分自身の魅力を見つけ、花開かせるために
+        </p>
+        <a className="campaign-button" href="#diagnosis">診断をはじめる</a>
+      </div>
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   BloomSection — ホバーで色づく + 触れたら光る
 ────────────────────────────────────────────── */
 function BloomSection({ className = "", style = {}, children, ...rest }) {
-  const ref = useRef(null);
+  const ref      = useRef(null);
   const [cssVars, setCssVars] = useState({ "--x": "50%", "--y": "50%", "--r": "0px" });
-  const waves = useRef([]);
-  const [waveList, setWaveList] = useState([]);
-  const nextId = useRef(0);
+  const waves    = useRef([]);
+  const [waveList, setWaveList]   = useState([]);
+  const [shineKey, setShineKey]   = useState(0);
+  const nextId   = useRef(0);
 
   const setPos = useCallback((x, y) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -110,9 +194,10 @@ function BloomSection({ className = "", style = {}, children, ...rest }) {
     }, 1400);
   }, []);
 
-  const handleMouseMove = (e) => setPos(e.clientX, e.clientY);
-  const handleClick     = (e) => spawnWave(e.clientX, e.clientY);
-  const handleTouch     = (e) => {
+  const handleMouseMove  = (e) => setPos(e.clientX, e.clientY);
+  const handleMouseEnter = ()  => setShineKey((k) => k + 1);
+  const handleClick      = (e) => spawnWave(e.clientX, e.clientY);
+  const handleTouch      = (e) => {
     const t = e.touches[0];
     if (t) { setPos(t.clientX, t.clientY); spawnWave(t.clientX, t.clientY); }
   };
@@ -123,11 +208,16 @@ function BloomSection({ className = "", style = {}, children, ...rest }) {
       className={`campaign bloom ${className}`}
       style={{ ...style, ...cssVars }}
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
       onClick={handleClick}
       onTouchStart={handleTouch}
       {...rest}
     >
       {children}
+      {/* マウス進入ごとに新しいキーでマウントし直してアニメーションを再生 */}
+      {shineKey > 0 && (
+        <div key={shineKey} className="section-shine" aria-hidden="true" />
+      )}
       {waveList.map((w) => (
         <div
           key={w.id}
@@ -141,7 +231,7 @@ function BloomSection({ className = "", style = {}, children, ...rest }) {
 }
 
 /* ──────────────────────────────────────────────
-   Popup
+   MemberPopup
 ────────────────────────────────────────────── */
 function MemberPopup() {
   const [open, setOpen] = useState(false);
@@ -176,30 +266,8 @@ export default function Home() {
       <Topbar />
 
       <main>
-        {/* ① メインビジュアル — 外側から色が流れ込む */}
-        <section
-          className="campaign tall hero-main"
-          style={{
-            "--img": `url('${IMAGES.hero}')`,
-            "--pos": "center 30%",
-          }}
-          aria-label="メインビジュアル"
-        >
-          <div className="campaign-gray" aria-hidden="true" />
-          <div className="hero-color-left"  aria-hidden="true" />
-          <div className="hero-color-right" aria-hidden="true" />
-          <div className="hero-flash"  aria-hidden="true" />
-          <div className="hero-sweep"  aria-hidden="true" />
-          <div className="campaign-copy">
-            <h1 className="campaign-title jp">
-              自分らしく美しくなりたい<br />すべての人へ
-            </h1>
-            <p className="campaign-sub">
-              誰かになるためではなく、自分自身の魅力を見つけ、花開かせるために
-            </p>
-            <a className="campaign-button" href="#diagnosis">診断をはじめる</a>
-          </div>
-        </section>
+        {/* ① メインビジュアル */}
+        <HeroMultiBloom />
 
         {/* ② SPECIAL CARE */}
         <BloomSection
@@ -321,7 +389,7 @@ export default function Home() {
             </div>
             <div className="service-card">
               <h3>MONEA MEMBER</h3>
-              <p>メンバー登録で、すべてのアイテムがい��でも10%OFF。特別なケア体験をあなたに。</p>
+              <p>メンバー登録で、すべてのアイテムがいつでも10%OFF。特別なケア体験をあなたに。</p>
               <a href="#member">登録はこちら</a>
             </div>
             <div className="service-card">
@@ -376,14 +444,15 @@ export default function Home() {
 }
 
 /* ──────────────────────────────────────────────
-   SplitItem — split-promo 内の左右セクション
+   SplitItem — split-promo 内の左右セクション（光る演出付き）
 ────────────────────────────────────────────── */
 function SplitItem({ img, pos, title, sub, btnLabel }) {
-  const ref  = useRef(null);
-  const [cssVars, setCssVars] = useState({ "--x": "50%", "--y": "50%", "--r": "0px" });
-  const waves = useRef([]);
+  const ref     = useRef(null);
+  const [cssVars, setCssVars]   = useState({ "--x": "50%", "--y": "50%", "--r": "0px" });
+  const waves   = useRef([]);
   const [waveList, setWaveList] = useState([]);
-  const nextId = useRef(0);
+  const [shineKey, setShineKey] = useState(0);
+  const nextId  = useRef(0);
 
   const spawnWave = (clientX, clientY) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -398,13 +467,14 @@ function SplitItem({ img, pos, title, sub, btnLabel }) {
     }, 1400);
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove  = (e) => {
     const rect = ref.current?.getBoundingClientRect();
     if (!rect) return;
     const px = ((e.clientX - rect.left) / rect.width)  * 100;
     const py = ((e.clientY - rect.top)  / rect.height) * 100;
     setCssVars({ "--x": `${px}%`, "--y": `${py}%`, "--r": "0px" });
   };
+  const handleMouseEnter = ()  => setShineKey((k) => k + 1);
 
   return (
     <div
@@ -412,6 +482,7 @@ function SplitItem({ img, pos, title, sub, btnLabel }) {
       className="split-item bloom"
       style={{ "--img": `url('${img}')`, "--pos": pos, ...cssVars }}
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
       onClick={(e) => spawnWave(e.clientX, e.clientY)}
       onTouchStart={(e) => {
         const t = e.touches[0];
@@ -425,6 +496,9 @@ function SplitItem({ img, pos, title, sub, btnLabel }) {
         <p className="campaign-sub">{sub}</p>
         <a className="campaign-button" href="#">{btnLabel}</a>
       </div>
+      {shineKey > 0 && (
+        <div key={shineKey} className="section-shine" aria-hidden="true" />
+      )}
       {waveList.map((w) => (
         <div
           key={w.id}
@@ -441,13 +515,11 @@ function SplitItem({ img, pos, title, sub, btnLabel }) {
    MemberSection — member-smooth 演出
 ────────────────────────────────────────────── */
 function MemberSection() {
-  const ref    = useRef(null);
   const [active, setActive] = useState(false);
 
   return (
     <section
       id="member"
-      ref={ref}
       className={`campaign member-smooth ${active ? "active" : ""}`}
       style={{ "--img": `url('${IMAGES.member}')`, "--pos": "center 45%" }}
       onMouseEnter={() => setActive(true)}

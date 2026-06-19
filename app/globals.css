@@ -183,6 +183,7 @@ button {
 .campaign.active .campaign-color,
 .campaign:hover .campaign-color {
   opacity: 1;
+  filter: saturate(1.22) contrast(1.06) brightness(1.1);
 }
 
 .campaign.active .campaign-gray,
@@ -210,66 +211,65 @@ button {
     radial-gradient(circle at center, transparent 0 44%, rgba(0, 0, 0, 0.12) 94%);
 }
 
-/* ── hero (main visual) ──────────────────────────────── */
+/* ── hero (main visual) — 多点色づきblob演出 ─────────── */
 
 .hero-main {
   isolation: isolate;
 }
 
-.hero-main .campaign-gray {
-  filter: grayscale(1) contrast(1.08) brightness(0.72);
-  transform: scale(1.035);
-  animation: heroGrayFade 6.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+/* グレースケールベース */
+.hero-gray {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--img);
+  background-size: cover;
+  background-position: var(--pos, center);
+  filter: grayscale(1) contrast(1.12) brightness(0.65);
+  transform: scale(1.02);
 }
 
-/* two color halves that bloom inward from outside */
-.hero-color-left,
-.hero-color-right {
+/* 各色づきブロブ — clip-path: circle() で広がる */
+.hero-blob {
   position: absolute;
   inset: 0;
   z-index: 1;
   background-image: var(--img);
   background-size: cover;
   background-position: var(--pos, center);
-  filter: saturate(1.18) contrast(1.04) brightness(1);
-  transform: scale(1.035);
+  filter: saturate(1.22) contrast(1.05) brightness(1.04);
+  clip-path: circle(0% at var(--bx) var(--by));
+  animation: blobExpand 4.6s cubic-bezier(0.22, 0.78, 0.35, 1) forwards;
+  transform: scale(1.02);
 }
 
-.hero-color-left {
-  clip-path: inset(0 100% 0 0);
-  animation:
-    heroLeftBloom  5.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards,
-    heroColorSettle 6.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s  forwards;
+@keyframes blobExpand {
+  0%   { clip-path: circle(0%   at var(--bx) var(--by)); }
+  20%  { clip-path: circle(8%   at var(--bx) var(--by)); }
+  55%  { clip-path: circle(52%  at var(--bx) var(--by)); }
+  82%  { clip-path: circle(130% at var(--bx) var(--by)); }
+  100% { clip-path: circle(210% at var(--bx) var(--by)); }
 }
 
-.hero-color-right {
-  clip-path: inset(0 0 0 100%);
-  animation:
-    heroRightBloom  5.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards,
-    heroColorSettle 6.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s  forwards;
-}
-
-/* subtle side flash */
-.hero-flash {
+/* 全面カラーオーバーレイ — ブロブが広がったあとにフェードイン */
+.hero-full-color {
   position: absolute;
   inset: 0;
   z-index: 2;
-  pointer-events: none;
+  background-image: var(--img);
+  background-size: cover;
+  background-position: var(--pos, center);
+  filter: saturate(1.12) contrast(1.03) brightness(1);
   opacity: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.42) 0%,
-    rgba(255, 235, 216, 0.12) 18%,
-    transparent 34%,
-    transparent 66%,
-    rgba(255, 235, 216, 0.12) 82%,
-    rgba(255, 255, 255, 0.42) 100%
-  );
-  mix-blend-mode: screen;
-  animation: heroSideGlow 5.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+  transform: scale(1.02);
+  transition: opacity 2.4s ease;
 }
 
-/* final light sweep */
+.hero-full-color.visible {
+  opacity: 1;
+}
+
+/* 最後の光スウィープ */
 .hero-sweep {
   position: absolute;
   inset: 0;
@@ -279,57 +279,56 @@ button {
   background: linear-gradient(
     100deg,
     transparent 0%,
-    transparent 38%,
-    rgba(255, 255, 255, 0.08) 44%,
-    rgba(255, 255, 255, 0.86) 50%,
-    rgba(255, 229, 205, 0.18) 56%,
-    transparent 64%,
+    transparent 36%,
+    rgba(255, 255, 255, 0.07) 43%,
+    rgba(255, 255, 255, 0.88) 50%,
+    rgba(255, 232, 210, 0.16) 57%,
+    transparent 65%,
     transparent 100%
   );
   transform: translateX(-120%);
   mix-blend-mode: screen;
-  animation: heroSweep 2.1s cubic-bezier(0.16, 1, 0.3, 1) 4.75s forwards;
 }
 
-@keyframes heroLeftBloom {
-  0%   { clip-path: inset(0 100% 0 0); }
-  22%  { clip-path: inset(0  78% 0 0); }
-  48%  { clip-path: inset(0  52% 0 0); }
-  74%  { clip-path: inset(0  28% 0 0); }
-  100% { clip-path: inset(0   0  0 0); }
-}
-
-@keyframes heroRightBloom {
-  0%   { clip-path: inset(0 0 0 100%); }
-  22%  { clip-path: inset(0 0 0  78%); }
-  48%  { clip-path: inset(0 0 0  52%); }
-  74%  { clip-path: inset(0 0 0  28%); }
-  100% { clip-path: inset(0 0 0   0 ); }
-}
-
-@keyframes heroGrayFade {
-  0%   { opacity: 1; transform: scale(1.035); }
-  70%  { opacity: 1; transform: scale(1.012); }
-  100% { opacity: 0.04; transform: scale(1);  }
-}
-
-@keyframes heroColorSettle {
-  0%   { transform: scale(1.035); }
-  100% { transform: scale(1);     }
-}
-
-@keyframes heroSideGlow {
-  0%   { opacity: 0;    filter: blur(28px); }
-  24%  { opacity: 0.28; filter: blur(20px); }
-  68%  { opacity: 0.55; filter: blur(12px); }
-  100% { opacity: 0;    filter: blur(24px); }
+.hero-sweep.play {
+  animation: heroSweep 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes heroSweep {
   0%   { opacity: 0;   transform: translateX(-120%); }
-  18%  { opacity: 0.7; }
-  58%  { opacity: 1;   }
+  16%  { opacity: 0.7; }
+  55%  { opacity: 1;   }
   100% { opacity: 0;   transform: translateX(120%);  }
+}
+
+/* ── section-shine — 商品セクションに触れたら光る ──────── */
+
+.section-shine {
+  position: absolute;
+  top: -60%;
+  bottom: -60%;
+  left: 0;
+  z-index: 9;
+  width: 120px;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 28%,
+    rgba(255, 255, 255, 0.62) 50%,
+    rgba(255, 238, 215, 0.10) 72%,
+    transparent 100%
+  );
+  transform: skewX(-16deg) translateX(-300%);
+  mix-blend-mode: screen;
+  animation: sectionShine 1.05s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sectionShine {
+  0%   { opacity: 0;   transform: skewX(-16deg) translateX(-300%); }
+  10%  { opacity: 1;   }
+  78%  { opacity: 0.95; }
+  100% { opacity: 0;   transform: skewX(-16deg) translateX(520%);  }
 }
 
 /* ── member smooth reveal ────────────────────────────── */
@@ -404,7 +403,7 @@ button {
   background: #eee;
 }
 
-/* ── bloom wave (cursor ripple for non-hero) ─────────── */
+/* ── bloom wave (cursor ripple) ──────────────────────── */
 
 .bloom-wave {
   position: absolute;
@@ -662,13 +661,17 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-color-left,
-  .hero-color-right,
-  .hero-flash,
-  .hero-sweep {
-    animation-duration: 0.01ms;
+  .hero-blob {
+    animation: none;
+    clip-path: circle(210% at var(--bx) var(--by));
   }
 
-  .hero-color-left  { clip-path: inset(0 0 0 0); }
-  .hero-color-right { clip-path: inset(0 0 0 0); }
+  .hero-full-color {
+    opacity: 1;
+    transition: none;
+  }
+
+  .section-shine {
+    display: none;
+  }
 }
