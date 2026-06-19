@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 const heroImage =
-  "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=1800&q=85";
+  "https://images.unsplash.com/photo-1457972729786-0411a3b2b626?auto=format&fit=crop&w=2000&q=90";
 
 const categories = [
   {
@@ -12,8 +12,9 @@ const categories = [
     jp: "スキンケア",
     title: "肌本来の透明感を育てるケア",
     text: "乾燥、ゆらぎ、くすみ感に寄り添い、毎日の肌を静かに整えるライン。",
+    match: "SKINCARE",
     image:
-      "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=1600&q=90",
   },
   {
     slug: "makeup",
@@ -21,8 +22,9 @@ const categories = [
     jp: "メイクアップ",
     title: "自分らしさを引き出す色と質感",
     text: "誰かに近づくためではなく、あなたの表情を咲かせるカラーコスメ。",
+    match: "MAKEUP",
     image:
-      "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1600&q=90",
   },
   {
     slug: "fragrance",
@@ -30,8 +32,9 @@ const categories = [
     jp: "フレグランス",
     title: "記憶に残る印象をまとう香り",
     text: "近づいた瞬間に残る、静かで美しい余韻をまとう香りのコレクション。",
+    match: "FRAGRANCE",
     image:
-      "https://images.unsplash.com/photo-1619994403073-2cec844b8e63?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1619994403073-2cec844b8e63?auto=format&fit=crop&w=1600&q=90",
   },
   {
     slug: "inner-glow",
@@ -39,8 +42,9 @@ const categories = [
     jp: "インナーグロウ",
     title: "内側から整える美容習慣",
     text: "外側の美しさだけでなく、毎日のリズムから自分らしい輝きを整える。",
+    match: "INNER GLOW",
     image:
-      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1600&q=90",
   },
 ];
 
@@ -120,12 +124,22 @@ const resultCopy = {
   },
 };
 
+function filterByCategory(products, category) {
+  if (!products.length) return [];
+  const key = category.match.toLowerCase();
+  const matched = products.filter((product) =>
+    (product.category || "").toLowerCase().includes(key.split(" ")[0])
+  );
+  return matched.concat(products).slice(0, 4);
+}
+
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [featureIndex, setFeatureIndex] = useState(0);
   const [activeCategory, setActiveCategory] = useState(null);
+  const [hoverSlug, setHoverSlug] = useState("");
   const [touchSlug, setTouchSlug] = useState("");
-  const [popupOpen, setPopupOpen] = useState(true);
+  const [popupOpen, setPopupOpen] = useState(false);
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
@@ -137,24 +151,31 @@ export default function Home() {
 
   useEffect(() => {
     if (!products.length) return;
-
     const timer = setInterval(() => {
       setFeatureIndex((current) => (current + 1) % products.length);
-    }, 4200);
-
+    }, 4600);
     return () => clearInterval(timer);
   }, [products]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setPopupOpen(true), 3200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (activeCategory) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }, [activeCategory]);
 
   const featuredProduct = products[featureIndex];
 
   const diagnosisResult = useMemo(() => {
     if (answers.length < diagnosisQuestions.length) return null;
-
     const score = answers.reduce((acc, type) => {
       acc[type] = (acc[type] || 0) + 1;
       return acc;
     }, {});
-
     return Object.entries(score).sort((a, b) => b[1] - a[1])[0][0];
   }, [answers]);
 
@@ -174,40 +195,30 @@ export default function Home() {
   }
 
   if (currentCategory) {
-    const categoryProducts = products
-      .filter((product) =>
-        product.category
-          ?.toLowerCase()
-          .includes(currentCategory.label.toLowerCase().split(" ")[0])
-      )
-      .concat(products)
-      .slice(0, 4);
+    const categoryProducts = filterByCategory(products, currentCategory);
 
     return (
       <main>
         <Header onCategorySelect={setActiveCategory} />
+
         <section className="subpageHero">
-          <div
-            className="subpageImage colorReveal"
-            style={{ "--image": `url(${currentCategory.image})` }}
-          />
-          <div className="subpageCopy">
+          <div className="subpageImage radialReveal imageZoom" style={imageVar(currentCategory.image)} />
+          <div className="subpageCopy luxuryFade">
             <p className="eyebrow">{currentCategory.jp}</p>
             <h1>{currentCategory.label}</h1>
             <h2>{currentCategory.title}</h2>
             <p>{currentCategory.text}</p>
-            <button className="lineButton" onClick={() => setActiveCategory(null)}>
-              TOPへ戻る
+            <button className="ghostButton" onClick={() => setActiveCategory(null)}>
+              ← TOPへ戻る
             </button>
           </div>
         </section>
 
-        <section className="section productSection">
-          <div className="sectionTitle">
+        <section className="editorialSection productSection">
+          <div className="sectionHead">
             <p className="eyebrow">SELECTED FOR {currentCategory.label}</p>
             <h2>{currentCategory.jp}のおすすめ</h2>
           </div>
-
           <div className="productGrid">
             {categoryProducts.map((product) => (
               <ProductCard key={`${currentCategory.slug}-${product.id}`} product={product} />
@@ -223,81 +234,106 @@ export default function Home() {
       <Header onCategorySelect={setActiveCategory} />
 
       <section className="hero">
-        <div
-          className="heroImage colorReveal autoReveal"
-          style={{ "--image": `url(${heroImage})` }}
-        />
-        <div className="heroCopy">
+        <div className="radialReveal imageZoom" style={imageVar(heroImage)} />
+        <div className="heroOverlay" />
+        <div className="heroCopy luxuryFade">
           <p className="brandMark">monea</p>
-          <h1>自分らしく美しくなりたいすべての人へ</h1>
-          <p>
+          <h1>
+            <span>自分らしく美しくなりたい</span>
+            <span>すべての人へ</span>
+          </h1>
+          <p className="heroSub">
             誰かになるためではなく、自分自身の魅力を見つけ、
             <br />
             花開かせるために。
           </p>
           <div className="heroActions">
-            <a href="#diagnosis" className="darkButton">
+            <a href="#diagnosis" className="solidButton">
               診断をはじめる
             </a>
-            <a href="#member" className="lightButton">
+            <a href="#member" className="outlineButton">
               メンバー登録
             </a>
           </div>
         </div>
+        <div className="scrollHint">SCROLL</div>
       </section>
 
-      <section id="member" className="memberBand">
-        <p>MEMBER BENEFIT</p>
+      <section id="member" className="memberBand editorialSection">
+        <p className="eyebrow">MONEA MEMBER</p>
         <h2>メンバーはいつでも10%OFF</h2>
-        <a href="#member-form">メンバー登録</a>
+        <p className="memberLead">
+          あなたらしい美しさのために。moneaのアイテムを特別な価格で。
+        </p>
+        <a href="#member-form" className="solidButton invert">
+          メンバー登録
+        </a>
       </section>
 
-      <section className="section">
-        <div className="sectionTitle">
+      <section className="editorialSection categorySection">
+        <div className="sectionHead">
           <p className="eyebrow">DISCOVER MONEA</p>
-          <h2>白黒の美しさが、触れた瞬間に色づく。</h2>
+          <h2>白黒の世界に、触れた瞬間だけ色が宿る。</h2>
         </div>
 
-        <div className="categoryGrid">
-          {categories.map((category) => (
-            <button
-              key={category.slug}
-              className={`categoryCard ${touchSlug === category.slug ? "touchActive" : ""}`}
-              onClick={() => setActiveCategory(category.slug)}
-              onTouchStart={() => setTouchSlug(category.slug)}
-            >
-              <div
-                className="categoryImage"
-                style={{ backgroundImage: `url(${category.image})` }}
-              />
-              <div className="categoryCopy">
-                <p>{category.jp}</p>
-                <h3>{category.label}</h3>
-                <span>{category.title}</span>
-              </div>
-            </button>
-          ))}
+        <div className="categoryPanels">
+          {categories.map((category) => {
+            const active = hoverSlug === category.slug || touchSlug === category.slug;
+            return (
+              <article
+                key={category.slug}
+                className={`categoryPanel ${active ? "active" : ""}`}
+                onMouseEnter={() => setHoverSlug(category.slug)}
+                onMouseLeave={() => setHoverSlug("")}
+                onClick={() =>
+                  setTouchSlug((current) =>
+                    current === category.slug ? "" : category.slug
+                  )
+                }
+              >
+                <div
+                  className="panelImage hoverColor"
+                  style={{ backgroundImage: `url(${category.image})` }}
+                />
+                <div className="panelShade" />
+                <p className="panelIndex">0{categories.indexOf(category) + 1}</p>
+                <div className="panelCopy">
+                  <p className="panelJp">{category.jp}</p>
+                  <h3>{category.label}</h3>
+                  <p className="panelText">{category.title}</p>
+                  <button
+                    className="enterButton"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setActiveCategory(category.slug);
+                    }}
+                  >
+                    ENTER →
+                  </button>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
-      <section id="products" className="section productFeature">
-        <div className="sectionTitle">
+      <section id="products" className="editorialSection productFeature">
+        <div className="sectionHead">
           <p className="eyebrow">AUTO CURATED</p>
           <h2>今のmoneaが選ぶアイテム</h2>
         </div>
 
         {featuredProduct && (
-          <div className="featureProduct">
-            <div
-              className="featureImage colorReveal"
-              style={{ "--image": `url(${featuredProduct.image})` }}
-            />
-            <div className="featureCopy">
+          <div className="featureProduct" key={featuredProduct.id}>
+            <div className="featureImage radialReveal" style={imageVar(featuredProduct.image)} />
+            <div className="featureCopy luxuryFade">
               <p className="eyebrow">{featuredProduct.category}</p>
               <h3>{featuredProduct.title}</h3>
-              <p>{featuredProduct.description}</p>
+              <p className="featureText">{featuredProduct.description}</p>
               <strong>{featuredProduct.price}</strong>
-              <a href={featuredProduct.url}>詳細を見る</a>
+              <a href={featuredProduct.url} className="ghostButton dark">
+                詳細を見る →
+              </a>
             </div>
           </div>
         )}
@@ -309,68 +345,99 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="diagnosis" className="section diagnosis">
-        <div className="sectionTitle">
-          <p className="eyebrow">5 MINUTES DIAGNOSIS</p>
-          <h2>あなたに似合うmoneaを見つける</h2>
-        </div>
+      <section id="diagnosis" className="diagnosis editorialSection">
+        <div className="diagnosisImage hoverColor active" />
+        <div className="diagnosisInner">
+          <div className="sectionHead light">
+            <p className="eyebrow">5 MINUTES DIAGNOSIS</p>
+            <h2>あなたに似合うmoneaを見つける</h2>
+          </div>
 
-        {!diagnosisResult && (
-          <div className="questionBox">
-            <p className="questionCount">
-              {answers.length + 1} / {diagnosisQuestions.length}
-            </p>
-            <h3>{diagnosisQuestions[answers.length].question}</h3>
-
-            <div className="answerGrid">
-              {diagnosisQuestions[answers.length].options.map((option) => (
-                <button key={option.label} onClick={() => answerQuestion(option.type)}>
-                  {option.label}
+          {!diagnosisResult && (
+            <div className="questionBox luxuryFade" key={answers.length}>
+              <p className="questionCount">
+                <span>{String(answers.length + 1).padStart(2, "0")}</span> / 0
+                {diagnosisQuestions.length}
+              </p>
+              <h3>{diagnosisQuestions[answers.length].question}</h3>
+              <div className="answerGrid">
+                {diagnosisQuestions[answers.length].options.map((option) => (
+                  <button key={option.label} onClick={() => answerQuestion(option.type)}>
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+              {answers.length > 0 && (
+                <button className="textButton" onClick={resetDiagnosis}>
+                  はじめからやり直す
                 </button>
-              ))}
+              )}
             </div>
-          </div>
-        )}
+          )}
 
-        {diagnosisResult && (
-          <div className="resultBox">
-            <p className="eyebrow">YOUR RESULT</p>
-            <h3>{resultCopy[diagnosisResult].title}</h3>
-            <p>{resultCopy[diagnosisResult].text}</p>
-            <button onClick={() => setActiveCategory(diagnosisResult)}>
-              おすすめを見る
-            </button>
-            <button className="textButton" onClick={resetDiagnosis}>
-              もう一度診断する
-            </button>
-          </div>
-        )}
+          {diagnosisResult && (
+            <div className="resultBox luxuryFade">
+              <p className="eyebrow">YOUR RESULT</p>
+              <h3>{resultCopy[diagnosisResult].title}</h3>
+              <p className="resultText">{resultCopy[diagnosisResult].text}</p>
+              <p className="resultRecommend">
+                おすすめカテゴリ：
+                {categories.find((c) => c.slug === diagnosisResult)?.label}
+              </p>
+
+              <div className="resultProducts">
+                {filterByCategory(
+                  products,
+                  categories.find((c) => c.slug === diagnosisResult)
+                ).map((product) => (
+                  <ProductCard key={`result-${product.id}`} product={product} />
+                ))}
+              </div>
+
+              <div className="resultActions">
+                <button
+                  className="solidButton invert"
+                  onClick={() => setActiveCategory(diagnosisResult)}
+                >
+                  おすすめを見る →
+                </button>
+                <button className="textButton" onClick={resetDiagnosis}>
+                  もう一度診断する
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </section>
 
-      <section id="member-form" className="memberForm">
-        <p className="eyebrow">MONEA MEMBER</p>
+      <section id="member-form" className="memberForm editorialSection">
+        <p className="eyebrow">JOIN MONEA</p>
         <h2>メンバー登録</h2>
-        <p>登録すると、moneaのアイテムをいつでも10%OFFでご利用いただけます。</p>
+        <p className="memberLead">
+          登録すると、moneaのアイテムをいつでも10%OFFでご利用いただけます。
+        </p>
         <form onSubmit={handleMemberSubmit}>
           <input type="text" placeholder="お名前" />
           <input type="email" placeholder="メールアドレス" />
-          <button type="submit">登録する</button>
+          <button type="submit" className="solidButton">
+            登録する
+          </button>
         </form>
       </section>
 
       <footer className="footer">
-        <p>monea</p>
+        <p className="footerMark">monea</p>
         <span>自分自身の魅力を見つけ、花開かせるために。</span>
       </footer>
 
       {popupOpen && (
-        <div className="memberPopup">
-          <button className="popupClose" onClick={() => setPopupOpen(false)}>
+        <div className="memberPopup luxuryFade">
+          <button className="popupClose" onClick={() => setPopupOpen(false)} aria-label="閉じる">
             ×
           </button>
-          <p>MEMBER ONLY</p>
+          <p className="eyebrow">MEMBER ONLY</p>
           <h3>メンバーはいつでも10%OFF</h3>
-          <a href="#member-form" onClick={() => setPopupOpen(false)}>
+          <a href="#member-form" className="solidButton" onClick={() => setPopupOpen(false)}>
             メンバー登録
           </a>
         </div>
@@ -379,13 +446,16 @@ export default function Home() {
   );
 }
 
+function imageVar(url) {
+  return { "--image": `url(${url})` };
+}
+
 function Header({ onCategorySelect }) {
   return (
     <header className="header">
       <button className="logo" onClick={() => onCategorySelect(null)}>
         monea
       </button>
-
       <nav aria-label="Main navigation">
         {categories.map((category) => (
           <button key={category.slug} onClick={() => onCategorySelect(category.slug)}>
@@ -402,13 +472,12 @@ function Header({ onCategorySelect }) {
 function ProductCard({ product }) {
   return (
     <a className="productCard" href={product.url}>
-      <div
-        className="productImage"
-        style={{ backgroundImage: `url(${product.image})` }}
-      />
-      <p>{product.category}</p>
-      <h3>{product.title}</h3>
-      <span>{product.price}</span>
+      <div className="productImage hoverColor" style={{ backgroundImage: `url(${product.image})` }} />
+      <div className="productMeta">
+        <p>{product.category}</p>
+        <h3>{product.title}</h3>
+        <span>{product.price}</span>
+      </div>
     </a>
   );
 }
