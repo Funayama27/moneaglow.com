@@ -1,0 +1,9 @@
+{
+  "name": "monea-glow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MONEA GLOW — 美容ECサイト（静的フロント + Vercel Serverless）",
+  "dependencies": {
+    "@vercel/kv": "^3.0.0"
+  }
+}
