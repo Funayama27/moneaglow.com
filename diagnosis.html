@@ -151,6 +151,7 @@ footer{background:var(--soft2);color:var(--sub);padding:9vh 6vw 5vh;font-size:.8
     <h2 id="rt"></h2>
     <p id="rp" style="color:#555;line-height:2;margin-bottom:30px"></p>
     <a href="collection.html" class="btn" id="rb">おすすめを見る</a>
+    <a href="journal.html" class="btn line" id="rb2" style="margin-left:8px">関連記事を読む</a>
     <p style="margin-top:30px;font-size:.84rem;color:var(--sub)">会員登録で、いつでも10%OFF。</p>
   </div>
 </section>
@@ -240,6 +241,8 @@ function result(){document.getElementById("bar").style.width="100%";document.get
  document.getElementById("rt").textContent=r[0];
  document.getElementById("rp").textContent=r[1];
  document.getElementById("rb").href="collection.html?cat="+encodeURIComponent(best);
+ var RESART={"クリーム":"winter-dry-skincare","クレンジング":"cleansing-choose","美容液":"vitamin-c-serum-guide","化粧水":"toner-how-to","日焼け止め":"sunscreen-reapply","マスク":"sheet-mask","美容雑貨":"self-care-tools"};
+ document.getElementById("rb2").href="article.html?slug="+(RESART[best]||"winter-dry-skincare");
  document.getElementById("res").classList.add("on");}
 show();
 (function(){var l=document.getElementById("faqList");if(!l)return;l.querySelectorAll(".faqx-q").forEach(function(b){b.addEventListener("click",function(){var it=b.parentNode,a=it.querySelector(".faqx-a"),op=it.classList.contains("open");l.querySelectorAll(".faqx-item").forEach(function(x){x.classList.remove("open");x.querySelector(".faqx-a").style.maxHeight=null;});if(!op){it.classList.add("open");a.style.maxHeight=a.scrollHeight+"px";}});});})();
