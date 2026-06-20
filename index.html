@@ -13,9 +13,9 @@
 <style>
 @property --r{syntax:'<length>';inherits:true;initial-value:0px}
 @property --burst{syntax:'<number>';inherits:true;initial-value:0}
-:root{--ink:#2b2622;--bg:#fff;--soft:#f7f4f0;--soft2:#ece5df;--sub:#8b8079;--line:rgba(43,38,34,.11);--d1:#2a2623;--d2:#3a332d;--d3:#4f453d;--d4:#6e5f54;--disp:'Marcellus',serif;--serif:'Zen Old Mincho',serif;
+:root{--ink:#1f1f1d;--bg:#fff;--soft:#f5f4f1;--soft2:#eae7e1;--sub:#7c7a74;--line:rgba(0,0,0,.10);--d1:#2a2623;--d2:#3a332d;--d3:#4f453d;--d4:#6e5f54;--disp:'Marcellus',serif;--serif:'Zen Old Mincho',serif;
 --sans:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;
---accent:#b07c66;--mx:50%;--my:50%;--r:0px;--burst:0}
+--accent:#5e7257;--brown:#94785f;--mx:50%;--my:50%;--r:0px;--burst:0}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--sans);background:#fff;word-break:auto-phrase}
 html.scroll-locked,body.scroll-locked{height:100%;overflow:hidden;overscroll-behavior:none}
@@ -94,20 +94,20 @@ canvas{position:absolute;inset:0;pointer-events:none;z-index:6}
 @keyframes underlineOut{0%{opacity:.72;transform:translateX(-50%) scaleX(1)}100%{opacity:0;transform:translateX(-50%) scaleX(.74)}}
 @keyframes mainIgnite{0%{letter-spacing:.1em;transform:scale(1);filter:blur(0)}38%{letter-spacing:.16em;transform:scale(1.025);filter:blur(.25px);text-shadow:0 0 14px rgba(255,255,255,.8),0 0 48px rgba(255,196,176,.50),0 0 84px rgba(255,217,230,.32)}100%{letter-spacing:.12em;transform:scale(1);filter:blur(0);text-shadow:0 6px 36px rgba(44,21,17,.42),0 0 22px rgba(204,92,72,.26)}}
 /* intro section below (scroll target) */
-.intro{background:linear-gradient(165deg,#2a2623 0%,#3a332d 44%,#4f453d 76%,#6e5f54 100%);color:#fff;padding:20vh 6vw;text-align:center}
-.intro .eb{font-family:var(--disp);letter-spacing:.4em;font-size:.74rem;color:#e0aa9a;text-transform:uppercase}
-.intro .lead{font-family:var(--serif);font-size:clamp(1.35rem,2.7vw,2rem);line-height:1.9;margin:24px auto 0;max-width:860px;color:#fff;text-wrap:balance}
-.intro .txt{font-size:.92rem;line-height:2.15;color:rgba(255,255,255,.78);max-width:600px;margin:32px auto 0;text-wrap:pretty}
+.intro{background:#fff;color:var(--ink);padding:17vh 6vw;text-align:center;border-bottom:1px solid var(--line)}
+.intro .eb{font-family:var(--disp);letter-spacing:.4em;font-size:.74rem;color:var(--accent);text-transform:uppercase}
+.intro .lead{font-family:var(--serif);font-size:clamp(1.35rem,2.7vw,2rem);line-height:1.9;margin:24px auto 0;max-width:860px;color:var(--ink);text-wrap:balance}
+.intro .txt{font-size:.92rem;line-height:2.15;color:var(--sub);max-width:600px;margin:32px auto 0;text-wrap:pretty}
 @media(max-width:760px){.hero{min-height:620px}.t-top{font-size:clamp(1.45rem,7vw,2.25rem)}.t-main{font-size:clamp(1.15rem,5.5vw,1.75rem)}.t-main::before{width:86vw;height:96px}.t-main::after{width:54vw}.t-bot{font-size:clamp(2rem,10vw,3.4rem);letter-spacing:.12em;text-indent:.12em}}
 .burger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;color:inherit}
 .burger span{display:block;width:26px;height:1.5px;background:currentColor;transition:.3s}
 .nav-bag{font-family:var(--disp);font-size:.8rem;letter-spacing:.18em;color:inherit;text-decoration:none}
 .nav-logo{position:absolute;left:50%;transform:translateX(-50%)}
-.menu{position:fixed;inset:0;z-index:60;background:linear-gradient(165deg,#2a2623,#3a332d 44%,#4f453d 76%,#6e5f54);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s}
+.menu{position:fixed;inset:0;z-index:60;background:rgba(255,255,255,.98);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s}
 .menu.active{opacity:1;visibility:visible}
-.menu-close{position:absolute;top:20px;right:5vw;background:none;border:none;color:#fff;font-size:2.2rem;line-height:1;cursor:pointer;font-family:var(--serif)}
+.menu-close{position:absolute;top:20px;right:5vw;background:none;border:none;color:var(--ink);font-size:2.2rem;line-height:1;cursor:pointer;font-family:var(--serif)}
 .menu-nav{display:flex;flex-direction:column;align-items:center;gap:24px}
-.menu-nav a{font-family:var(--disp);font-size:clamp(1.8rem,5.2vw,3.2rem);color:#fff;text-decoration:none;letter-spacing:.12em;opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease,letter-spacing .3s}
+.menu-nav a{font-family:var(--disp);font-size:clamp(1.8rem,5.2vw,3.2rem);color:var(--ink);text-decoration:none;letter-spacing:.12em;opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease,letter-spacing .3s}
 .menu.active .menu-nav a{opacity:.92;transform:none}
 .menu.active .menu-nav a:hover{opacity:1;letter-spacing:.2em}
 .menu.active .menu-nav a:nth-child(1){transition-delay:.08s}.menu.active .menu-nav a:nth-child(2){transition-delay:.14s}.menu.active .menu-nav a:nth-child(3){transition-delay:.2s}.menu.active .menu-nav a:nth-child(4){transition-delay:.26s}.menu.active .menu-nav a:nth-child(5){transition-delay:.32s}.menu.active .menu-nav a:nth-child(6){transition-delay:.38s}
@@ -116,7 +116,7 @@ canvas{position:absolute;inset:0;pointer-events:none;z-index:6}
 .sec-h .eb{font-family:var(--disp);letter-spacing:.4em;font-size:.74rem;color:var(--accent);text-transform:uppercase}
 .sec-h h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.7rem,3.6vw,2.6rem);margin-top:14px;color:var(--ink)}
 .sec-h p{color:#7a6a64;font-size:.9rem;margin-top:12px}
-.trend{background:#faf6f3}
+.trend{background:var(--soft)}
 .tstrip{display:flex;gap:24px;overflow-x:auto;padding:4px 0 20px;scroll-snap-type:x mandatory}
 .pcard{flex:0 0 auto;width:260px;scroll-snap-align:start}
 .pcard-fig{aspect-ratio:3/4;overflow:hidden;background:#efe7e2;margin-bottom:14px}
@@ -137,16 +137,16 @@ canvas{position:absolute;inset:0;pointer-events:none;z-index:6}
 .panel .pc h3{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,3.4vw,2.6rem);margin:12px 0 16px}
 .btn{display:inline-block;background:var(--accent);color:#fff;padding:14px 30px;font-size:.8rem;letter-spacing:.12em;text-decoration:none;border:none;cursor:pointer}
 .btn.ghost{background:none;border:1px solid currentColor}
-.member{background:linear-gradient(165deg,#2a2623,#3a332d 44%,#4f453d 76%,#6e5f54);color:#fff;text-align:center;padding:16vh 6vw}
+.member{background:var(--soft);color:var(--ink);text-align:center;padding:15vh 6vw}
 .member h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4vw,2.8rem)}
-.member p{color:rgba(255,255,255,.82);margin:18px auto 30px;max-width:520px;line-height:2}
-.member .btn{background:#fff;color:var(--accent)}
-footer{background:#241f1c;color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-size:.82rem}
+.member p{color:var(--sub);margin:18px auto 30px;max-width:520px;line-height:2}
+.member .btn{background:var(--accent);color:#fff}
+footer{background:var(--soft2);color:var(--sub);padding:9vh 6vw 5vh;font-size:.82rem}
 .ft-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:40px;max-width:1200px;margin:0 auto}
-.ft-logo{font-family:var(--disp);font-size:1.4rem;letter-spacing:.3em;color:#fff}
-.ft-col h4{font-family:var(--disp);letter-spacing:.16em;font-size:.72rem;color:#fff;margin-bottom:14px}
-.ft-col a{display:block;color:rgba(255,255,255,.66);text-decoration:none;margin:7px 0;font-size:.82rem}
-.ft-bot{max-width:1200px;margin:7vh auto 0;padding-top:3vh;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.72rem;color:rgba(255,255,255,.5)}
+.ft-logo{font-family:var(--disp);font-size:1.4rem;letter-spacing:.3em;color:var(--ink)}
+.ft-col h4{font-family:var(--disp);letter-spacing:.16em;font-size:.72rem;color:var(--ink);margin-bottom:14px}
+.ft-col a{display:block;color:var(--sub);text-decoration:none;margin:7px 0;font-size:.82rem}
+.ft-bot{max-width:1200px;margin:7vh auto 0;padding-top:3vh;border-top:1px solid rgba(0,0,0,.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.72rem;color:var(--sub)}
 @media(max-width:760px){.menu-nav a{font-size:2rem}.panel .pc{padding-bottom:6vh}}
 /* shared section helpers */
 .lede{max-width:760px;margin:26px auto 0;color:#6a5a54;font-size:.96rem;line-height:2.05;text-align:center;font-weight:300}
@@ -159,7 +159,7 @@ footer{background:#241f1c;color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-si
 .reasons{background:#fff}
 .rgrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1100px;margin:0 auto}
 .rcard{background:var(--soft);padding:44px 34px;text-align:center}
-.rcard .rn{font-family:var(--disp);font-size:.72rem;letter-spacing:.24em;color:var(--accent)}
+.rcard .rn{font-family:var(--disp);font-size:.72rem;letter-spacing:.24em;color:var(--brown)}
 .rcard h3{font-family:var(--serif);font-weight:500;font-size:1.32rem;margin:16px 0 14px;color:var(--ink);line-height:1.5}
 .rcard p{font-size:.9rem;line-height:2;color:#6a5a54}
 @media(max-width:860px){.rgrid3{grid-template-columns:1fr}}
@@ -176,18 +176,18 @@ footer{background:#241f1c;color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-si
 /* flow steps */
 .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:1100px;margin:0 auto}
 .fstep{text-align:center;padding:0 8px}
-.fstep .fn{font-family:var(--disp);font-size:2.2rem;color:var(--accent);line-height:1}
+.fstep .fn{font-family:var(--disp);font-size:2.2rem;color:var(--brown);line-height:1}
 .fstep h3{font-family:var(--serif);font-weight:500;font-size:1.1rem;margin:14px 0 10px;color:var(--ink)}
 .fstep p{font-size:.86rem;line-height:1.9;color:#6a5a54}
 @media(max-width:860px){.flow{grid-template-columns:repeat(2,1fr);gap:36px 18px}}
 /* trust band */
-.trust{background:linear-gradient(165deg,#2a2623,#3a332d 44%,#4f453d 76%,#6e5f54);color:#fff}
+.trust{background:var(--soft)}
 .tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;max-width:1100px;margin:0 auto}
 .titem{text-align:center}
-.titem h3{font-family:var(--serif);font-weight:500;font-size:1.08rem;margin-bottom:10px;color:#fff}
-.titem p{font-size:.84rem;line-height:1.9;color:rgba(255,255,255,.78)}
-.trust .sec-h h2{color:#fff}
-.trust .sec-h .eb{color:#e0aa9a}
+.titem h3{font-family:var(--serif);font-weight:500;font-size:1.08rem;margin-bottom:10px;color:var(--ink)}
+.titem p{font-size:.84rem;line-height:1.9;color:var(--sub)}
+.trust .sec-h h2{color:var(--ink)}
+.trust .sec-h .eb{color:var(--accent)}
 @media(max-width:860px){.tgrid{grid-template-columns:repeat(2,1fr);gap:36px 18px}}
 /* voices */
 .voices{background:#fff}
@@ -207,17 +207,17 @@ footer{background:#241f1c;color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-si
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
 .faq-a p{padding:0 0 24px;color:#6a5a54;font-size:.92rem;line-height:2}
 /* closing cta */
-.closing{background:linear-gradient(165deg,#2a2623,#3a332d 44%,#4f453d 76%,#6e5f54);color:#fff;text-align:center;padding:18vh 6vw}
+.closing{background:var(--soft);color:var(--ink);text-align:center;padding:16vh 6vw}
 .closing h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,4vw,2.8rem)}
-.closing p{color:rgba(255,255,255,.82);margin:20px auto 0;max-width:560px;line-height:2}
-.closing .btn{background:#fff;color:var(--accent)}
-.closing .btn.line{background:none;border:1px solid rgba(255,255,255,.6);color:#fff}
+.closing p{color:var(--sub);margin:20px auto 0;max-width:560px;line-height:2}
+.closing .btn{background:var(--accent);color:#fff}
+.closing .btn.line{background:none;border:1px solid var(--accent);color:var(--accent)}
 /* sticky mobile cta */
 .mcta{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;gap:0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);box-shadow:0 -1px 0 rgba(0,0,0,.08)}
 .mcta a{flex:1;text-align:center;padding:15px 8px;font-size:.8rem;letter-spacing:.06em;text-decoration:none;color:var(--ink)}
 .mcta a.p{background:var(--accent);color:#fff}
 @media(max-width:760px){.mcta{display:flex}footer{padding-bottom:13vh}}
-.ft-note{max-width:1200px;margin:30px auto 0;font-size:.74rem;line-height:1.9;color:rgba(255,255,255,.48)}
+.ft-note{max-width:1200px;margin:30px auto 0;font-size:.74rem;line-height:1.9;color:var(--sub)}
 </style></head><body class="scroll-locked">
 <nav class="nav" id="nav">
   <button class="burger" id="burger" aria-label="メニュー"><span></span><span></span><span></span></button>
@@ -247,31 +247,7 @@ footer{background:#241f1c;color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-si
     <span class="t-bot" aria-label="すべての人へ"><span class="char" data-c="す">す</span><span class="char" data-c="べ">べ</span><span class="char" data-c="て">て</span><span class="char" data-c="の">の</span><span class="char" data-c="人">人</span><span class="char" data-c="へ">へ</span></span>
   </div>
 </section>
-<section class="intro" id="concept">
-  <div class="eb">Concept</div>
-  <p class="lead">自分らしく美しくなりたいすべての人へ。<br>誰かになるためではなく、自分自身の魅力を見つけ花開かせるために。</p>
-  <p class="txt">MONEA GLOWは、いまをときめく美容アイテムが自動で入れ替わるオンラインストアです。流行を追いかけるだけでなく、あなたの肌質や気分、なりたい印象に寄り添いながら、「好き」と「なりたい」に出会える場所を目指しています。スキンケアやコスメは、種類が多く選ぶのが難しいもの。だからこそ私たちは、5分でわかる肌診断と、読んで役立つビューティージャーナルで、はじめての方にも迷わないお買い物をお届けします。</p>
-  <div class="cta-row">
-    <a href="diagnosis.html" class="btn lg" style="background:#fff;color:var(--accent)">5分の肌診断をはじめる</a>
-    <a href="collection.html" class="btn lg line" style="border-color:rgba(255,255,255,.6);color:#fff">商品を見る</a>
-  </div>
-</section>
-<section class="sec trend" id="trending">
-  <div class="sec-h"><div class="eb">Trending</div><h2>いま、人気のアイテム</h2><p>在庫を持たず、人気の美容アイテムが自動で入れ替わります。気になるものは、タップして詳しく。</p></div>
-  <div class="tstrip" id="tstrip"></div>
-  <div style="text-align:center;margin-top:8px"><span class="live"><span class="dot"></span>自動更新中</span></div>
-  <div class="cta-row"><a href="collection.html" class="btn">すべての商品を見る</a></div>
-</section>
-<section class="sec reasons">
-  <div class="sec-h"><div class="eb">Why MONEA GLOW</div><h2>MONEA GLOWが選ばれる理由</h2><p>はじめての方でも、自分に合うケアにたどり着けるように。</p></div>
-  <div class="rgrid3">
-    <div class="rcard"><div class="rn">01</div><h3>迷わず選べる肌診断</h3><p>5つの質問に答えるだけで、いまのあなたに合うケアの方向性とおすすめカテゴリーをご提案。情報が多くて選べない、という不安をやわらげます。</p></div>
-    <div class="rcard"><div class="rn">02</div><h3>トレンドが自動で入れ替わる</h3><p>在庫を抱えない仕組みで、いま支持されている美容アイテムを軽やかにラインアップ。流行のうつろいに合わせて、見るたびに新しい出会いがあります。</p></div>
-    <div class="rcard"><div class="rn">03</div><h3>読んで役立つ美容知識</h3><p>成分・スキンケア・UVケアの基本を、誇張のない言葉でわかりやすく。買う前に「なぜ良いのか」を理解してから選べます。</p></div>
-  </div>
-  <div class="cta-row"><a href="diagnosis.html" class="btn ink">まずは肌診断から</a></div>
-</section>
-<section class="panel">
+<section class="panel" id="collection">
   <div class="pbg" style="background-image:url('https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?w=1600&h=1100&fit=crop&crop=faces&q=85&auto=format')"></div>
   <div class="pov"></div>
   <div class="pc"><div class="eb">Collection</div><h3>あなたの「好き」に出会う</h3><p style="opacity:.9;line-height:1.9;margin-bottom:18px;max-width:440px">クレンジングから日焼け止め、美容雑貨まで。カテゴリーごとに探せて、気になるアイテムがきっと見つかります。</p><a href="collection.html" class="btn">商品を見る</a></div>
@@ -287,7 +263,22 @@ footer{background:#241f1c;color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-si
     <a class="catcell" href="collection.html?cat=%E7%BE%8E%E5%AE%B9%E9%9B%91%E8%B2%A8"><div class="cn">Tools</div><h3>マスク・美容雑貨</h3><p>ごほうびケアやセルフマッサージに。毎日のお手入れを心地よくする道具たち。</p><span class="go">アイテムを見る →</span></a>
   </div>
 </section>
-<section class="sec" style="background:#fff">
+<section class="sec trend" id="trending">
+  <div class="sec-h"><div class="eb">Trending</div><h2>いま、人気のアイテム</h2><p>在庫を持たず、人気の美容アイテムが自動で入れ替わります。気になるものは、タップして詳しく。</p></div>
+  <div class="tstrip" id="tstrip"></div>
+  <div style="text-align:center;margin-top:8px"><span class="live"><span class="dot"></span>自動更新中</span></div>
+  <div class="cta-row"><a href="collection.html" class="btn">すべての商品を見る</a></div>
+</section>
+<section class="sec" id="diagnosis">
+  <div class="sec-h"><div class="eb">Diagnosis</div><h2>5分でわかる肌診断</h2><p>「自分に何が合うのか」がいちばんの迷いどころ。5つの質問に答えるだけで、いまのあなたに合うケアの方向性とおすすめカテゴリーをご提案します。登録不要・無料、所要は約5分です。</p></div>
+  <div class="rgrid3">
+    <div class="rcard"><div class="rn">01</div><h3>合うケアの方向性</h3><p>うるおい重視・透明感・ゆらぎケアなど、いまのあなたに合うケアのタイプをご提案します。</p></div>
+    <div class="rcard"><div class="rn">02</div><h3>おすすめカテゴリー</h3><p>化粧水・美容液・日焼け止めなど、最初に取り入れたいカテゴリーへご案内します。</p></div>
+    <div class="rcard"><div class="rn">03</div><h3>選ぶときの目安</h3><p>何を基準に選べばいいか。迷いがちなポイントを、シンプルな指針として持ち帰れます。</p></div>
+  </div>
+  <div class="cta-row"><a href="diagnosis.html" class="btn ink">5分の肌診断をはじめる</a></div>
+</section>
+<section class="sec" style="background:var(--soft)">
   <div class="sec-h"><div class="eb">How to shop</div><h2>ご利用の流れ</h2><p>はじめての方も、4ステップでスムーズに。</p></div>
   <div class="flow">
     <div class="fstep"><div class="fn">01</div><h3>肌診断で知る</h3><p>5つの質問に答えて、いまのあなたに合うケアの方向性をチェック。</p></div>
@@ -297,6 +288,29 @@ footer{background:#241f1c;color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-si
   </div>
   <div class="cta-row"><a href="diagnosis.html" class="btn">肌診断をはじめる</a><a href="collection.html" class="btn line">商品一覧を見る</a></div>
 </section>
+<section class="panel" id="journal">
+  <div class="pbg" style="background-image:url('https://images.unsplash.com/photo-1515734674582-29010bb37906?w=1600&h=1100&fit=crop&crop=faces&q=85&auto=format')"></div>
+  <div class="pov"></div>
+  <div class="pc"><div class="eb">Beauty Journal</div><h3>肌と向き合う、美容ジャーナル</h3><p style="opacity:.9;line-height:1.9;margin-bottom:18px;max-width:440px">スキンケアの基本から成分の選び方まで。読んでそのまま実践できる、やさしい美容の手引きです。</p><a href="journal.html" class="btn ghost" style="color:#fff">記事を読む</a></div>
+</section>
+<section class="intro" id="concept">
+  <div class="eb">Concept</div>
+  <p class="lead">自分らしく美しくなりたいすべての人へ。<br>誰かになるためではなく、自分自身の魅力を見つけ花開かせるために。</p>
+  <p class="txt">MONEA GLOWは、いまをときめく美容アイテムが自動で入れ替わるオンラインストアです。流行を追いかけるだけでなく、あなたの肌質や気分、なりたい印象に寄り添いながら、「好き」と「なりたい」に出会える場所を目指しています。スキンケアやコスメは、種類が多く選ぶのが難しいもの。だからこそ私たちは、5分でわかる肌診断と、読んで役立つビューティージャーナルで、はじめての方にも迷わないお買い物をお届けします。</p>
+  <div class="cta-row">
+    <a href="diagnosis.html" class="btn lg">5分の肌診断をはじめる</a>
+    <a href="collection.html" class="btn lg line">商品を見る</a>
+  </div>
+</section>
+<section class="sec reasons">
+  <div class="sec-h"><div class="eb">Why MONEA GLOW</div><h2>MONEA GLOWが選ばれる理由</h2><p>はじめての方でも、自分に合うケアにたどり着けるように。</p></div>
+  <div class="rgrid3">
+    <div class="rcard"><div class="rn">01</div><h3>迷わず選べる肌診断</h3><p>5つの質問に答えるだけで、いまのあなたに合うケアの方向性とおすすめカテゴリーをご提案。情報が多くて選べない、という不安をやわらげます。</p></div>
+    <div class="rcard"><div class="rn">02</div><h3>トレンドが自動で入れ替わる</h3><p>在庫を抱えない仕組みで、いま支持されている美容アイテムを軽やかにラインアップ。流行のうつろいに合わせて、見るたびに新しい出会いがあります。</p></div>
+    <div class="rcard"><div class="rn">03</div><h3>読んで役立つ美容知識</h3><p>成分・スキンケア・UVケアの基本を、誇張のない言葉でわかりやすく。買う前に「なぜ良いのか」を理解してから選べます。</p></div>
+  </div>
+  <div class="cta-row"><a href="diagnosis.html" class="btn ink">まずは肌診断から</a></div>
+</section>
 <section class="sec trust">
   <div class="sec-h"><div class="eb">Our Promise</div><h2>安心してお選びいただくために</h2><p>美容アイテムだからこそ、買う前の不安を減らすことを大切にしています。</p></div>
   <div class="tgrid">
@@ -305,11 +319,6 @@ footer{background:#241f1c;color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-si
     <div class="titem"><h3>無理な勧誘なし</h3><p>必要なものを、必要なぶんだけ。しつこい追加提案やしつこい広告は行いません。</p></div>
     <div class="titem"><h3>困ったときの窓口</h3><p>商品やお届けで気になる点があれば、いつでもお問い合わせいただけます。</p></div>
   </div>
-</section>
-<section class="panel">
-  <div class="pbg" style="background-image:url('https://images.unsplash.com/photo-1515734674582-29010bb37906?w=1600&h=1100&fit=crop&crop=faces&q=85&auto=format')"></div>
-  <div class="pov"></div>
-  <div class="pc"><div class="eb">Beauty Journal</div><h3>肌と向き合う、美容ジャーナル</h3><p style="opacity:.9;line-height:1.9;margin-bottom:18px;max-width:440px">スキンケアの基本から成分の選び方まで。読んでそのまま実践できる、やさしい美容の手引きです。</p><a href="journal.html" class="btn ghost" style="color:#fff">記事を読む</a></div>
 </section>
 <section class="sec voices">
   <div class="sec-h"><div class="eb">Voice</div><h2>こんな声を目指しています</h2><p>MONEA GLOWが届けたい体験を、言葉にしてみました。</p></div>
@@ -344,7 +353,7 @@ footer{background:#241f1c;color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-si
 </section>
 <footer>
   <div class="ft-top">
-    <div style="max-width:300px"><div class="ft-logo">MONEA GLOW</div><p style="margin-top:16px;font-size:.8rem;line-height:1.9;color:rgba(255,255,255,.6)">自分らしく美しくなりたいすべての人へ。トレンドの美容アイテムと、読んで役立つ美容知識を届けるオンラインストアです。</p></div>
+    <div style="max-width:300px"><div class="ft-logo">MONEA GLOW</div><p style="margin-top:16px;font-size:.8rem;line-height:1.9;color:var(--sub)">自分らしく美しくなりたいすべての人へ。トレンドの美容アイテムと、読んで役立つ美容知識を届けるオンラインストアです。</p></div>
     <div class="ft-col"><h4>Shop</h4><a href="collection.html">商品一覧</a><a href="diagnosis.html">5分の肌診断</a><a href="#trending">人気のアイテム</a><a href="#member">メンバーシップ</a></div>
     <div class="ft-col"><h4>Read</h4><a href="journal.html">ビューティージャーナル</a><a href="journal.html">スキンケアの基本</a><a href="journal.html">成分ガイド</a><a href="#concept">コンセプト</a></div>
     <div class="ft-col"><h4>Help</h4><a href="#faqList">よくある質問</a><a href="#concept">運営について</a><a href="#">Instagram</a><a href="#">X</a></div>
