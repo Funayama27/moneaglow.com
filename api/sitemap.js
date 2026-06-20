@@ -3,7 +3,7 @@ let kv = null;
 try { ({ kv } = await import("@vercel/kv")); } catch(e){ kv = null; }
 
 const BASE = process.env.SITE_URL || "https://moneaglow.com";
-const STATIC = ["", "collection.html", "diagnosis.html", "journal.html"];
+const STATIC = ["", "collection.html", "diagnosis.html", "journal.html", "tokushoho.html", "privacy.html"];
 const ARTICLE_SLUGS = ["winter-dry-skincare","vitamin-c-serum-guide","sunscreen-reapply"];
 
 export default async function handler(req, res){
