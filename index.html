@@ -15,7 +15,7 @@
 @property --burst{syntax:'<number>';inherits:true;initial-value:0}
 :root{--ink:#1f1f1d;--bg:#fff;--soft:#f5f4f1;--soft2:#eae7e1;--sub:#7c7a74;--line:rgba(0,0,0,.10);--d1:#2a2623;--d2:#3a332d;--d3:#4f453d;--d4:#6e5f54;--disp:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',sans-serif;--serif:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',sans-serif;
 --sans:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;
---accent:#5e7257;--brown:#94785f;--mx:50%;--my:50%;--r:0px;--burst:0}
+--accent:#2e9e54;--brown:#94785f;--mx:50%;--my:50%;--r:0px;--burst:0}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--sans);background:#fff;word-break:auto-phrase}
 html.scroll-locked,body.scroll-locked{height:100%;overflow:hidden;overscroll-behavior:none}
@@ -98,7 +98,7 @@ canvas{position:absolute;inset:0;pointer-events:none;z-index:6}
 .intro .eb{font-family:var(--disp);letter-spacing:.4em;font-size:.74rem;color:var(--accent);text-transform:uppercase}
 .intro .lead{font-family:var(--serif);font-size:clamp(1.35rem,2.7vw,2rem);line-height:1.9;margin:24px auto 0;max-width:860px;color:var(--ink);text-wrap:balance}
 .intro .txt{font-size:.92rem;line-height:2.15;color:var(--sub);max-width:600px;margin:32px auto 0;text-wrap:pretty}
-@media(max-width:760px){.hero{min-height:620px}.t-top{font-size:clamp(1.45rem,7vw,2.25rem)}.t-main{font-size:clamp(1.15rem,5.5vw,1.75rem)}.t-main::before{width:86vw;height:96px}.t-main::after{width:54vw}.t-bot{font-size:clamp(2rem,10vw,3.4rem);letter-spacing:.12em;text-indent:.12em}}
+@media(max-width:760px){.hero{min-height:600px}.color,.gray{inset:0;background-size:contain;background-repeat:no-repeat;background-position:center 46%;transform:none}.hero.ignited .color{transform:none}.t-top{font-size:clamp(1.45rem,7vw,2.25rem)}.t-main{font-size:clamp(1.15rem,5.5vw,1.75rem)}.t-main::before{width:86vw;height:96px}.t-main::after{width:54vw}.t-bot{font-size:clamp(2rem,10vw,3.4rem);letter-spacing:.12em;text-indent:.12em}}
 .burger{display:flex;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;color:inherit}
 .burger span{display:block;width:26px;height:1.5px;background:currentColor;transition:.3s}
 .nav-bag{font-family:var(--disp);font-size:.8rem;letter-spacing:.18em;color:inherit;text-decoration:none}
@@ -285,13 +285,13 @@ footer{background:var(--soft2);color:var(--sub);padding:9vh 6vw 5vh;font-size:.8
 <section class="about" id="about">
   <div class="eb">About MONEA GLOW</div>
   <h2>自分らしく、美しく。</h2>
-  <p>MONEA GLOWは、いまをときめく美容アイテムが自動で入れ替わるオンラインストアです。流行を追いかけるだけでなく、あなたの肌質や気分、なりたい印象に寄り添いながら、「好き」と「なりたい」に出会える場所を目指しています。5分でわかる肌診断と、読んで役立つビューティージャーナルで、はじめての方にも迷わないお買い物を。</p>
-  <div class="cta-row"><a href="diagnosis.html" class="btn lg">5分の肌診断をはじめる</a><a href="collection.html" class="btn lg line">商品を見る</a></div>
+  <p>MONEA GLOWは、いまをときめく美容アイテムが自動で入れ替わるオンラインストアです。流行を追いかけるだけでなく、あなたの肌質や気分、なりたい印象に寄り添いながら、「好き」と「なりたい」に出会える場所を目指しています。<strong style="color:var(--ink);font-weight:600">無料の会員登録で、初回のお買い物が10%OFF。</strong>はじめての方も、気軽にお買い物を始められます。</p>
+  <div class="cta-row"><a href="#member" class="btn lg">初回10%OFFで会員登録</a><a href="collection.html" class="btn lg line">商品を見る</a></div>
 </section>
 <section class="memberband" id="member">
-  <h2>Membership</h2>
-  <p>無料のメンバー登録で、いつでも10%OFF。新作アイテムやジャーナルの先行案内もお届けします。</p>
-  <a href="diagnosis.html" class="btn lg">まずは肌診断から</a>
+  <h2>会員登録で、ずっと10%OFF</h2>
+  <p>無料のメンバー登録で、初回のお買い物から10%OFF。新作アイテムやお得な情報も先行してお届けします。登録は1分、費用はかかりません。</p>
+  <a href="collection.html" class="btn lg">10%OFFで買い物をはじめる</a>
 </section>
 <footer>
   <div class="ft-top">
@@ -303,7 +303,7 @@ footer{background:var(--soft2);color:var(--sub);padding:9vh 6vw 5vh;font-size:.8
   <p class="ft-note">※当サイトに掲載する美容情報は一般的な内容であり、特定の効果・効能を保証するものではありません。肌に異常を感じた場合は使用を中止し、必要に応じて専門家にご相談ください。掲載画像はイメージです。</p>
   <div class="ft-bot"><span>© MONEA GLOW</span><span>VISA / Mastercard / AMEX / JCB</span></div>
 </footer>
-<div class="mcta"><a href="collection.html">商品を見る</a><a href="diagnosis.html" class="p">5分診断をはじめる</a></div>
+<div class="mcta"><a href="collection.html">商品を見る</a><a href="#member" class="p">初回10%OFFで登録</a></div>
 <script>
 var hero=document.getElementById("hero"),root=document.documentElement,copy=document.getElementById("copy"),nav=document.getElementById("nav");
 var burger=document.getElementById("burger"),menu=document.getElementById("menu"),menuClose=document.getElementById("menuClose");
