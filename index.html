@@ -13,7 +13,7 @@
 <style>
 @property --r{syntax:'<length>';inherits:true;initial-value:0px}
 @property --burst{syntax:'<number>';inherits:true;initial-value:0}
-:root{--ink:#1f1f1d;--bg:#fff;--soft:#f5f4f1;--soft2:#eae7e1;--sub:#7c7a74;--line:rgba(0,0,0,.10);--d1:#2a2623;--d2:#3a332d;--d3:#4f453d;--d4:#6e5f54;--disp:'Marcellus',serif;--serif:'Zen Old Mincho',serif;
+:root{--ink:#1f1f1d;--bg:#fff;--soft:#f5f4f1;--soft2:#eae7e1;--sub:#7c7a74;--line:rgba(0,0,0,.10);--d1:#2a2623;--d2:#3a332d;--d3:#4f453d;--d4:#6e5f54;--disp:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',sans-serif;--serif:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP',sans-serif;
 --sans:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;
 --accent:#5e7257;--brown:#94785f;--mx:50%;--my:50%;--r:0px;--burst:0}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -218,6 +218,26 @@ footer{background:var(--soft2);color:var(--sub);padding:9vh 6vw 5vh;font-size:.8
 .mcta a.p{background:var(--accent);color:#fff}
 @media(max-width:760px){.mcta{display:flex}footer{padding-bottom:13vh}}
 .ft-note{max-width:1200px;margin:30px auto 0;font-size:.74rem;line-height:1.9;color:var(--sub)}
+/* Apple-clean simplified top */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.cat-rail{display:block;background:#fff}
+.cat-rail a{display:block;position:relative;overflow:hidden}
+.cat-rail a+a{border-top:1px solid rgba(0,0,0,.05)}
+.cat-rail img{display:block;width:100%;height:auto;transition:transform 1.4s cubic-bezier(.16,1,.3,1)}
+.cat-rail a:hover img{transform:scale(1.025)}
+.about{max-width:760px;margin:0 auto;padding:20vh 8vw;text-align:center}
+.about .eb{font-family:var(--disp);letter-spacing:.4em;font-size:.72rem;color:var(--accent);text-transform:uppercase}
+.about h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3.4vw,2.5rem);letter-spacing:.01em;margin:18px 0 0;line-height:1.5;color:var(--ink)}
+.about p{font-size:1rem;line-height:2.2;color:var(--sub);margin-top:28px}
+.about .cta-row{margin-top:42px}
+.bestsellers{padding:16vh 6vw;background:var(--soft)}
+.best-h{text-align:center;margin-bottom:7vh}
+.best-h .eb{font-family:var(--disp);letter-spacing:.4em;font-size:.72rem;color:var(--accent);text-transform:uppercase}
+.best-h h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.3rem);letter-spacing:.01em;margin-top:14px;color:var(--ink)}
+.memberband{text-align:center;padding:20vh 8vw}
+.memberband h2{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.3rem);letter-spacing:.01em;color:var(--ink)}
+.memberband p{color:var(--sub);margin:18px auto 30px;max-width:520px;line-height:2.1;font-size:.96rem}
+@media(max-width:760px){.about{padding:13vh 8vw}.bestsellers{padding:12vh 6vw}.memberband{padding:13vh 8vw}}
 </style></head><body class="scroll-locked">
 <nav class="nav" id="nav">
   <button class="burger" id="burger" aria-label="メニュー"><span></span><span></span><span></span></button>
@@ -227,7 +247,7 @@ footer{background:var(--soft2);color:var(--sub);padding:9vh 6vw 5vh;font-size:.8
 <div class="menu" id="menu">
   <button class="menu-close" id="menuClose" aria-label="閉じる">×</button>
   <nav class="menu-nav">
-    <a href="collection.html">Collection</a><a href="#trending">Trending</a><a href="diagnosis.html">Diagnosis</a><a href="journal.html">Journal</a><a href="#concept">Concept</a><a href="#member">Membership</a>
+    <a href="collection.html">Collection</a><a href="#bestsellers">Trending</a><a href="diagnosis.html">Diagnosis</a><a href="journal.html">Journal</a><a href="#about">Concept</a><a href="#member">Membership</a>
   </nav>
 </div>
 <section class="hero" id="hero">
@@ -247,116 +267,38 @@ footer{background:var(--soft2);color:var(--sub);padding:9vh 6vw 5vh;font-size:.8
     <span class="t-bot" aria-label="すべての人へ"><span class="char" data-c="す">す</span><span class="char" data-c="べ">べ</span><span class="char" data-c="て">て</span><span class="char" data-c="の">の</span><span class="char" data-c="人">人</span><span class="char" data-c="へ">へ</span></span>
   </div>
 </section>
-<section class="panel" id="collection">
-  <div class="pbg" style="background-image:url('https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?w=1600&h=1100&fit=crop&crop=faces&q=85&auto=format')"></div>
-  <div class="pov"></div>
-  <div class="pc"><div class="eb">Collection</div><h3>あなたの「好き」に出会う</h3><p style="opacity:.9;line-height:1.9;margin-bottom:18px;max-width:440px">クレンジングから日焼け止め、美容雑貨まで。カテゴリーごとに探せて、気になるアイテムがきっと見つかります。</p><a href="collection.html" class="btn">商品を見る</a></div>
-</section>
-<section class="sec cats">
-  <div class="sec-h"><div class="eb">Categories</div><h2>カテゴリーから探す</h2><p>悩みや使うシーンに合わせて、ぴったりのアイテムを。</p></div>
-  <div class="catgrid">
-    <a class="catcell" href="collection.html?cat=%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0"><div class="cn">Cleansing</div><h3>クレンジング</h3><p>一日の汚れをやさしくオフ。うるおいを残しながら、次のケアが届きやすい肌へ整えます。</p><span class="go">アイテムを見る →</span></a>
-    <a class="catcell" href="collection.html?cat=%E5%8C%96%E7%B2%A7%E6%B0%B4"><div class="cn">Lotion</div><h3>化粧水</h3><p>洗顔後の素肌に水分を届ける一歩目。みずみずしいタイプからしっとりタイプまで。</p><span class="go">アイテムを見る →</span></a>
-    <a class="catcell" href="collection.html?cat=%E7%BE%8E%E5%AE%B9%E6%B6%B2"><div class="cn">Serum</div><h3>美容液</h3><p>気になる悩みに寄り添う一本を。透明感・うるおい・ハリ、目的で選べます。</p><span class="go">アイテムを見る →</span></a>
-    <a class="catcell" href="collection.html?cat=%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A0"><div class="cn">Cream</div><h3>クリーム</h3><p>届けたうるおいを抱え込み、乾燥から守る仕上げのケア。季節に合わせて使い分けを。</p><span class="go">アイテムを見る →</span></a>
-    <a class="catcell" href="collection.html?cat=%E6%97%A5%E7%84%BC%E3%81%91%E6%AD%A2%E3%82%81"><div class="cn">UV Care</div><h3>日焼け止め</h3><p>毎日の紫外線対策は未来の素肌への投資。日常用から屋外用まで揃えています。</p><span class="go">アイテムを見る →</span></a>
-    <a class="catcell" href="collection.html?cat=%E7%BE%8E%E5%AE%B9%E9%9B%91%E8%B2%A8"><div class="cn">Tools</div><h3>マスク・美容雑貨</h3><p>ごほうびケアやセルフマッサージに。毎日のお手入れを心地よくする道具たち。</p><span class="go">アイテムを見る →</span></a>
-  </div>
-</section>
-<section class="sec trend" id="trending">
-  <div class="sec-h"><div class="eb">Trending</div><h2>いま、人気のアイテム</h2><p>在庫を持たず、人気の美容アイテムが自動で入れ替わります。気になるものは、タップして詳しく。</p></div>
+<h1 class="sr-only">MONEA GLOW｜自分らしく美しくなりたいすべての人へ。スキンケア・コスメのオンラインストア</h1>
+<section class="bestsellers" id="bestsellers">
+  <div class="best-h"><div class="eb">Bestsellers</div><h2>売れ筋商品</h2></div>
   <div class="tstrip" id="tstrip"></div>
-  <div style="text-align:center;margin-top:8px"><span class="live"><span class="dot"></span>自動更新中</span></div>
+  <div style="text-align:center;margin-top:10px"><span class="live"><span class="dot"></span>自動更新中</span></div>
   <div class="cta-row"><a href="collection.html" class="btn">すべての商品を見る</a></div>
 </section>
-<section class="sec" id="diagnosis">
-  <div class="sec-h"><div class="eb">Diagnosis</div><h2>5分でわかる肌診断</h2><p>「自分に何が合うのか」がいちばんの迷いどころ。5つの質問に答えるだけで、いまのあなたに合うケアの方向性とおすすめカテゴリーをご提案します。登録不要・無料、所要は約5分です。</p></div>
-  <div class="rgrid3">
-    <div class="rcard"><div class="rn">01</div><h3>合うケアの方向性</h3><p>うるおい重視・透明感・ゆらぎケアなど、いまのあなたに合うケアのタイプをご提案します。</p></div>
-    <div class="rcard"><div class="rn">02</div><h3>おすすめカテゴリー</h3><p>化粧水・美容液・日焼け止めなど、最初に取り入れたいカテゴリーへご案内します。</p></div>
-    <div class="rcard"><div class="rn">03</div><h3>選ぶときの目安</h3><p>何を基準に選べばいいか。迷いがちなポイントを、シンプルな指針として持ち帰れます。</p></div>
-  </div>
-  <div class="cta-row"><a href="diagnosis.html" class="btn ink">5分の肌診断をはじめる</a></div>
-</section>
-<section class="sec" style="background:var(--soft)">
-  <div class="sec-h"><div class="eb">How to shop</div><h2>ご利用の流れ</h2><p>はじめての方も、4ステップでスムーズに。</p></div>
-  <div class="flow">
-    <div class="fstep"><div class="fn">01</div><h3>肌診断で知る</h3><p>5つの質問に答えて、いまのあなたに合うケアの方向性をチェック。</p></div>
-    <div class="fstep"><div class="fn">02</div><h3>アイテムを選ぶ</h3><p>診断結果やカテゴリーから、気になる商品をじっくり比較。</p></div>
-    <div class="fstep"><div class="fn">03</div><h3>カートで購入</h3><p>主要クレジットカードに対応。安心してお手続きいただけます。</p></div>
-    <div class="fstep"><div class="fn">04</div><h3>お届け・ケア開始</h3><p>商品が届いたら、ジャーナルのコツを参考に毎日のケアへ。</p></div>
-  </div>
-  <div class="cta-row"><a href="diagnosis.html" class="btn">肌診断をはじめる</a><a href="collection.html" class="btn line">商品一覧を見る</a></div>
-</section>
-<section class="panel" id="journal">
-  <div class="pbg" style="background-image:url('https://images.unsplash.com/photo-1515734674582-29010bb37906?w=1600&h=1100&fit=crop&crop=faces&q=85&auto=format')"></div>
-  <div class="pov"></div>
-  <div class="pc"><div class="eb">Beauty Journal</div><h3>肌と向き合う、美容ジャーナル</h3><p style="opacity:.9;line-height:1.9;margin-bottom:18px;max-width:440px">スキンケアの基本から成分の選び方まで。読んでそのまま実践できる、やさしい美容の手引きです。</p><a href="journal.html" class="btn ghost" style="color:#fff">記事を読む</a></div>
-</section>
-<section class="intro" id="concept">
-  <div class="eb">Concept</div>
-  <p class="lead">自分らしく美しくなりたいすべての人へ。<br>誰かになるためではなく、自分自身の魅力を見つけ花開かせるために。</p>
-  <p class="txt">MONEA GLOWは、いまをときめく美容アイテムが自動で入れ替わるオンラインストアです。流行を追いかけるだけでなく、あなたの肌質や気分、なりたい印象に寄り添いながら、「好き」と「なりたい」に出会える場所を目指しています。スキンケアやコスメは、種類が多く選ぶのが難しいもの。だからこそ私たちは、5分でわかる肌診断と、読んで役立つビューティージャーナルで、はじめての方にも迷わないお買い物をお届けします。</p>
-  <div class="cta-row">
-    <a href="diagnosis.html" class="btn lg">5分の肌診断をはじめる</a>
-    <a href="collection.html" class="btn lg line">商品を見る</a>
-  </div>
-</section>
-<section class="sec reasons">
-  <div class="sec-h"><div class="eb">Why MONEA GLOW</div><h2>MONEA GLOWが選ばれる理由</h2><p>はじめての方でも、自分に合うケアにたどり着けるように。</p></div>
-  <div class="rgrid3">
-    <div class="rcard"><div class="rn">01</div><h3>迷わず選べる肌診断</h3><p>5つの質問に答えるだけで、いまのあなたに合うケアの方向性とおすすめカテゴリーをご提案。情報が多くて選べない、という不安をやわらげます。</p></div>
-    <div class="rcard"><div class="rn">02</div><h3>トレンドが自動で入れ替わる</h3><p>在庫を抱えない仕組みで、いま支持されている美容アイテムを軽やかにラインアップ。流行のうつろいに合わせて、見るたびに新しい出会いがあります。</p></div>
-    <div class="rcard"><div class="rn">03</div><h3>読んで役立つ美容知識</h3><p>成分・スキンケア・UVケアの基本を、誇張のない言葉でわかりやすく。買う前に「なぜ良いのか」を理解してから選べます。</p></div>
-  </div>
-  <div class="cta-row"><a href="diagnosis.html" class="btn ink">まずは肌診断から</a></div>
-</section>
-<section class="sec trust">
-  <div class="sec-h"><div class="eb">Our Promise</div><h2>安心してお選びいただくために</h2><p>美容アイテムだからこそ、買う前の不安を減らすことを大切にしています。</p></div>
-  <div class="tgrid">
-    <div class="titem"><h3>価格はわかりやすく</h3><p>表示価格と送料の考え方を明確に。あとから戸惑わないお買い物を心がけています。</p></div>
-    <div class="titem"><h3>誇張しない情報</h3><p>「必ず」「劇的に」といった断定は使わず、一般的な美容情報として誠実にお伝えします。</p></div>
-    <div class="titem"><h3>無理な勧誘なし</h3><p>必要なものを、必要なぶんだけ。しつこい追加提案やしつこい広告は行いません。</p></div>
-    <div class="titem"><h3>困ったときの窓口</h3><p>商品やお届けで気になる点があれば、いつでもお問い合わせいただけます。</p></div>
-  </div>
-</section>
-<section class="sec voices">
-  <div class="sec-h"><div class="eb">Voice</div><h2>こんな声を目指しています</h2><p>MONEA GLOWが届けたい体験を、言葉にしてみました。</p></div>
-  <div class="vgrid">
-    <div class="vcard"><p class="vq">「何を選べばいいかわからなかったけれど、診断のおかげで方向性が見えた」</p><p class="vm">— 私たちが目指す、はじめての方の体験</p></div>
-    <div class="vcard"><p class="vq">「成分の説明がやさしくて、納得してから選べるのが安心」</p><p class="vm">— 私たちが目指す、ジャーナル読者の体験</p></div>
-    <div class="vcard"><p class="vq">「見るたびに新しいアイテムがあって、選ぶ時間が楽しい」</p><p class="vm">— 私たちが目指す、リピーターの体験</p></div>
-  </div>
-  <p class="vnote">※上記はサービスが目指す体験イメージであり、特定の個人の体験談ではありません。</p>
-</section>
-<section class="member" id="member">
-  <h2>Membership</h2>
-  <p>無料のメンバー登録で、いつでも10%OFF。新作アイテムやジャーナルの先行案内、季節のケアのヒントもお届けします。気軽な気持ちで、あなたの美容習慣のそばに。</p>
-  <a href="diagnosis.html" class="btn">まずは肌診断から</a>
-</section>
-<section class="sec faq">
-  <div class="sec-h"><div class="eb">FAQ</div><h2>よくあるご質問</h2><p>お買い物の前に、気になる点をまとめました。</p></div>
-  <div class="faq-list" id="faqList">
-    <div class="faq-item"><button class="faq-q">肌診断は無料で受けられますか？</button><div class="faq-a"><p>はい、5分でわかる肌診断は無料でご利用いただけます。会員登録なしでお試しいただけ、いまのあなたに合うケアの方向性とおすすめカテゴリーをご案内します。</p></div></div>
-    <div class="faq-item"><button class="faq-q">どんな支払い方法に対応していますか？</button><div class="faq-a"><p>VISA・Mastercard・AMEX・JCBの主要クレジットカードに対応しています。決済画面で安心してお手続きいただけます。</p></div></div>
-    <div class="faq-item"><button class="faq-q">商品はどのくらいで届きますか？</button><div class="faq-a"><p>国内発送のアイテムは目安として2〜4日、海外直送のアイテムは5〜9日でのお届けを予定しています。商品ごとにお届け目安を表示しています。</p></div></div>
-    <div class="faq-item"><button class="faq-q">敏感肌でも使えるアイテムはありますか？</button><div class="faq-a"><p>やさしい使い心地を意識したアイテムも取り扱っています。肌に合うかどうかには個人差があるため、心配な場合は少量から試し、肌に異常を感じたら使用を中止してください。</p></div></div>
-    <div class="faq-item"><button class="faq-q">商品の効果は保証されますか？</button><div class="faq-a"><p>化粧品は医薬品ではなく、効果・効能の感じ方には個人差があります。当サイトの情報は一般的な美容情報としてご提供しており、特定の効果を保証するものではありません。</p></div></div>
-    <div class="faq-item"><button class="faq-q">どのアイテムから始めればいいか迷います。</button><div class="faq-a"><p>まずは5分の肌診断がおすすめです。結果に合わせておすすめカテゴリーへご案内します。ビューティージャーナルの基本記事もあわせてご覧ください。</p></div></div>
-  </div>
-  <div class="cta-row"><a href="diagnosis.html" class="btn">肌診断で相性を確かめる</a><a href="journal.html" class="btn line">ジャーナルを読む</a></div>
-</section>
-<section class="closing">
-  <h2>あなたらしい輝きを、今日から。</h2>
-  <p>迷ったら、まずは5分の肌診断から。あなたの肌と気分に合うケアを、一緒に見つけていきましょう。</p>
+<nav class="cat-rail" aria-label="カテゴリー">
+  <a href="collection.html"><img src="cat-collection.jpg" alt="Collection｜商品一覧。クレンジング・化粧水・美容液・日焼け止め" loading="lazy" width="1600" height="640"></a>
+  <a href="#bestsellers"><img src="cat-trending.jpg" alt="Trending｜いま人気の売れ筋アイテム" loading="lazy" width="1600" height="640"></a>
+  <a href="diagnosis.html"><img src="cat-diagnosis.jpg" alt="Diagnosis｜5分でわかる肌診断" loading="lazy" width="1600" height="640"></a>
+  <a href="journal.html"><img src="cat-journal.jpg" alt="Beauty Journal｜美容ジャーナル" loading="lazy" width="1600" height="640"></a>
+  <a href="#about"><img src="cat-concept.jpg" alt="Concept｜MONEA GLOWが大切にする想いやこだわり" loading="lazy" width="1600" height="640"></a>
+  <a href="#member"><img src="cat-membership.jpg" alt="Membership｜メンバー登録でいつでも10%OFF" loading="lazy" width="1600" height="640"></a>
+</nav>
+<section class="about" id="about">
+  <div class="eb">About MONEA GLOW</div>
+  <h2>自分らしく、美しく。</h2>
+  <p>MONEA GLOWは、いまをときめく美容アイテムが自動で入れ替わるオンラインストアです。流行を追いかけるだけでなく、あなたの肌質や気分、なりたい印象に寄り添いながら、「好き」と「なりたい」に出会える場所を目指しています。5分でわかる肌診断と、読んで役立つビューティージャーナルで、はじめての方にも迷わないお買い物を。</p>
   <div class="cta-row"><a href="diagnosis.html" class="btn lg">5分の肌診断をはじめる</a><a href="collection.html" class="btn lg line">商品を見る</a></div>
+</section>
+<section class="memberband" id="member">
+  <h2>Membership</h2>
+  <p>無料のメンバー登録で、いつでも10%OFF。新作アイテムやジャーナルの先行案内もお届けします。</p>
+  <a href="diagnosis.html" class="btn lg">まずは肌診断から</a>
 </section>
 <footer>
   <div class="ft-top">
     <div style="max-width:300px"><div class="ft-logo">MONEA GLOW</div><p style="margin-top:16px;font-size:.8rem;line-height:1.9;color:var(--sub)">自分らしく美しくなりたいすべての人へ。トレンドの美容アイテムと、読んで役立つ美容知識を届けるオンラインストアです。</p></div>
-    <div class="ft-col"><h4>Shop</h4><a href="collection.html">商品一覧</a><a href="diagnosis.html">5分の肌診断</a><a href="#trending">人気のアイテム</a><a href="#member">メンバーシップ</a></div>
-    <div class="ft-col"><h4>Read</h4><a href="journal.html">ビューティージャーナル</a><a href="journal.html">スキンケアの基本</a><a href="journal.html">成分ガイド</a><a href="#concept">コンセプト</a></div>
-    <div class="ft-col"><h4>Help</h4><a href="#faqList">よくある質問</a><a href="#concept">運営について</a><a href="#">Instagram</a><a href="#">X</a></div>
+    <div class="ft-col"><h4>Shop</h4><a href="collection.html">商品一覧</a><a href="diagnosis.html">5分の肌診断</a><a href="#bestsellers">売れ筋商品</a><a href="#member">メンバーシップ</a></div>
+    <div class="ft-col"><h4>Read</h4><a href="journal.html">ビューティージャーナル</a><a href="diagnosis.html">5分の肌診断</a><a href="#about">コンセプト</a></div>
+    <div class="ft-col"><h4>Help</h4><a href="#about">運営について</a><a href="#">Instagram</a><a href="#">X</a></div>
   </div>
   <p class="ft-note">※当サイトに掲載する美容情報は一般的な内容であり、特定の効果・効能を保証するものではありません。肌に異常を感じた場合は使用を中止し、必要に応じて専門家にご相談ください。掲載画像はイメージです。</p>
   <div class="ft-bot"><span>© MONEA GLOW</span><span>VISA / Mastercard / AMEX / JCB</span></div>
@@ -476,14 +418,6 @@ function sparkBurst(X,Y,n,power){for(var i=0;i<n;i++){var a=Math.random()*Math.P
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","@id":"https://moneaglow.com/#org","name":"MONEA GLOW","url":"https://moneaglow.com/","description":"いまをときめく美容アイテムが自動で入れ替わるオンラインストア。5分の肌診断とビューティージャーナルで、自分らしいケアが見つかります。","slogan":"自分らしく美しくなりたいすべての人へ"},
-{"@type":"WebSite","@id":"https://moneaglow.com/#website","url":"https://moneaglow.com/","name":"MONEA GLOW","publisher":{"@id":"https://moneaglow.com/#org"},"inLanguage":"ja"},
-{"@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"肌診断は無料で受けられますか？","acceptedAnswer":{"@type":"Answer","text":"はい、5分でわかる肌診断は無料でご利用いただけます。会員登録なしでお試しいただけ、いまのあなたに合うケアの方向性とおすすめカテゴリーをご案内します。"}},
-{"@type":"Question","name":"どんな支払い方法に対応していますか？","acceptedAnswer":{"@type":"Answer","text":"VISA・Mastercard・AMEX・JCBの主要クレジットカードに対応しています。"}},
-{"@type":"Question","name":"商品はどのくらいで届きますか？","acceptedAnswer":{"@type":"Answer","text":"国内発送のアイテムは目安として2〜4日、海外直送のアイテムは5〜9日でのお届けを予定しています。"}},
-{"@type":"Question","name":"敏感肌でも使えるアイテムはありますか？","acceptedAnswer":{"@type":"Answer","text":"やさしい使い心地を意識したアイテムも取り扱っています。肌に合うかどうかには個人差があるため、心配な場合は少量から試し、肌に異常を感じたら使用を中止してください。"}},
-{"@type":"Question","name":"商品の効果は保証されますか？","acceptedAnswer":{"@type":"Answer","text":"化粧品は医薬品ではなく、効果・効能の感じ方には個人差があります。当サイトの情報は一般的な美容情報としてご提供しており、特定の効果を保証するものではありません。"}},
-{"@type":"Question","name":"どのアイテムから始めればいいか迷います。","acceptedAnswer":{"@type":"Answer","text":"まずは5分の肌診断がおすすめです。結果に合わせておすすめカテゴリーへご案内します。ビューティージャーナルの基本記事もあわせてご覧ください。"}}
-]}
+{"@type":"WebSite","@id":"https://moneaglow.com/#website","url":"https://moneaglow.com/","name":"MONEA GLOW","publisher":{"@id":"https://moneaglow.com/#org"},"inLanguage":"ja"}
 ]}
 </script></body></html>
