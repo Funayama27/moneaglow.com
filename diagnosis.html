@@ -96,7 +96,37 @@ footer{background:var(--d1);color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-
 .ft-col a{display:block;color:rgba(255,255,255,.66);text-decoration:none;margin:7px 0;font-size:.82rem}
 .ft-bot{max-width:1200px;margin:7vh auto 0;padding-top:3vh;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.72rem;color:rgba(255,255,255,.5)}
 .btn{display:inline-block;background:var(--accent);color:#fff;padding:14px 30px;font-size:.8rem;letter-spacing:.12em;text-decoration:none;cursor:pointer;border:none}
-@media(max-width:760px){.menu-nav a{font-size:2rem}}</style></head><body><nav class="nav" id="nav">
+@media(max-width:760px){.menu-nav a{font-size:2rem}}
+/* enriched sections */
+.pcrumb{max-width:1280px;margin:0 auto;padding:18px 5vw 0;font-size:.72rem;color:var(--sub);letter-spacing:.04em}
+.pcrumb a{color:var(--sub);text-decoration:none}.pcrumb a:hover{color:var(--accent)}.pcrumb span{margin:0 6px;opacity:.5}
+.lede{max-width:760px;margin:0 auto;padding:6vh 6vw 0;text-align:center;color:#6a5a54;font-size:.98rem;line-height:2.1;font-weight:300}
+.sec2{padding:10vh 5vw;max-width:1100px;margin:0 auto}
+.softwrap{background:var(--soft);padding:1px 0}
+.sec2-h{text-align:center;margin-bottom:5vh}
+.sec2-h .eb{font-family:var(--disp);letter-spacing:.4em;font-size:.72rem;color:var(--accent);text-transform:uppercase}
+.sec2-h h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.5rem,3.2vw,2.2rem);margin-top:12px;color:var(--ink)}
+.sec2-h p{color:var(--sub);font-size:.9rem;margin-top:12px;max-width:620px;margin-left:auto;margin-right:auto;line-height:1.9}
+.info3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.ibox{background:#fff;border:1px solid var(--line);padding:34px 28px;text-align:center}
+.ibox .in{font-family:var(--disp);font-size:.7rem;letter-spacing:.2em;color:var(--accent)}
+.ibox h3{font-family:var(--serif);font-weight:500;font-size:1.15rem;margin:14px 0 12px;color:var(--ink)}
+.ibox p{font-size:.88rem;line-height:2;color:#6a5a54}
+@media(max-width:760px){.info3{grid-template-columns:1fr;gap:18px}}
+.faqx{max-width:780px;margin:0 auto}
+.faqx-item{border-bottom:1px solid var(--line)}
+.faqx-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:inherit;color:var(--ink);font-size:1rem;padding:22px 40px 22px 0;position:relative;line-height:1.6}
+.faqx-q::after{content:"+";position:absolute;right:6px;top:20px;font-size:1.4rem;color:var(--accent)}
+.faqx-item.open .faqx-q::after{content:"–"}
+.faqx-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faqx-a p{padding:0 0 22px;color:#6a5a54;font-size:.92rem;line-height:2}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:38px}
+.btn.line{background:none;border:1px solid var(--accent);color:var(--accent)}.btn.lg{padding:17px 40px}
+.closing2{background:linear-gradient(165deg,var(--d1),var(--d2) 44%,var(--d3) 76%,var(--d4));color:#fff;text-align:center;padding:15vh 6vw}
+.closing2 h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.6vw,2.5rem)}
+.closing2 p{color:rgba(255,255,255,.82);margin:18px auto 0;max-width:560px;line-height:2}
+.closing2 .btn{background:#fff;color:var(--accent)}.closing2 .btn.line{background:none;border:1px solid rgba(255,255,255,.6);color:#fff}
+.ft-note{max-width:1200px;margin:30px auto 0;font-size:.74rem;line-height:1.9;color:rgba(255,255,255,.48)}</style></head><body><nav class="nav" id="nav">
   <button class="burger" id="burger" aria-label="メニュー"><span></span><span></span><span></span></button>
   <div class="nav-logo"><a href="index.html" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center"><span class="l1">MONEA</span><span class="l2">GLOW</span></a></div>
   <a class="nav-bag" href="#">BAG</a>
@@ -108,6 +138,8 @@ footer{background:var(--d1);color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-
   </nav>
 </div>
 <section class="sub"><div class="in"><div class="eb">Diagnosis</div><h1>5分でわかる肌診断</h1><p>5つの質問で、いまのあなたに合うケアを。</p></div></section>
+<nav class="pcrumb" aria-label="パンくず"><a href="index.html">ホーム</a><span>›</span>5分でわかる肌診断</nav>
+<p class="lede">スキンケアは種類が多く、「自分に何が合うのか」がいちばん迷うところ。MONEA GLOWの肌診断は、5つの質問に答えるだけで、いまのあなたに合うケアの方向性とおすすめカテゴリーをご提案します。登録不要・無料で、約5分。気軽な気持ちで、今日のあなたの肌と向き合ってみてください。</p>
 <section class="dx">
   <div class="bar"><i id="bar"></i></div>
   <div id="quiz">
@@ -122,13 +154,44 @@ footer{background:var(--d1);color:rgba(255,255,255,.7);padding:9vh 6vw 5vh;font-
     <p style="margin-top:30px;font-size:.84rem;color:var(--sub)">会員登録で、いつでも10%OFF。</p>
   </div>
 </section>
+<div class="softwrap"><section class="sec2">
+  <div class="sec2-h"><div class="eb">About this test</div><h2>診断でわかること</h2><p>たった5つの質問から、あなたのケアの「軸」を見つけます。</p></div>
+  <div class="info3">
+    <div class="ibox"><div class="in">01</div><h3>合うケアの方向性</h3><p>うるおい重視・透明感・ゆらぎケアなど、いまのあなたに合うケアのタイプをご提案します。</p></div>
+    <div class="ibox"><div class="in">02</div><h3>おすすめカテゴリー</h3><p>化粧水・美容液・日焼け止めなど、最初に取り入れたいカテゴリーへご案内します。</p></div>
+    <div class="ibox"><div class="in">03</div><h3>選ぶときの目安</h3><p>何を基準に選べばいいか。迷いがちなポイントを、シンプルな指針として持ち帰れます。</p></div>
+  </div>
+</section></div>
+<section class="sec2">
+  <div class="sec2-h"><div class="eb">How it works</div><h2>診断の使い方</h2><p>結果は「いまの肌」に合わせた目安です。気軽に試してみてください。</p></div>
+  <div class="info3">
+    <div class="ibox"><div class="in">Step 1</div><h3>5つの質問に答える</h3><p>気になる悩みやケアにかけられる時間など、直感で選んでOK。約5分で完了します。</p></div>
+    <div class="ibox"><div class="in">Step 2</div><h3>結果をチェック</h3><p>あなたのケアタイプとおすすめカテゴリーが表示されます。</p></div>
+    <div class="ibox"><div class="in">Step 3</div><h3>アイテムを見る</h3><p>結果に合わせて商品一覧へ。ジャーナルの記事もあわせて読むと、より選びやすくなります。</p></div>
+  </div>
+</section>
+<div class="softwrap"><section class="sec2">
+  <div class="sec2-h"><div class="eb">FAQ</div><h2>肌診断のよくある質問</h2></div>
+  <div class="faqx" id="faqList">
+    <div class="faqx-item"><button class="faqx-q">本当に無料で、登録もいりませんか？</button><div class="faqx-a"><p>はい。会員登録なしで、無料でご利用いただけます。診断結果の閲覧にも費用はかかりません。</p></div></div>
+    <div class="faqx-item"><button class="faqx-q">診断結果はどのくらい正確ですか？</button><div class="faqx-a"><p>診断は「いまの肌」と「好み」をもとにした目安です。医学的な肌質判定ではありません。季節や体調で肌は変化するため、気になるときにくり返し試すのがおすすめです。</p></div></div>
+    <div class="faqx-item"><button class="faqx-q">敏感肌・ゆらぎ肌でも受けられますか？</button><div class="faqx-a"><p>どなたでもご利用いただけます。結果はあくまで目安のため、実際に使う際は少量から試し、肌に異常を感じた場合は使用を中止してください。</p></div></div>
+    <div class="faqx-item"><button class="faqx-q">結果と違うアイテムを選んでもいいですか？</button><div class="faqx-a"><p>もちろんです。診断はきっかけのひとつ。気になるアイテムがあれば、好みや使用感を優先してお選びください。</p></div></div>
+  </div>
+</section></div>
+<section class="closing2">
+  <h2>まずは、5分から。</h2>
+  <p>迷ったままより、ひとつ軸が見つかると、ケアはぐっと楽しくなります。今日のあなたに合うケアを見つけにいきましょう。</p>
+  <div class="cta-row"><a href="collection.html" class="btn lg">商品一覧を見る</a><a href="journal.html" class="btn lg line">ジャーナルを読む</a></div>
+</section>
 <footer>
   <div class="ft-top">
-    <div><div class="ft-logo">MONEA GLOW</div></div>
-    <div class="ft-col"><h4>Menu</h4><a href="collection.html">Collection</a><a href="index.html#trending">Trending</a><a href="diagnosis.html">Diagnosis</a><a href="journal.html">Journal</a></div>
-    <div class="ft-col"><h4>About</h4><a href="index.html#concept">Concept</a><a href="index.html#member">Membership</a></div>
-    <div class="ft-col"><h4>Follow</h4><a href="#">Instagram</a><a href="#">X</a></div>
+    <div style="max-width:300px"><div class="ft-logo">MONEA GLOW</div><p style="margin-top:16px;font-size:.8rem;line-height:1.9;color:rgba(255,255,255,.6)">自分らしく美しくなりたいすべての人へ。トレンドの美容アイテムと、読んで役立つ美容知識を届けるオンラインストアです。</p></div>
+    <div class="ft-col"><h4>Shop</h4><a href="collection.html">商品一覧</a><a href="diagnosis.html">5分の肌診断</a><a href="index.html#trending">人気のアイテム</a><a href="index.html#member">メンバーシップ</a></div>
+    <div class="ft-col"><h4>Read</h4><a href="journal.html">ビューティージャーナル</a><a href="index.html#concept">コンセプト</a></div>
+    <div class="ft-col"><h4>Help</h4><a href="index.html#faqList">よくある質問</a><a href="#">Instagram</a><a href="#">X</a></div>
   </div>
+  <p class="ft-note">※当サイトに掲載する美容情報は一般的な内容であり、特定の効果・効能を保証するものではありません。肌に異常を感じた場合は使用を中止し、必要に応じて専門家にご相談ください。掲載画像はイメージです。</p>
   <div class="ft-bot"><span>© MONEA GLOW</span><span>VISA / Mastercard / AMEX / JCB</span></div>
 </footer>
 <script>var burger=document.getElementById("burger"),menu=document.getElementById("menu"),menuClose=document.getElementById("menuClose");
@@ -157,4 +220,18 @@ function result(){document.getElementById("bar").style.width="100%";document.get
  document.getElementById("rb").href="collection.html?cat="+encodeURIComponent(best);
  document.getElementById("res").classList.add("on");}
 show();
+(function(){var l=document.getElementById("faqList");if(!l)return;l.querySelectorAll(".faqx-q").forEach(function(b){b.addEventListener("click",function(){var it=b.parentNode,a=it.querySelector(".faqx-a"),op=it.classList.contains("open");l.querySelectorAll(".faqx-item").forEach(function(x){x.classList.remove("open");x.querySelector(".faqx-a").style.maxHeight=null;});if(!op){it.classList.add("open");a.style.maxHeight=a.scrollHeight+"px";}});});})();
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"ホーム","item":"https://moneaglow.com/"},
+{"@type":"ListItem","position":2,"name":"5分でわかる肌診断","item":"https://moneaglow.com/diagnosis.html"}]},
+{"@type":"WebPage","name":"5分でわかる肌診断｜MONEA GLOW","url":"https://moneaglow.com/diagnosis.html","description":"5つの質問に答えると、いまのあなたに合うケアの方向性とおすすめカテゴリーをご提案する無料の肌診断。"},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"本当に無料で、登録もいりませんか？","acceptedAnswer":{"@type":"Answer","text":"会員登録なしで、無料でご利用いただけます。診断結果の閲覧にも費用はかかりません。"}},
+{"@type":"Question","name":"診断結果はどのくらい正確ですか？","acceptedAnswer":{"@type":"Answer","text":"診断は「いまの肌」と「好み」をもとにした目安で、医学的な肌質判定ではありません。季節や体調で肌は変化するため、気になるときにくり返し試すのがおすすめです。"}},
+{"@type":"Question","name":"敏感肌・ゆらぎ肌でも受けられますか？","acceptedAnswer":{"@type":"Answer","text":"どなたでもご利用いただけます。結果はあくまで目安のため、実際に使う際は少量から試し、肌に異常を感じた場合は使用を中止してください。"}},
+{"@type":"Question","name":"結果と違うアイテムを選んでもいいですか？","acceptedAnswer":{"@type":"Answer","text":"もちろんです。診断はきっかけのひとつ。気になるアイテムがあれば、好みや使用感を優先してお選びください。"}}
+]}]}
 </script></body></html>
